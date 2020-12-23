@@ -11,13 +11,17 @@ import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import { RegisterComponent } from './register/register.component';
 import {CalendarModule} from 'primeng/calendar';
-// import {DropdownModule} from 'primeng/dropdown';
+
+import { HeaderComponent } from './header/header.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -33,4 +37,4 @@ import {CalendarModule} from 'primeng/calendar';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
