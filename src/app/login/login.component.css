@@ -5,3 +5,8 @@
     left: 50%;
     margin-left: -180px;
 }
+
+.login-form {
+    width: 50%;
+    margin: 0 auto;
+}
