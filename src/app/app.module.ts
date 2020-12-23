@@ -14,6 +14,7 @@ import {CalendarModule} from 'primeng/calendar';
 
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     RegisterComponent,
     HeaderComponent,
-    ProfileComponent
+    ProfileComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
