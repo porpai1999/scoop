@@ -39,7 +39,6 @@ const routes: Routes = [
   { path: 'photo', component: PhotoComponent},
   { path: 'follow', component: FollowComponent},
   { path: 'postpage', component: PostpageComponent},
-  { path: 'follow', component: FollowComponent},
   { path: 'following', component: FollowingComponent},
 
   
