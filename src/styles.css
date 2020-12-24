@@ -7,16 +7,18 @@
    border-color: wheat;
 }
 .container {
-    margin-bottom: 500px
+    margin-bottom: 500px;
+    /* background-color: darkblue; */
 }
+
 
 .stretch-card>.card {
     width: 100%;
     min-width: 100%
 }
-
-/* body {
-    background-color: #fdfdff
+/* 
+body {
+    background-color: #1c1c8a
 } */
 
 .flex {
@@ -303,3 +305,5 @@ p {
 .img-sm+.img-push {
     margin-left: 40px
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
