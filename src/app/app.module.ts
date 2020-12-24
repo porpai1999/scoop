@@ -11,6 +11,9 @@ import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import { RegisterComponent } from './register/register.component';
 import {CalendarModule} from 'primeng/calendar';
+import {MegaMenuModule} from 'primeng/megamenu';
+import {TieredMenuModule} from 'primeng/tieredmenu';
+import {SlideMenuModule} from 'primeng/slidemenu';
 
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -29,6 +32,7 @@ import { FollowingComponent } from './following/following.component';
 
 
 
+
 const routes: Routes = [
   { path: '', component: AppComponent},
   { path: 'profile', component: ProfileComponent},
@@ -44,6 +48,7 @@ const routes: Routes = [
 
 
 
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -74,7 +79,12 @@ const routes: Routes = [
     MatSliderModule,
     MatListModule,
     MatGridListModule,
-    RouterModule.forRoot(routes)    // DropdownModule
+    RouterModule.forRoot(routes),    // DropdownModule
+    
+    MegaMenuModule,
+    TieredMenuModule,
+    SlideMenuModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

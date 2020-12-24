@@ -3,3 +3,63 @@
     <a class="navbar-brand" href="#" >SCOOP</a>
 </nav> -->
 <app-header></app-header>
+<!-- <div>
+    <h3 class="first"></h3>
+    <p-tieredMenu [model]="items" ></p-tieredMenu>
+</div> -->
+<html>
+    <style>
+        .novel{
+            height: 500px;
+            width: 800px;
+        }
+    </style>
+    <body>
+        <div >
+            <br><br>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-3">
+                    <h3 class="first"></h3>
+                    <p-slideMenu [model]="items" [viewportHeight]="500"></p-slideMenu>
+                </div>
+
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-6">
+                   <div>
+                    <p-card title="Simple Card" class="novel" >
+                        <div class="row">
+                            <div class="col-sm-6">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<img class="img-circle" src="../../assets/images/n.jpg"><br><br>
+                                <h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Allen, Woody</h3>
+                            </div>
+                            <div class="col-sm-5">
+                               <h1>Christmas</h1>
+                               <p>
+                                It's the time of year for Santa Claus, fairy lights and all the best pop songs. 
+                                What are the essential elements of Christmas in the UK?
+                                Do the preparation task first. Then read the article and do the exercises.
+                               </p>
+                            </div>
+                        </div>
+                    </p-card>
+                   </div>  
+
+                </div>
+                
+            </div>
+        </div>
+        <!-- <h3 class="first"></h3>
+        <p-slideMenu [model]="items" [viewportHeight]="250"></p-slideMenu>
+        <br><br>
+        <table align="center">
+            <tr>
+                <td>
+                    <div>
+                        <p-card title="Simple Card" [style]="{width: '360px'}">
+                            <div>บทความ</div>
+                        </p-card>
+                      </div>
+                </td>
+            </tr>
+        </table> -->
+    </body>
+</html>

@@ -1,9 +1,9 @@
-const mysql = require('mysql');
+const {Router} = require('express');
 const express = require('express');
-const sesssion = require('express-session');
+const app = express();
 const bodyPaser = require('body-parser');
 const usersController = require('./api/users');
-const app = express();
+// const connection = require('./dbconnection');
 
 app.use(bodyPaser.json());
 app.use('/', usersController);
