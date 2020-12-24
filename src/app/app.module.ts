@@ -45,7 +45,8 @@ import { FormsModule } from '@angular/forms';
     
     MegaMenuModule,
     TieredMenuModule,
-    SlideMenuModule
+    SlideMenuModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,10 +16,8 @@ export class HomeComponent implements OnInit {
       {
           label: 'Profile',
           icon: 'pi pi-user',
-        //   routerLink = "/profile"
-          
-      },
-     
+        //   routerLink = "/profile"       
+      },  
   ];
   }
 
