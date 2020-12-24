@@ -20,16 +20,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 
 import {DialogModule} from 'primeng/dialog';
-import { Routes, RouterModule} from "@angular/router";
-
-const appRoutes: Routes= [
-  {path: '', component: AppComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'profile', component: ProfileComponent}
-  
-];
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -51,8 +42,7 @@ const appRoutes: Routes= [
     CardModule,
     CalendarModule,
     DialogModule,
-    // DropdownModule
-    RouterModule.forRoot(appRoutes),
+    
     MegaMenuModule,
     TieredMenuModule,
     SlideMenuModule
