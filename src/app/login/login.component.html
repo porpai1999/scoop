@@ -1,10 +1,16 @@
-<div class="login-form">
-    <p-card [style]="{'width': '25rem', 'margin-bottom': '2em'}">
-        <form action="auth" method="post">
-            <input type="text" pInputText placeholder="Username">
-            <input type="password" pInputText placeholder="Password">
-            <br><button pButton pRipple type="button" label="Login"></button>
-            <br><button pButton pRipple type="button" label="Register" class="p-button-success"></button>
-        </form>
-    </p-card>
+<div class="_card_center">
+    <div class="_logo">
+        <h1 style="font-weight: bold; letter-spacing: 5px;">Scoop</h1>
+    </div>
+    <div class="login-form">
+        <p-card [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+            <form action="auth" method="post">
+                <input type="text" pInputText placeholder="Username">
+                <input type="password" pInputText placeholder="Password">
+                <hr>
+                <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Login"></button>
+                <br><button (click)="showRegister()" pButton pRipple type="button" label="Register" class="p-button-success"></button>
+            </form>
+        </p-card>
+    </div>
 </div>

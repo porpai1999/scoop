@@ -1,13 +1,24 @@
- <!-- <h1>Scoop</h1> -->
-<div class="register-form">
-    <p-card header="Register" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
-        <input type="text" pInputText placeholder="name">
-        <input type="text" pInputText placeholder="surname">
-        <input type="text" pInputText placeholder="Username">
-        <input type="password" pInputText placeholder="New password">
-        <label >Birthday</label>
-        <p-calendar [showIcon]="true" inputId="icon"></p-calendar>
-        <input type="text" pInputText placeholder="Sex?">
-        <br><button pButton pRipple type="button" label="Register" class="p-button-success"></button>
-    </p-card>
+<div class="_card_center">
+    <div class="register-form">
+        <p-card header="Scoop" [style]="{'width': '25rem'}">
+            <hr style="margin-top: -5%;">
+            <h5 style="font-weight: bold; margin-top: -3%;">Register</h5>
+            <input type="text" pInputText placeholder="name">
+            <input type="text" pInputText placeholder="surname">
+            <input type="text" pInputText placeholder="Username">
+            <input type="password" pInputText placeholder="New password">
+            <div style="width: 100%; margin-bottom: 5%;">
+                <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Birthday</label>
+                <p-calendar  [showIcon]="true" inputId="icon"></p-calendar>
+            </div>
+            <div>  
+                <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Sex</label>
+                <input type="text" pInputText>
+            </div>
+            <hr style="margin-top: -1%; margin-bottom: -2%;">
+            <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Register" class="p-button-success"></button>
+            <br><button pButton pRipple type="button" label="Cancel" class="p-button-danger"></button>
+        </p-card>
+    </div>
 </div>
+

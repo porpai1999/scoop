@@ -1,7 +1,33 @@
-.register-form {
+._logo {
+    margin-bottom: 1%;
+    text-align: center;
+    background-color: rgb(230, 230, 230);
+}
+
+._card_center {
     height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
     background-color: rgb(230, 230, 230);
+}
+
+.register-form {
+    margin-top: 0%;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(230, 230, 230);
+}
+
+.p-button {
+    width: 100%;
+}
+
+input {
+    margin-bottom: 5%;
+    width: 100%;
+}
+
+hr {
+    width: 100%;
 }

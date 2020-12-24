@@ -16,6 +16,8 @@ import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 
+import {DialogModule} from 'primeng/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,6 +26,7 @@ import { HomeComponent } from './home/home.component';
     HeaderComponent,
     ProfileComponent,
     HomeComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -34,6 +37,7 @@ import { HomeComponent } from './home/home.component';
     ButtonModule,
     CardModule,
     CalendarModule,
+    DialogModule
     // DropdownModule
   ],
   providers: [],

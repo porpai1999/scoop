@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  displayModal: boolean;
+
   constructor() { }
+
+  showRegister() {
+      this.displayModal = true;
+  }
 
   ngOnInit(): void {
   }
