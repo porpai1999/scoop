@@ -17,6 +17,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 
 import {DialogModule} from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {DialogModule} from 'primeng/dialog';
     CardModule,
     CalendarModule,
     DialogModule,
+    FormsModule,
     
     // DropdownModule
   ],

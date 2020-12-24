@@ -3,20 +3,20 @@
         <p-card header="Scoop" [style]="{'width': '25rem'}">
             <hr style="margin-top: -5%;">
             <h5 style="font-weight: bold; margin-top: -3%;">Register</h5>
-            <input type="text" pInputText placeholder="name">
-            <input type="text" pInputText placeholder="surname">
-            <input type="text" pInputText placeholder="Username">
-            <input type="password" pInputText placeholder="New password">
+            <input type="text" pInputText placeholder="name" name="name" [(ngModel)]="name">
+            <input type="text" pInputText placeholder="surname" name="surname" [(ngModel)]="surname">
+            <input type="text" pInputText placeholder="Username" name="username" [(ngModel)]="username">
+            <input type="password" pInputText placeholder="New password" name="password" [(ngModel)]="password">
             <div style="width: 100%; margin-bottom: 5%;">
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Birthday</label>
-                <p-calendar  [showIcon]="true" inputId="icon"></p-calendar>
+                <p-calendar  [showIcon]="true" inputId="icon" name="birthDay" [(ngModel)]="birthDay"></p-calendar>
             </div>
-            <div>  
+            <div>
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Sex</label>
                 <input type="text" pInputText>
             </div>
             <hr style="margin-top: -1%; margin-bottom: -2%;">
-            <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Register" class="p-button-success"></button>
+            <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Register" class="p-button-success" (click)="register()"></button>
             <br><button routerLink="/login" pButton pRipple type="button" label="Cancel" class="p-button-danger"></button>
         </p-card>
     </div>

@@ -5,10 +5,10 @@
     <div class="login-form">
         <p-card [style]="{'width': '25rem', 'margin-bottom': '2em'}">
             <form action="auth" method="post">
-                <input type="text" pInputText placeholder="Username">
-                <input type="password" pInputText placeholder="Password">
+                <input type="text" pInputText placeholder="Username" name="username" [(ngModel)]="username">
+                <input type="password" pInputText placeholder="Password" name="password" [(ngModel)]="password">
                 <hr>
-                <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Login"></button>
+                <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Login" (click)="login()"></button>
                 <br><button routerLink="/register" pButton pRipple type="button" label="Register" class="p-button-success"></button>
             </form>
         </p-card>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,8 +7,16 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   displayModal: boolean;
+  username;
+  password;
 
-  constructor() { }
+  constructor() { 
+  }
+
+  login() {
+    console.log(this.username);
+    console.log(this.password);
+  }
 
   showRegister() {
       this.displayModal = true;
