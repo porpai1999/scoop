@@ -11,6 +11,9 @@ import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import { RegisterComponent } from './register/register.component';
 import {CalendarModule} from 'primeng/calendar';
+import {MegaMenuModule} from 'primeng/megamenu';
+import {TieredMenuModule} from 'primeng/tieredmenu';
+import {SlideMenuModule} from 'primeng/slidemenu';
 
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -43,8 +46,10 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     DialogModule,
     FormsModule,
     HttpClientModule,
-    SelectButtonModule
-    
+    SelectButtonModule,
+    MegaMenuModule,
+    TieredMenuModule,
+    SlideMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
