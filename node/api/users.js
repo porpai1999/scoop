@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/insert', (req, res) => {
+router.post('/register', (req, res) => {
     let data = req.body;
     let sql = 'insert into user (username, password, firstname, lastname, address, phone_number, image)' +
     'values(?, ?, ?, ?, ?, ?, ?)';

@@ -18,6 +18,8 @@ import { HomeComponent } from './home/home.component';
 
 import {DialogModule} from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [
@@ -40,8 +42,9 @@ import { FormsModule } from '@angular/forms';
     CalendarModule,
     DialogModule,
     FormsModule,
+    HttpClientModule,
+    SelectButtonModule
     
-    // DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
