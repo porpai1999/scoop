@@ -18,13 +18,6 @@ import { HomeComponent } from './home/home.component';
 
 import {DialogModule} from 'primeng/dialog';
 
-import { Routes, RouterModule } from '@angular/router'
-const appRoutes: Routes = [
-  {path: '', component: AppComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent}
-];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +38,7 @@ const appRoutes: Routes = [
     CardModule,
     CalendarModule,
     DialogModule,
-    RouterModule.forRoot(appRoutes)
+    
     // DropdownModule
   ],
   providers: [],
