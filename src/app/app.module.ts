@@ -11,12 +11,25 @@ import {ButtonModule} from 'primeng/button';
 import {CardModule} from 'primeng/card';
 import { RegisterComponent } from './register/register.component';
 import {CalendarModule} from 'primeng/calendar';
+import {MegaMenuModule} from 'primeng/megamenu';
+import {TieredMenuModule} from 'primeng/tieredmenu';
+import {SlideMenuModule} from 'primeng/slidemenu';
 
 import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 
 import {DialogModule} from 'primeng/dialog';
+import { Routes, RouterModule} from "@angular/router";
+
+const appRoutes: Routes= [
+  {path: '', component: AppComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'home', component: HomeComponent},
+  {path: 'profile', component: ProfileComponent}
+  
+];
 
 @NgModule({
   declarations: [
@@ -37,8 +50,12 @@ import {DialogModule} from 'primeng/dialog';
     ButtonModule,
     CardModule,
     CalendarModule,
-    DialogModule
+    DialogModule,
     // DropdownModule
+    RouterModule.forRoot(appRoutes),
+    MegaMenuModule,
+    TieredMenuModule,
+    SlideMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
