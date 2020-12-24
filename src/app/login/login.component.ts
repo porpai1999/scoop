@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
     .subscribe(response => {
       if (response) {
         console.log('Status : Correct');
+        this.router.navigateByUrl('/register');
       }else {
         console.log('Status : Incorrect');
       }
