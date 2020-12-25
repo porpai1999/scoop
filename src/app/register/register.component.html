@@ -13,9 +13,9 @@
             </div>
             <div>
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Sex</label>
-                <input type="text" pInputText>
+                <p-selectButton [options]="stateOptions" [(ngModel)]="gender" optionLabel="label" optionValue="value"></p-selectButton>
             </div>
-            <hr style="margin-top: -1%; margin-bottom: -2%;">
+            <hr style="margin-top: 5%; margin-bottom: -2%;">
             <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Register" class="p-button-success" (click)="register()"></button>
             <br><button routerLink="/login" pButton pRipple type="button" label="Cancel" class="p-button-danger"></button>
         </p-card>

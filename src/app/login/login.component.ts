@@ -1,4 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TouchSequence } from 'selenium-webdriver';
+import { DatapassService } from '../datapass.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,12 +15,24 @@ export class LoginComponent implements OnInit {
   username;
   password;
 
-  constructor() { 
+  constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
+    private http: HttpClient) { 
+    let uid = acRouter.snapshot.params[''];
   }
-
+  
   login() {
-    console.log(this.username);
-    console.log(this.password);
+    let json = { username : this.username , password : this.password };
+    this.http.post('http://localhost:3000/login/auth', json)
+    .subscribe(response => {
+      if (response) {
+        console.log('Status : Correct');
+        this.router.navigateByUrl('/home');
+      }else {
+        console.log('Status : Incorrect');
+      }
+    }, error => {
+      console.log('Error!');
+    });
   }
 
   showRegister() {

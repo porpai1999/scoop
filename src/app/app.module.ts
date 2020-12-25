@@ -30,9 +30,6 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { PostpageComponent } from './postpage/postpage.component';
 import { FollowingComponent } from './following/following.component';
 
-
-
-
 const routes: Routes = [
   { path: '', component: AppComponent},
   { path: 'profile', component: ProfileComponent},
@@ -40,14 +37,11 @@ const routes: Routes = [
   { path: 'follow', component: FollowComponent},
   { path: 'postpage', component: PostpageComponent},
   { path: 'following', component: FollowingComponent},
-
-  
-
 ];
 
-
-
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 @NgModule({
   declarations: [
@@ -75,10 +69,13 @@ import { FormsModule } from '@angular/forms';
     CardModule,
     CalendarModule,
     DialogModule,
+    FormsModule,
+    HttpClientModule,
+    SelectButtonModule,
     MatSliderModule,
     MatListModule,
     MatGridListModule,
-    RouterModule.forRoot(routes),    // DropdownModule
+    RouterModule.forRoot(routes),
     
     MegaMenuModule,
     TieredMenuModule,
