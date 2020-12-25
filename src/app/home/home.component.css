@@ -1,0 +1,16 @@
+.novel{
+    height: 500px;
+    width: 800px;
+}
+.avatar {
+    vertical-align: middle;
+    width: 250px;
+    height: 250px;
+    border-radius: 100%;
+}
+:host >>> .mystyle{
+    background-color: rgb(111, 182, 182);
+}
+:host >>> .icon{
+    color: rgb(255, 0, 0);
+}
