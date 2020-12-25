@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // let request = this.http.get('http://localhost:3000/');
+    let request = this.http.get('http://localhost:3000/');
     console.log('ok');
   }
 
