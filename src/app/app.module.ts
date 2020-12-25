@@ -38,18 +38,15 @@ const routes: Routes = [
   { path: 'follow', component: FollowComponent},
   { path: 'postpage', component: PostpageComponent},
   { path: 'following', component: FollowingComponent},
-  { path: 'profileagain', component: ProfileagainComponent},
+  { path: 'profileagain', component: ProfileagainComponent}
 
 ];
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {SelectButtonModule} from 'primeng/selectbutton';
-<<<<<<< HEAD
 import { HomeoutComponent } from './homeout/homeout.component';
-=======
 import { ProfileagainComponent } from './profileagain/profileagain.component';
->>>>>>> 60bf49b8ec7819d73f175b8c7d605b77ce401584
 
 @NgModule({
   declarations: [
@@ -64,11 +61,7 @@ import { ProfileagainComponent } from './profileagain/profileagain.component';
     MenubarComponent,
     PostpageComponent,
     FollowingComponent,
-<<<<<<< HEAD
     HomeoutComponent,
-=======
-    ProfileagainComponent,
->>>>>>> 60bf49b8ec7819d73f175b8c7d605b77ce401584
 
 
   ],
