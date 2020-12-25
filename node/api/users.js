@@ -2,13 +2,12 @@ const express = require('express');
 const connection = require('../dbconnection');
 const router = express.Router();
 const mysql = require('mysql');
-const { send } = require('process');
 
 router.get('/', (req, res) => {
     connection.query('select * from user', (error, results, fields) => {
         if (error) throw error;
         res.status(200).json(results)
-        req.send("hello");
+        // req.send("hello");
     });
 });
 
@@ -29,9 +28,11 @@ router.post('/insert', (req, res) => {
 
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
-        res.status(200).json({
-            masseage : results
-        });
+        if (results.affectedRows > 0) {
+            res.status(200).send(true);
+        } else {
+            res.status(200).send(false);
+        }
     });
 });
 
