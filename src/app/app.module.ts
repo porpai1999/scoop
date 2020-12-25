@@ -62,7 +62,7 @@ import { ProfileagainComponent } from './profileagain/profileagain.component';
     PostpageComponent,
     FollowingComponent,
     HomeoutComponent,
-    ProfileagainComponent
+    ProfileagainComponent,
 
 
   ],
