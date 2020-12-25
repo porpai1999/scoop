@@ -30,4 +30,13 @@ router.post('/post', (req, res) => {
     });
 });
 
+router.get('/delete_account:id', (req, res) => {
+    connection.query('delete from user where id ='+id , (error, results, fields) => {
+        if (error) throw error;
+        res.status(200).json(results)
+    });
+})
+
+
+
 module.exports = router;
