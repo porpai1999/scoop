@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-  <a class="navbar-brand" href="#">Scoop</a>
+  <a class="navbar-brand" routerLink="/home">Scoop</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
     aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,12 +8,12 @@
   <div class="collapse navbar-collapse" id="navbarColor01">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home
+        <a class="nav-link" routerLink="/home">Home
           <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="profileagain">Profile</a>
+        <a class="nav-link" href="postpage">Profile</a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">Pricing</a>
@@ -36,7 +36,12 @@
   </div>
 
   <form class="form-inline my-2 my-lg-0">
-    <input class="form-control mr-sm-2" type="text" placeholder="Search">
+    <div>
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" size="50px">
+    </div>
     <button class="btn btn-success my-2 my-sm-0 col-md" type="submit">Search</button>
+    &nbsp;
+     <a routerLink="/login"><button class="btn btn-warning my-2 my-sm-0 col-md" type="submit" >
+    &nbsp;LogOut</button></a>
   </form>
 </nav>
