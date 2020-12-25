@@ -42,6 +42,7 @@ const routes: Routes = [
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {SelectButtonModule} from 'primeng/selectbutton';
+import { HomeoutComponent } from './homeout/homeout.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import {SelectButtonModule} from 'primeng/selectbutton';
     MenubarComponent,
     PostpageComponent,
     FollowingComponent,
+    HomeoutComponent,
 
 
   ],
