@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
-    <a class="navbar-brand" routerLink="/home">Scoop</a>
+    <a class="navbar-brand" routerLink="/homeout">Scoop</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
       aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="/home">Home
+          <a class="nav-link" routerLink="/homeout">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
@@ -27,3 +27,87 @@
         &nbsp;Sign In</button></a>
     </form>
   </nav>
+<html>
+    <style>
+        .novel{
+            height: 500px;
+            width: 800px;
+        }
+        .avatar {
+            vertical-align: middle;
+            width: 250px;
+            height: 250px;
+            border-radius: 100%;
+        }
+        :host >>> .mystyle{
+            background-color: rgb(111, 182, 182);
+        }
+    </style>
+    <body>
+        <div >
+            <br><br>
+            <div class="row">
+                &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-3" >
+                    <!-- <h3 class="first"></h3>
+                    <p-slideMenu [model]="items" [viewportHeight]="500" styleClass="mystyle"></p-slideMenu> -->
+                </div>
+
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-6">
+                   <div >
+                    <p-card  title="Simple Card" class="novel" >
+                        <div class="row">
+                            <div class="col-sm-6">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<img  src="../../assets/images/n.jpg" alt="Avatar" class="avatar"><br><br>
+                                <h2 style="color: black;"> 
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                    <i class="pi pi-user" style="color: darkred;"></i>
+                                    <i class="pi pi-ellipsis-v" style="color: darkred;"></i>
+                                    Allen, Woody</h2>
+                            </div>
+                            <div class="col-sm-5">
+                               <h1 style="color: black;">Christmas</h1>
+                               <p>
+                                It's the time of year for Santa Claus, fairy lights and all the best pop songs. 
+                                What are the essential elements of Christmas in the UK?
+                                Do the preparation task first. Then read the article and do the exercises.
+                               </p>
+                               <br>
+                                <!-- Button seemore -->
+                                <a routerLink="/login"><button type="button" class="btn btn-dark" ><i class="pi pi-arrow-circle-down"></i>&nbsp; See more</button></a>
+                            </div>
+                        </div>
+                    </p-card>
+                    <br><br>
+                    <p-card title="Simple Card" class="novel" >
+                        <div class="row">
+                            <div class="col-sm-6">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<img  src="../../assets/images/n1.jpg" alt="Avatar" class="avatar"><br><br>
+                                <h2 style="color: black;"> 
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                                <i class="pi pi-user" style="color: darkred;"></i>
+                                <i class="pi pi-ellipsis-v" style="color: darkred;"></i>
+                                Jennifer, Jennie</h2>
+                            </div>
+                            <div class="col-sm-5">
+                               <h1 style="color: black;">Universal Children's Day</h1>
+                               <p>
+                                Children all around the world need adults to help them, to protect them and to teach them their rights. 
+                                Do you know what the Rights of the Child are? Every year, 
+                                20 November is Universal Children’s Day, a chance for all of us to learn how we can help the youngest, 
+                                most vulnerable members of our communities.
+                               </p>
+                               <br>
+                                <!-- Button seemore -->
+                                <a routerLink="/login"><button type="button" class="btn btn-dark" ><i class="pi pi-arrow-circle-down"></i>&nbsp; See more</button></a>
+                            </div>
+                        </div>
+                    </p-card>
+                   </div>  
+
+                </div>
+                
+            </div>
+        </div>
+
+    </body>
+</html>
