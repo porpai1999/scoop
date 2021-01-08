@@ -1,0 +1,9 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-gap: 8px;
+  }
+  
+  .grid-container > div {
+    text-align: center;
+  }
