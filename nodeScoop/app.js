@@ -9,9 +9,8 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/', (req, res) => {
-    res.send({'test' : 'this text was sent from the server'})
-});
+app.use('/', require('./routes/index.js'));
+app.use('/users', require('./routes/users.js'));
 
 app.use(bodyPaser.json());
 
