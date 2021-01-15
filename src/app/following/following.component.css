@@ -1,0 +1,34 @@
+/* .following {
+    border-radius: 25px;
+    padding-right: 19px;
+    padding-left: 19px;
+    height: 42px;
+    font-size: 13px;
+    width: 130px;
+    background-color: #940d08
+    
+}
+
+.following:hover {
+    background-color: #f84242fa
+} */
+.button {
+    border-radius: 25px;
+    padding-right: 19px;
+    padding-left: 19px;
+    height: 42px;
+    font-size: 13px;
+    width: 130px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-color: #4CAF50;
+  }
+  
+  .button:hover {background-color: #f84242fa}
+  
+  .button:active {
+    background-color: #d11f19;
+    transform: translateY(2px);
+  }
