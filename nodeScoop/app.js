@@ -2,6 +2,11 @@ const {Router} = require('express');
 const express = require('express');
 const app = express();
 const bodyPaser = require('body-parser');
+const multer = require('multer');
+//app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'ejs');
+app.set('views', '.');
+app.use(express.static('.'));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -9,9 +14,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use('/', require('./routes/index.js'));
-app.use('/users', require('./routes/users.js'));
-
 app.use(bodyPaser.json());
+
+app.use('/', require('./routes/index.js'));
+app.use('/verify', require('./routes/secure.js'));
+app.use('/users', require('./routes/users.js'));
 
 module.exports = app;

@@ -1,10 +1,15 @@
 const express = require('express');
-const router = express.Router();
+const routes = express.Router();
 const connection = require('../dbconnection');
 const mysql = require('mysql');
+const path = require('path');
 
-router.get('/', (req, res) => {
-    res.send("Welcome to Scoop");
+routes.get('/', (req, res) => {
+    //console.log(path.join(__dirname, '..\\'));
+    console.log("Welcome to Scoop");
+    //res.sendFile(path.join(__dirname, '..\\index.html'));
+    res.render('index');
+    
 });
 
-module.exports = router;
+module.exports = routes;
