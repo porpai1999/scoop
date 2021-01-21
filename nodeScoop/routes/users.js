@@ -211,7 +211,6 @@ routes.get('/select_some', (req, res) => {
         }
         else {
             return res.send(results);
-            //res.send({'log' : 'select_some'});
         }
     });
 });
