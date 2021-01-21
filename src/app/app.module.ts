@@ -43,6 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { HomeoutComponent } from './homeout/homeout.component';
 
+import { CookieService } from 'ngx-cookie-service'; 
+
 
 @NgModule({
   declarations: [
@@ -83,7 +85,7 @@ import { HomeoutComponent } from './homeout/homeout.component';
     SlideMenuModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

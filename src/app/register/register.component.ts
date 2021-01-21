@@ -43,6 +43,25 @@ export class RegisterComponent implements OnInit {
       console.log('Error!');
     });
 
+    //---- Session ---------
+    //สร้าง session 
+    sessionStorage.register = "Register";
+    if(typeof(Storage) !== "undefined"){
+      if(sessionStorage.clickcountRegister){
+        sessionStorage.clickcountRegister = Number(sessionStorage.clickcountRegister)+1;
+        console.log("Creating a success session...");
+      }
+      else{
+        sessionStorage.clickcountRegister = 1;
+        console.log("Start creating sessions...");
+      }
+      sessionStorage.getItem("result")+ sessionStorage.clickcountRegister ;
+    }
+    else{
+      sessionStorage.getItem("result");
+    }
+    
+
   }
 
   ngOnInit(): void {

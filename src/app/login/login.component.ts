@@ -33,6 +33,24 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.log('Error!');
     });
+
+    //---- Session ----
+    sessionStorage.login = "Login";
+    if(typeof(Storage) !== "undefined"){
+      if(sessionStorage.clickcountLogin){
+        sessionStorage.clickcountLogin = Number(sessionStorage.clickcountLogin)+1;
+        console.log("Creating a success session...");
+      }
+      else{
+        sessionStorage.clickcountLogin = 1;
+        console.log("Start creating sessions...");
+      }
+      sessionStorage.getItem("result")+ sessionStorage.clickcountLogin ;
+    }
+    else{
+      sessionStorage.getItem("result");
+    }
+    
   }
 
   showRegister() {
