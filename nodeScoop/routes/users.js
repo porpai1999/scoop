@@ -1,16 +1,11 @@
-const express = require('express');
+const express = require("express");
 const routes = express.Router();
-const connection = require('../dbconnection');
+const connection = require("../dbconnection");
 const mysql = require('mysql');
-const bcrypt = require('bcrypt');
-const { userInfo } = require('os');
+// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { verify } = require('crypto');
-const e = require('express');
 const multer = require('multer');
-const app = express();
 const path = require('path');
-const { response } = require('../app');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -86,90 +81,90 @@ routes.post('/profiler', (req, res) => {
 });
 
 // login
-routes.post('/login', (req, res) => {
-    const  { email, password: plainTextPassword } = req.body;
-    if (!plainTextPassword || typeof plainTextPassword !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
-    }
-    if (!email || typeof email !== 'string') {
-        return res.json({ status: false, error: 'Invalid email'});
-    } else {
-         connection.query( mysql.format("select user_id, password from users where email=?", [email]), (error, results, fields) => {
-            if (error) throw error;
-            if (results.length > 0) {
-                if (bcrypt.compareSync(plainTextPassword, results[0].password)) {
-                    const token = jwt.sign(
-                        {
-                            id: results[0].user_id,
-                            email: email
-                        }, 
-                        JWT_SECRET
-                    );
-                    return res.json({ status: true, secretKey: token});
-                } else {
-                    return res.json({ status: false, error: 'Invalid Password'});
-                }
-            } else {
-                return res.json({ status: false, error: 'Invalid email'});
-            }
-        });
-    }
-});
+// routes.post('/login', (req, res) => {
+//     const  { email, password: plainTextPassword } = req.body;
+//     if (!plainTextPassword || typeof plainTextPassword !== 'string') {
+//         return res.json({ status: false, error: 'Invalid password'});
+//     }
+//     if (!email || typeof email !== 'string') {
+//         return res.json({ status: false, error: 'Invalid email'});
+//     } else {
+//          connection.query( mysql.format("select user_id, password from users where email=?", [email]), (error, results, fields) => {
+//             if (error) throw error;
+//             if (results.length > 0) {
+//                 if (bcrypt.compareSync(plainTextPassword, results[0].password)) {
+//                     const token = jwt.sign(
+//                         {
+//                             id: results[0].user_id,
+//                             email: email
+//                         }, 
+//                         JWT_SECRET
+//                     );
+//                     return res.json({ status: true, secretKey: token});
+//                 } else {
+//                     return res.json({ status: false, error: 'Invalid Password'});
+//                 }
+//             } else {
+//                 return res.json({ status: false, error: 'Invalid email'});
+//             }
+//         });
+//     }
+// });
 
 // register
-routes.post('/register', async (req, res) => {
-    const { email, password: plainTextPassword, first_name, last_name, date_of_birth, gender, photo_id} = req.body;
-    const password = await bcrypt.hash(plainTextPassword, 10);
-    if (!email || typeof email !== 'string') {
-        return res.json({ status: false, error: 'Invalid email'});
-    }
+// routes.post('/register', async (req, res) => {
+//     const { email, password: plainTextPassword, first_name, last_name, date_of_birth, gender, photo_id} = req.body;
+//     const password = await bcrypt.hash(plainTextPassword, 10);
+//     if (!email || typeof email !== 'string') {
+//         return res.json({ status: false, error: 'Invalid email'});
+//     }
     
-    if (!first_name || typeof first_name !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
-    }
+//     if (!first_name || typeof first_name !== 'string') {
+//         return res.json({ status: false, error: 'Invalid password'});
+//     }
 
-    if (!last_name || typeof last_name !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
-    }
+//     if (!last_name || typeof last_name !== 'string') {
+//         return res.json({ status: false, error: 'Invalid password'});
+//     }
 
-    if (!date_of_birth || typeof date_of_birth !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
-    }
+//     if (!date_of_birth || typeof date_of_birth !== 'string') {
+//         return res.json({ status: false, error: 'Invalid password'});
+//     }
 
-    if (!gender || typeof gender !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
-    }
+//     if (!gender || typeof gender !== 'string') {
+//         return res.json({ status: false, error: 'Invalid password'});
+//     }
 
-    let sql = 'insert into users (photo_id, email, password, first_name, last_name, date_of_birth, gender)' +
-    'values(?, ?, ?, ?, ?, ?, ?)';
+//     let sql = 'insert into users (photo_id, email, password, first_name, last_name, date_of_birth, gender)' +
+//     'values(?, ?, ?, ?, ?, ?, ?)';
 
-    sql = mysql.format(sql, [
-        photo_id,
-        email,
-        password,
-        first_name,
-        last_name,
-        date_of_birth,
-        gender
-    ]);
+//     sql = mysql.format(sql, [
+//         photo_id,
+//         email,
+//         password,
+//         first_name,
+//         last_name,
+//         date_of_birth,
+//         gender
+//     ]);
 
-    connection.query(sql, (error, results, fields) => {
-        if (error) {
-            if (error.sqlMessage) {
-                return res.status(500).json({ status: false, message: error.sqlMessage, duplicate_email: true });
-            } else {
-                return res.status(404).json({ status: false, message: "error"});
-            }
+//     connection.query(sql, (error, results, fields) => {
+//         if (error) {
+//             if (error.sqlMessage) {
+//                 return res.status(500).json({ status: false, message: error.sqlMessage, duplicate_email: true });
+//             } else {
+//                 return res.status(404).json({ status: false, message: "error"});
+//             }
             
-        }
-        if (results.affectedRows > 0) {
-            return res.status(200).json({ status: true });
-        } else {
-            return res.status(501).json({ status: false });
-        }
-    });
+//         }
+//         if (results.affectedRows > 0) {
+//             return res.status(200).json({ status: true });
+//         } else {
+//             return res.status(501).json({ status: false });
+//         }
+//     });
     
-});
+// });
 
 // upload image
 routes.post('/upload_image', async (req, res) => {
