@@ -12,8 +12,9 @@ import { DatapassService } from '../datapass.service';
 export class LoginComponent implements OnInit {
 
   displayModal: boolean;
-  username;
+  email;
   password;
+  item = [];
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
@@ -21,12 +22,20 @@ export class LoginComponent implements OnInit {
   }
   
   login() {
-    let json = { username : this.username , password : this.password };
-    this.http.post('http://localhost:3000/login/auth', json)
+    let json = { email : this.email , password : this.password };
+    this.http.post('http://localhost:3000/users/login', json)
     .subscribe(response => {
       if (response) {
-        console.log('Status : Correct');
-        this.router.navigateByUrl('/home');
+        if (response.status) {
+          console.log('Status : Correct');
+          this.router.navigateByUrl('/home');
+        } else {
+          console.log('Status : res Incorrect');
+        }
+        //console.log(response.status);
+        // for (let key in response)
+        //   if (this.data.ha)
+        
       }else {
         console.log('Status : Incorrect');
       }
@@ -35,21 +44,21 @@ export class LoginComponent implements OnInit {
     });
 
     //---- Session ----
-    sessionStorage.login = "Login";
-    if(typeof(Storage) !== "undefined"){
-      if(sessionStorage.clickcountLogin){
-        sessionStorage.clickcountLogin = Number(sessionStorage.clickcountLogin)+1;
-        console.log("Creating a success session...");
-      }
-      else{
-        sessionStorage.clickcountLogin = 1;
-        console.log("Start creating sessions...");
-      }
-      sessionStorage.getItem("result")+ sessionStorage.clickcountLogin ;
-    }
-    else{
-      sessionStorage.getItem("result");
-    }
+    // sessionStorage.login = "Login";
+    // if(typeof(Storage) !== "undefined"){
+    //   if(sessionStorage.clickcountLogin){
+    //     sessionStorage.clickcountLogin = Number(sessionStorage.clickcountLogin)+1;
+    //     console.log("Creating a success session...");
+    //   }
+    //   else{
+    //     sessionStorage.clickcountLogin = 1;
+    //     console.log("Start creating sessions...");
+    //   }
+    //   sessionStorage.getItem("result")+ sessionStorage.clickcountLogin ;
+    // }
+    // else{
+    //   sessionStorage.getItem("result");
+    // }
     
   }
 

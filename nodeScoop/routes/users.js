@@ -90,7 +90,7 @@ routes.post('/login', (req, res) => {
         return res.json({ status: false, error: 'Invalid email'});
     } else {
          connection.query( mysql.format("select user_id, password from users where email=?", [email]), (error, results, fields) => {
-            if (error) throw error;
+            if (error) { return res.json({ status: false, error: 'Error404'}); }
             if (results.length > 0) {
                 if (phppass.verify(plainTextPassword, results[0].password)) {
                     const token = jwt.sign(

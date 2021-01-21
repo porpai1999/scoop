@@ -45,10 +45,10 @@ routes.post('/subscribe', async (req, res) => {
   
     // If not successful
     if (body.success !== undefined && !body.success)
-      return res.json({ success: false, msg: 'Failed captcha verification' });
+      return res.json({ status: false, msg: 'Failed captcha verification' });
   
     // If successful
-    return res.json({ success: true, msg: 'Captcha passed' });
+    return res.json({ status: true, msg: 'Captcha passed' });
   });
 
 routes.post('/reCAPTCHA', (req, res) => {
@@ -57,7 +57,7 @@ routes.post('/reCAPTCHA', (req, res) => {
         req.body.captcha === '' ||
         req.body.captcha === null
     ) {
-        return res.json({"success": false, "msg": "please select captcha"});
+        return res.json({ status: false, "msg": "please select captcha"});
     }
 
     const secretKey = '6LebNC0aAAAAANFJovWoWevXEzTLM7RRLERD4Tyt';
@@ -67,9 +67,9 @@ routes.post('/reCAPTCHA', (req, res) => {
     request(verifyUrl, (error, response, body) => {
         body = JSON.parse(body);
         if(body.success !== undefined && !body.success) {
-            return res.json({"success": false, "msg": "Failed captcha"});
+            return res.json({status: false, "msg": "Failed captcha"});
         }
-        return res.json({"success": true, "msg": "Captcha passed!"});
+        return res.json({ status: true, "msg": "Captcha passed!"});
     });
 });
 
