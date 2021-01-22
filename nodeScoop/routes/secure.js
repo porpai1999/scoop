@@ -18,6 +18,7 @@ function verifyJWT(token, JWT_SECRET) {
     return { status: false, message: error};
   }
 }
+
 // test API JWT_verify
 routes.post('/JWT_verify', (req, res) => {
   const { token } = req.body;

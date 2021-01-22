@@ -29,6 +29,8 @@ import { FollowComponent } from './follow/follow.component';
 import { MenubarComponent } from './menubar/menubar.component';
 import { FollowingComponent } from './following/following.component';
 
+import { NgxCaptchaModule } from 'ngx-captcha';
+
 const routes: Routes = [
   { path: '', component: AppComponent},
   { path: 'profile', component: ProfileComponent},
@@ -83,7 +85,9 @@ import { CookieService } from 'ngx-cookie-service';
     MegaMenuModule,
     TieredMenuModule,
     SlideMenuModule,
-    FormsModule
+    FormsModule,
+
+    NgxCaptchaModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

@@ -16,6 +16,11 @@
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Sex</label>
                 <p-selectButton [options]="stateOptions" [(ngModel)]="gender" optionLabel="label" optionValue="value"></p-selectButton>
             </div>
+
+            <hr style="margin-top: 5%; margin-bottom: 5%;">
+            <div>
+                <ngx-recaptcha2 [siteKey]="siteKey" (success)="handleSuccess($event)" ></ngx-recaptcha2>
+            </div>
             <hr style="margin-top: 5%; margin-bottom: -2%;">
             <!-- <h1>reCAPTCHA</h1> -->
             <form action="?" method="POST" id="reCAPTCHA">
