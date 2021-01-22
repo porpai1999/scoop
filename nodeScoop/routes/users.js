@@ -203,14 +203,16 @@ routes.get('/delete', (req, res) => {
 
 routes.get('/select_some', (req, res) => {
     
-    let sql = "select * from users where user_id=6"
+    let sql = "select * from users where user_id=6 "
     connection.query(sql, (error, results, fields) => {
         if (error) {
             console.log("error");
             throw error;
         }
         else {
-            return res.send(results);
+            while(row = results.forEach(element => {
+                return res.send(results);
+            })){}
         }
     });
 });

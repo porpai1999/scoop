@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import {MenuItem} from 'primeng/api';
 
@@ -8,9 +10,22 @@ import {MenuItem} from 'primeng/api';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
   items: MenuItem[];
+  email;
 
+
+  list(){
+    console.log('Ok');
+    let request = this.http.get('http://localhost:3000/users/profiler')
+      .subscribe(response =>{
+        console.log('Response: '+ JSON.stringify(response) );
+      },error =>{
+        console.log('Error: '+ JSON.stringify(error));
+      });
+    console.log("Continue");
+    console.log("Next statement");
+  }
   ngOnInit(): void {
     this.items = [
       {
@@ -21,10 +36,18 @@ export class HomeComponent implements OnInit {
 
     // //สร้าง session 
     var data = sessionStorage.getItem("key");
-    var data = sessionStorage.getItem("key");
-    var data = sessionStorage.getItem("keyuser");
+    var data1 = sessionStorage.getItem("keyemail");
+    this.email = data1;
     //console.log(data);
+    // var data = sessionStorage.getItem("keysecret");
+    // var data3 = sessionStorage.getItem("keyuser");
+    //console.log("==",data);
+    //console.log(data3);
+    //----------------------------------------
+    //this.name = data3;
+    //sessionStorage.setItem('value',this.name);
 
+//----------------------------------------------------
     // //สร้าง session 
     // sessionStorage.home = "Home";
     // //var home = sessionStorage.home; 
