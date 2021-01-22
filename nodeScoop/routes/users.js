@@ -100,7 +100,7 @@ routes.post('/login', (req, res) => {
                         }, 
                         JWT_SECRET
                     );
-                    return res.json({ status: true, secretKey: token});
+                    return res.json({ status: true, email: email, user_id: results[0].user_id ,secretKey: token});
                 } else {
                     return res.json({ status: false, error: 'Invalid Password'});
                 }
