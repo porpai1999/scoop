@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   email;
   password;
   items = [];
-
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
     let uid = acRouter.snapshot.params[''];

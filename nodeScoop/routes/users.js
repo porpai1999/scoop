@@ -6,6 +6,9 @@ const phppass = require("node-php-password");
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const path = require('path');
+const config = require('../config/config');
+
+const checkAuth = require('../middleware/secure.js');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -52,6 +55,7 @@ routes.get('/', (req, res) => {
 
 // user_profile
 routes.post('/profiler', (req, res) => {
+    // res.send("Profiler");
     const { user_id, email, token} = req.body;
     let is_verify = false;
     let verifyJWT_result = verifyJWT(token, JWT_SECRET);
@@ -81,7 +85,7 @@ routes.post('/profiler', (req, res) => {
 });
 
 // login
-routes.post('/login', (req, res) => {
+routes.post('/login', (req, res, next) => {
     const  { email, password: plainTextPassword } = req.body;
     if (!plainTextPassword || typeof plainTextPassword !== 'string') {
         return res.json({ status: false, error: 'Invalid password'});
@@ -92,15 +96,17 @@ routes.post('/login', (req, res) => {
          connection.query( mysql.format("select user_id, password from users where email=?", [email]), (error, results, fields) => {
             if (error) { return res.json({ status: false, error: 'Error404'}); }
             if (results.length > 0) {
+
                 if (phppass.verify(plainTextPassword, results[0].password)) {
                     const token = jwt.sign(
                         {
                             id: results[0].user_id,
                             email: email
-                        }, 
-                        JWT_SECRET
+                        },
+                        config.JWT_SECRET
                     );
-                    return res.json({ status: true, email: email, user_id: results[0].user_id ,secretKey: token});
+                    // return res.send(token);
+                    return res.json({ status: true, email: email, user_id: results[0].user_id , token: token});
                 } else {
                     return res.json({ status: false, error: 'Invalid Password'});
                 }
@@ -213,6 +219,20 @@ routes.get('/select_some', (req, res) => {
             return res.send(results);
         }
     });
+});
+
+routes.get("/token", (req, res) => {
+    const payload = {
+      name: "Jimmy",
+      scopes: "customer:read"
+    };
+  
+    const token = jwt.sign(payload, config.JWT_SECRET);
+    res.send(token);
+  });
+  
+routes.get("/customer", checkAuth("customer:read"), (req, res) => {
+res.send("You are in Profile Page!!");
 });
 
 module.exports = routes;

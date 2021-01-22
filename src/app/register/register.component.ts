@@ -17,55 +17,65 @@ export class RegisterComponent implements OnInit {
   birthDay;
   gender: string = "";
   stateOptions: any[];
+  siteKey: string;
+  recaptcha: boolean;
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
     this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
+    this.siteKey = "6LebNC0aAAAAAOC8dWexryo1xwYyLCy8G3Ipa7a7";
+    this.recaptcha= false;
   }
 
   register() {
-    let date = ("0" + this.birthDay.getDate()).slice(-2);
-    let month = ("0" + (this.birthDay.getMonth() + 1)).slice(-2);
-    let year = this.birthDay.getFullYear();
-    let birthDay = year + "-" + month + "-" + date;
-    let json = { username : this.username, password : this.password, firstname : this.name, lastname : this.surname, 
-      address : this.birthDay, phone_number : this.gender, image : '' };
-    
-    this.http.post('http://localhost:3000/users/insert', json)
-    .subscribe(response => {
-      if (response) {
-        console.log('Status : registered');
-        this.router.navigateByUrl('/login');
-      }else {
-        console.log('Status : failed');
-      }
-    }, error => {
-      console.log('Error!');
-    });
+    if (this.recaptcha) {
+      // let date = ("0" + this.birthDay.getDate()).slice(-2);
+      // let month = ("0" + (this.birthDay.getMonth() + 1)).slice(-2);
+      // let year = this.birthDay.getFullYear();
+      // let birthDay = year + "-" + month + "-" + date;
+      // let json = { username : this.username, password : this.password, firstname : this.name, lastname : this.surname, 
+      // address : this.birthDay, phone_number : this.gender, image : '' };
+      this.router.navigateByUrl('/login');
+    //   this.http.post('http://localhost:3000/users/insert', json).subscribe(response => {
+    //     if (response) {
+    //       console.log('Status : registered');
+    //       this.router.navigateByUrl('/login');
+    //     } else {
+    //       console.log('Status : failed');
+    //     }
+    //   }, error => {
+    //     console.log('Error!');
+    //   });
 
-    //---- Session ---------
-    //สร้าง session 
-    sessionStorage.register = "Register";
-    if(typeof(Storage) !== "undefined"){
-      if(sessionStorage.clickcountRegister){
-        sessionStorage.clickcountRegister = Number(sessionStorage.clickcountRegister)+1;
-        console.log("Creating a success session...");
-      }
-      else{
-        sessionStorage.clickcountRegister = 1;
-        console.log("Start creating sessions...");
-      }
-      sessionStorage.getItem("result")+ sessionStorage.clickcountRegister ;
+    // //---- Session ---------
+    // //สร้าง session 
+    //   sessionStorage.register = "Register";
+    //   if(typeof(Storage) !== "undefined"){
+    //     if(sessionStorage.clickcountRegister){
+    //       sessionStorage.clickcountRegister = Number(sessionStorage.clickcountRegister)+1;
+    //       console.log("Creating a success session...");
+    //     }
+    //     else{
+    //       sessionStorage.clickcountRegister = 1;
+    //       console.log("Start creating sessions...");
+    //     }
+    //     sessionStorage.getItem("result")+ sessionStorage.clickcountRegister ;
+    //   }
+    //   else{
+    //     sessionStorage.getItem("result");
+    //   }
+    } else {
+      console.log(`reCaptcha : ${this.recaptcha}`);
     }
-    else{
-      sessionStorage.getItem("result");
-    }
-    
-
   }
 
   ngOnInit(): void {
     
+  }
+
+  handleSuccess($even) {
+    this.recaptcha = true;
+    console.log(`reCaptcha : ${this.recaptcha}`);
   }
 
 }
