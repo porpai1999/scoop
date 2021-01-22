@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     else{
       sessionStorage.getItem("result");
     }
-    
+    console.log('session count : '+sessionStorage.clickcountLogin);
   }
 
   showRegister() {
