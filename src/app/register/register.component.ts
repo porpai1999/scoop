@@ -10,9 +10,9 @@ import { DatapassService } from '../datapass.service';
 })
 export class RegisterComponent implements OnInit {
 
-  name;
-  surname;
-  username;
+  first_name;
+  last_name;
+  email;
   password;
   birthDay;
   gender: string = "";
@@ -28,42 +28,43 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (this.recaptcha) {
+    if (this.recaptcha==false) {
+      console.log(this.first_name);
       // let date = ("0" + this.birthDay.getDate()).slice(-2);
       // let month = ("0" + (this.birthDay.getMonth() + 1)).slice(-2);
       // let year = this.birthDay.getFullYear();
-      // let birthDay = year + "-" + month + "-" + date;
-      // let json = { username : this.username, password : this.password, firstname : this.name, lastname : this.surname, 
-      // address : this.birthDay, phone_number : this.gender, image : '' };
-      this.router.navigateByUrl('/login');
-    //   this.http.post('http://localhost:3000/users/insert', json).subscribe(response => {
-    //     if (response) {
-    //       console.log('Status : registered');
-    //       this.router.navigateByUrl('/login');
-    //     } else {
-    //       console.log('Status : failed');
-    //     }
-    //   }, error => {
-    //     console.log('Error!');
-    //   });
+      // let date_of_birth = year + "-" + month + "-" + date;
+      let json = { photo_id: "0", email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: "0", gender: "0" };
+      // this.router.navigateByUrl('/login');
+      this.http.post('http://localhost:3000/users/register', json).subscribe(response => {
+        if (response) {
+          console.log(response);
+          console.log(json);
+          // this.router.navigateByUrl('/login');
+        } else {
+          console.log('Status : failed');
+        }
+      }, error => {
+        console.log('Error!');
+      });
 
-    // //---- Session ---------
-    // //สร้าง session 
-    //   sessionStorage.register = "Register";
-    //   if(typeof(Storage) !== "undefined"){
-    //     if(sessionStorage.clickcountRegister){
-    //       sessionStorage.clickcountRegister = Number(sessionStorage.clickcountRegister)+1;
-    //       console.log("Creating a success session...");
-    //     }
-    //     else{
-    //       sessionStorage.clickcountRegister = 1;
-    //       console.log("Start creating sessions...");
-    //     }
-    //     sessionStorage.getItem("result")+ sessionStorage.clickcountRegister ;
-    //   }
-    //   else{
-    //     sessionStorage.getItem("result");
-    //   }
+    //---- Session ---------
+    //สร้าง session 
+      sessionStorage.register = "Register";
+      if(typeof(Storage) !== "undefined"){
+        if(sessionStorage.clickcountRegister){
+          sessionStorage.clickcountRegister = Number(sessionStorage.clickcountRegister)+1;
+          console.log("Creating a success session...");
+        }
+        else{
+          sessionStorage.clickcountRegister = 1;
+          console.log("Start creating sessions...");
+        }
+        sessionStorage.getItem("result")+ sessionStorage.clickcountRegister ;
+      }
+      else{
+        sessionStorage.getItem("result");
+      }
     } else {
       console.log(`reCaptcha : ${this.recaptcha}`);
     }
