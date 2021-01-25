@@ -126,19 +126,19 @@ routes.post('/register', async (req, res) => {
     }
     
     if (!first_name || typeof first_name !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
+        return res.json({ status: false, error: 'Invalid first_name'});
     }
 
     if (!last_name || typeof last_name !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
+        return res.json({ status: false, error: 'Invalid last_name'});
     }
 
     if (!date_of_birth || typeof date_of_birth !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
+        return res.json({ status: false, error: 'Invalid date_of_birth'});
     }
 
     if (!gender || typeof gender !== 'string') {
-        return res.json({ status: false, error: 'Invalid password'});
+        return res.json({ status: false, error: 'Invalid gender'});
     }
 
     let sql = 'insert into users (photo_id, email, password, first_name, last_name, date_of_birth, gender)' +
