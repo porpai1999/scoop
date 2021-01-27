@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
+import { DatapassService } from '../datapass.service';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +13,12 @@ import {MenuItem} from 'primeng/api';
 export class HomeComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
+  // email:string[];
+  constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
+    private http: HttpClient) {
+      let email = acRouter.snapshot.params['p1'];
+      console.log('email',email);
+    }
   items: MenuItem[];
   email;
 
@@ -27,6 +35,7 @@ export class HomeComponent implements OnInit {
   //   console.log("Next statement");
   // }
   ngOnInit(): void {
+    
     this.items = [
       {
           label: 'Profile',
@@ -38,6 +47,9 @@ export class HomeComponent implements OnInit {
     var data = sessionStorage.getItem("key");
     var data1 = sessionStorage.getItem("keyemail");
 //----------------------------------------------------
+    var data = sessionStorage.getItem("key");
+    var data1 = sessionStorage.getItem("keyemail");
+    
     // //สร้าง session 
     // sessionStorage.home = "Home";
     // //var home = sessionStorage.home; 

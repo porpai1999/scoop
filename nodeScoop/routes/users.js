@@ -237,4 +237,16 @@ routes.get("/customer", checkAuth("customer:read"), (req, res) => {
 res.send("You are in Profile Page!!");
 });
 
+routes.get('/select_some/:email', (req, res) => {
+    
+    let sql = "select * from users where email=?"
+    connection.query(sql,[req.params.email], (error, results, fields) => {
+        
+        if (error) {
+            console.log("error")
+            throw error;
+        }
+        return res.send(results);
+    });
+});
 module.exports = routes;
