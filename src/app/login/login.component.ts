@@ -50,22 +50,22 @@ export class LoginComponent implements OnInit {
     
     //---- Session ----
     //console.log(this.items);
-    // sessionStorage.login = "Login";
-    // if(typeof(Storage) !== "undefined"){
-    //   if(sessionStorage.clickcountLogin){
-    //     sessionStorage.clickcountLogin = Number(sessionStorage.clickcountLogin)+1;
-    //     console.log("Creating a success session...");
-    //   }
-    //   else{
-    //     sessionStorage.clickcountLogin = 1;
-    //     console.log("Start creating sessions...");
-    //   }
-    //   sessionStorage.getItem("result")+ sessionStorage.clickcountLogin ;
-    // }
-    // else{
-    //   sessionStorage.getItem("result");
-    // } 
-    // console.log('session count : '+sessionStorage.clickcountLogin);
+    sessionStorage.login = "Login";
+    if(typeof(Storage) !== "undefined"){
+      if(sessionStorage.clickcountLogin){
+        sessionStorage.clickcountLogin = Number(sessionStorage.clickcountLogin)+1;
+        console.log("Creating a success session...");
+      }
+      else{
+        sessionStorage.clickcountLogin = 1;
+        console.log("Start creating sessions...");
+      }
+      sessionStorage.getItem("result")+ sessionStorage.clickcountLogin ;
+    }
+    else{
+      sessionStorage.getItem("result");
+    } 
+    console.log('session count : '+sessionStorage.clickcountLogin);
   }
 
   showRegister() {
