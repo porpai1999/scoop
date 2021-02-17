@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DatapassService } from '../datapass.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  emails;
+  fullname;
+  constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
+    private http: HttpClient) { 
+      let email = acRouter.snapshot.params['p1'];
+      this.emails = email;
+      console.log('----',this.emails);
+    }
 
   ngOnInit(): void {
+    this.http.get('http://localhost:3000/users/select_some/'+this.emails)
+       .subscribe(response => {
+        this.fullname = response[0].first_name +' '+response[0].last_name;
+        console.log('fullname :',this.fullname);
+      },error =>{
+        console.log(error);
+      });
+    
+
         //สร้าง session 
         sessionStorage.profile = "Profile";
         if(typeof(Storage) !== "undefined"){
@@ -27,5 +46,4 @@ export class ProfileComponent implements OnInit {
           sessionStorage.getItem("result");
         }
   }
-
 }

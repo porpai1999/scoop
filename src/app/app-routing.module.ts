@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { FeedComponent } from './feed/feed.component';
+import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { HomeoutComponent } from './homeout/homeout.component';
 import { LoginComponent } from './login/login.component';
@@ -13,8 +15,14 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent},
+  { path: 'home/:p1', component: HomeComponent},
+  { path: 'Header/:p1', component: HeaderComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: 'homeout', component: HomeoutComponent}
+  { path: 'profile/:p1', component: ProfileComponent},
+  { path: 'homeout', component: HomeoutComponent},
+  { path: 'feed', component: FeedComponent}
+  
+
 ];
 
 @NgModule({

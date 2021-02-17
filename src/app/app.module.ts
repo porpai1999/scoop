@@ -45,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { HomeoutComponent } from './homeout/homeout.component';
 
-import { CookieService } from 'ngx-cookie-service'; 
+import { CookieService } from 'ngx-cookie-service';
+import { FeedComponent } from './feed/feed.component'; 
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { CookieService } from 'ngx-cookie-service';
     MenubarComponent,
     FollowingComponent,
     HomeoutComponent,
+    FeedComponent,
 
 
   ],

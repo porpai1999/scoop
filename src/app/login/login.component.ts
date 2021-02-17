@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   email;
   password;
   items = [];
+  value;
+
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
     let uid = acRouter.snapshot.params[''];
@@ -32,7 +34,11 @@ export class LoginComponent implements OnInit {
         }
         if (this.items[0]) {
           console.log(this.items);
-          this.router.navigateByUrl('/home');
+          this.value = this.items;
+          sessionStorage.setItem("key",this.value);
+          sessionStorage.setItem("keyemail",this.email);
+          // this.router.navigate(['/Header',this.items[1]]);
+          this.router.navigateByUrl('/home/'+this.items[1]);
         } else {
           console.log({ message: "login failed" });
         }
