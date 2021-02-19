@@ -76,39 +76,6 @@ routes.get('/delete', (req, res) => {
     res.send({'log' : 'delete'})
 });
 
-<<<<<<< HEAD
-routes.get('/select_some', (req, res) => {
-    
-    let sql = "select * from users where user_id=6 "
-    connection.query(sql, (error, results, fields) => {
-        if (error) {
-            console.log("error");
-            throw error;
-        }
-        else {
-            while(row = results.forEach(element => {
-                return res.send(results);
-            })){}
-        }
-    });
-});
-
-routes.get("/token", (req, res) => {
-    const payload = {
-      name: "Jimmy",
-      scopes: "customer:read"
-    };
-  
-    const token = jwt.sign(payload, config.JWT_SECRET);
-    res.send(token);
-  });
-  
-routes.get("/customer", checkAuth("customer:read"), (req, res) => {
-res.send("You are in Profile Page!!");
-});
-
-=======
->>>>>>> 5d70b23796030b921d9f78ea3061528b06f44664
 routes.get('/select_some/:email', (req, res) => {
     let sql = "select * from users where email=?"
     connection.query(sql, [req.params.email], (error, results, fields) => {

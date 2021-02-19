@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   
   login() {
     let json = { email : this.email , password : this.password };
-    this.http.post('http://localhost:3000/users/login', json)
+    this.http.post('http://localhost:3000/auth/login', json)
     .subscribe(response => {
       if (response) {
         for (let key in response) {
