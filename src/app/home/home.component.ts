@@ -14,8 +14,8 @@ export class HomeComponent implements OnInit {
   // email:string[];
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) {
-      let email = acRouter.snapshot.params['p1'];
-      console.log('email',email);
+      let id = acRouter.snapshot.params['p1'];
+      console.log('id home page',id);
     }
   items: MenuItem[];
 

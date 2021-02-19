@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   
   login() {
     let json = { email : this.email , password : this.password };
-    this.http.post('http://localhost:3000/users/login', json)
+    this.http.post('http://localhost:3000/auth/login', json)
     .subscribe(response => {
       if (response) {
         for (let key in response) {
@@ -37,8 +37,9 @@ export class LoginComponent implements OnInit {
           this.value = this.items;
           sessionStorage.setItem("key",this.value);
           sessionStorage.setItem("keyemail",this.email);
-          // this.router.navigate(['/Header',this.items[1]]);
-          this.router.navigateByUrl('/home/'+this.items[1]);
+          console.log(this.items[2])
+  
+          this.router.navigateByUrl('/home/'+this.items[2]);
         } else {
           console.log({ message: "login failed" });
         }

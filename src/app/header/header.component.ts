@@ -11,13 +11,13 @@ import { DatapassService } from '../datapass.service';
 export class HeaderComponent implements OnInit {
 
 
-  emails;
+  id;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
       
-      let email = acRouter.snapshot.params['p1'];
-      this.emails = email;
-      console.log('p1--->',this.emails);
+      let ids = acRouter.snapshot.params['p1'];
+      this.id = ids;
+      console.log(this.id);
       
     }
 

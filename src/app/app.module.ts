@@ -40,7 +40,7 @@ const routes: Routes = [
 
 ];
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {SelectButtonModule} from 'primeng/selectbutton';
 import { HomeoutComponent } from './homeout/homeout.component';
@@ -84,6 +84,7 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     MatSliderModule,
     MatListModule,
     MatGridListModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     
     MegaMenuModule,
