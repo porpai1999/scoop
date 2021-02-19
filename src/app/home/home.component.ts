@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
@@ -11,6 +12,7 @@ import { DatapassService } from '../datapass.service';
 })
 export class HomeComponent implements OnInit {
 
+  //constructor(private http: HttpClient) { }
   // email:string[];
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) {
@@ -18,7 +20,20 @@ export class HomeComponent implements OnInit {
       console.log('id home page',id);
     }
   items: MenuItem[];
+  email;
 
+
+  // list(){
+  //   console.log('Ok');
+  //   let request = this.http.get('http://localhost:3000/users/profiler')
+  //     .subscribe(response =>{
+  //       console.log('Response: '+ JSON.stringify(response) );
+  //     },error =>{
+  //       console.log('Error: '+ JSON.stringify(error));
+  //     });
+  //   console.log("Continue");
+  //   console.log("Next statement");
+  // }
   ngOnInit(): void {
     
     this.items = [
@@ -27,9 +42,11 @@ export class HomeComponent implements OnInit {
           icon: 'pi pi-user',       
       },  
   ];
+
+    // //สร้าง session 
     var data = sessionStorage.getItem("key");
     var data1 = sessionStorage.getItem("keyemail");
-    
+//----------------------------------------------------
     // //สร้าง session 
     // sessionStorage.home = "Home";
     // //var home = sessionStorage.home; 
@@ -47,6 +64,7 @@ export class HomeComponent implements OnInit {
     // else{
     //   sessionStorage.getItem("result");
     // }
+
   }
 
 }

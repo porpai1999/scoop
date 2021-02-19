@@ -49,8 +49,9 @@ export class LoginComponent implements OnInit {
     }, error => {
       console.log('Error!');
     });
-
-    // ---- Session ----
+    
+    //---- Session ----
+    //console.log(this.items);
     sessionStorage.login = "Login";
     if(typeof(Storage) !== "undefined"){
       if(sessionStorage.clickcountLogin){
@@ -65,7 +66,7 @@ export class LoginComponent implements OnInit {
     }
     else{
       sessionStorage.getItem("result");
-    }
+    } 
     console.log('session count : '+sessionStorage.clickcountLogin);
   }
 

@@ -44,5 +44,6 @@ export class ProfileComponent implements OnInit {
         else{
           sessionStorage.getItem("result");
         }
-  }
-}
+      }
+      
+    }
