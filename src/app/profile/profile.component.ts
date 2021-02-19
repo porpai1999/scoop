@@ -20,19 +20,6 @@ export class ProfileComponent implements OnInit {
     }
 
   ngOnInit(): void {
-<<<<<<< HEAD
-
-    // var da = sessionStorage.getItem('value');
-    // this.data = da;
-    // console.log(this.data);
-
-      //สร้าง session 
-      sessionStorage.profile = "Profile";
-      if(typeof(Storage) !== "undefined"){
-        if(sessionStorage.clickcountProfile){
-          sessionStorage.clickcountProfile = Number(sessionStorage.clickcountProfile)+1;
-          console.log("Creating a success session...");
-=======
     this.http.get('http://localhost:3000/users/select_some/'+this.emails)
        .subscribe(response => {
         this.fullname = response[0].first_name +' '+response[0].last_name;
@@ -54,16 +41,10 @@ export class ProfileComponent implements OnInit {
             console.log("Start creating sessions...");
           }
           sessionStorage.getItem("result")+ sessionStorage.clickcountProfile ;
->>>>>>> c567ba6e591f6c06bf99c2840c6cdab4bfe274ad
         }
         else{
-          sessionStorage.clickcountProfile = 1;
-          console.log("Start creating sessions...");
+          sessionStorage.getItem("result");
         }
-        sessionStorage.getItem("result")+ sessionStorage.clickcountProfile ;
       }
-      else{
-        sessionStorage.getItem("result");
-      }
-  }
-}
+      
+    }

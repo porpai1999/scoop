@@ -12,7 +12,7 @@ import { DatapassService } from '../datapass.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  //constructor(private http: HttpClient) { }
   // email:string[];
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) {
@@ -47,9 +47,6 @@ export class HomeComponent implements OnInit {
     var data = sessionStorage.getItem("key");
     var data1 = sessionStorage.getItem("keyemail");
 //----------------------------------------------------
-    var data = sessionStorage.getItem("key");
-    var data1 = sessionStorage.getItem("keyemail");
-    
     // //สร้าง session 
     // sessionStorage.home = "Home";
     // //var home = sessionStorage.home; 
