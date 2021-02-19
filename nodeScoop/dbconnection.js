@@ -1,7 +1,7 @@
-const mysql      = require('mysql');
+var mysql = require('mysql');
 
-const connection = mysql.createPool({
-    connectionLimit : 10,
+var connection = mysql.createPool({
+    //connectionLimit : 10,
     host     : 'localhost',
     user     : 'scoop',
     password : 'a33^d7Rg',
@@ -13,8 +13,10 @@ connection.on('error', function(err) {
 });
 
 connection.query('SELECT 1 + 1 AS solution', (error, results, fields) => {
-    if (error) throw error;
+   if (error) throw error;
     console.log('The solution is: ', results[0].solution);
 });
+
+
 
 module.exports = connection;

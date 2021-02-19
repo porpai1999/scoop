@@ -15,8 +15,11 @@ app.get('/', (req, res) => {
     res.send({message: "Welcome to Scoop" });
 });
 
-app.use('/index', require('./routes/index.js'));
-app.use('/verify', require('./routes/secure.js'));
+app.use('/index', require('./routes/index'));
+app.use('/verify', require('./routes/secure'));
+app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
+app.use('/profiler', require('./routes/profiler'));
+
 
 module.exports = app;
