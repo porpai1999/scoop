@@ -46,7 +46,8 @@ import {SelectButtonModule} from 'primeng/selectbutton';
 import { HomeoutComponent } from './homeout/homeout.component';
 
 import { CookieService } from 'ngx-cookie-service';
-import { FeedComponent } from './feed/feed.component'; 
+import { FeedComponent } from './feed/feed.component';
+import { EditprofileComponent } from './editprofile/editprofile.component'; 
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { FeedComponent } from './feed/feed.component';
     FollowingComponent,
     HomeoutComponent,
     FeedComponent,
+    EditprofileComponent,
 
 
   ],

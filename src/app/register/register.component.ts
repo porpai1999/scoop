@@ -19,6 +19,9 @@ export class RegisterComponent implements OnInit {
   stateOptions: any[];
   siteKey: string;
   recaptcha: boolean;
+  filename;
+  base64;
+  url;
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
@@ -34,12 +37,14 @@ export class RegisterComponent implements OnInit {
       // let month = ("0" + (this.birthDay.getMonth() + 1)).slice(-2);
       // let year = this.birthDay.getFullYear();
       // let date_of_birth = year + "-" + month + "-" + date;
-      let json = { photo_id: "0", email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: "0", gender: "0" };
+      let json = { photo_id: this.base64, email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: "0", gender: "0" };
       // this.router.navigateByUrl('/login');
       this.http.post('http://localhost:3000/users/register', json).subscribe(response => {
         if (response) {
           console.log(response);
           console.log(json);
+          let jsonObj: any = response;
+          this.url = jsonObj.url;
           // this.router.navigateByUrl('/login');
         } else {
           console.log('Status : failed');
@@ -77,6 +82,25 @@ export class RegisterComponent implements OnInit {
   handleSuccess($even) {
     this.recaptcha = true;
     console.log(`reCaptcha : ${this.recaptcha}`);
+  }
+  getFile(target: EventTarget) {
+
+    let files = (target as HTMLInputElement).files;
+    if (files != null) {
+      // console.log(files[0].name)
+      let file = files[0]
+      this.filename = file?.name
+      console.log(this.filename)
+      let reader = new FileReader()
+      reader.readAsDataURL(files[0])
+      reader.onload = () => {
+        // console.log(reader.result)
+        this.base64 = reader.result
+      }
+      console.log('file ok');
+    } else {
+      console.log('No file');
+    }
   }
 
 }

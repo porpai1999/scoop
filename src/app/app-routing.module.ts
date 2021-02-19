@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
 import { FeedComponent } from './feed/feed.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -20,7 +21,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'profile/:p1', component: ProfileComponent},
   { path: 'homeout', component: HomeoutComponent},
-  { path: 'feed', component: FeedComponent}
+  { path: 'feed', component: FeedComponent},
+  { path: 'edit', component: EditprofileComponent},
+
   
 
 ];

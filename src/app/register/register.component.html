@@ -15,7 +15,13 @@
             <div>
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Sex</label>
                 <p-selectButton [options]="stateOptions" [(ngModel)]="gender" optionLabel="label" optionValue="value"></p-selectButton>
-            </div>
+            </div><br>
+                    <div class="form-group files">
+                      <label class="my-auto">Upload Your File </label>
+                       <input id="file" type="file" (change)="getFile($event.target)">
+                       <!-- (change)="getFile($event.target.files)" -->
+                      </div>
+                      <a href="{{this.url}}" target="_blank">{{this.url}}</a>
 
             <hr style="margin-top: 5%; margin-bottom: 5%;">
             <div>
