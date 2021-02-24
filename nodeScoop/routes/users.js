@@ -108,9 +108,9 @@ routes.get('/delete', (req, res) => {
     res.send({'log' : 'delete'})
 });
 
-routes.get('/select_some/:email', (req, res) => {
-    let sql = "select * from users where email=?"
-    connection.query(sql, [req.params.email], (error, results, fields) => {
+routes.get('/select_some/:user_id', (req, res) => {
+    let sql = "select * from users where user_id=?"
+    connection.query(sql, [req.params.user_id], (error, results, fields) => {
         if (error) {
             throw error;
         }
