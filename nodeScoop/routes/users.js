@@ -36,7 +36,7 @@ function checkFileType(file, cb){
 
 // users.js
 routes.get('/', (req, res) => {
-    res.send({'log': 'users.js'})
+    res.send({'api': 'users'})
 });
 
 // post text
