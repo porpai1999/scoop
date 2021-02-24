@@ -37,8 +37,9 @@ export class LoginComponent implements OnInit {
           this.value = this.items;
           sessionStorage.setItem("key",this.value);
           sessionStorage.setItem("keyemail",this.email);
-          // this.router.navigate(['/Header',this.items[1]]);
-          this.router.navigateByUrl('/home/'+this.items[1]);
+          console.log(this.items[2])
+  
+          this.router.navigateByUrl('/home/'+this.items[2]);
         } else {
           console.log({ message: "login failed" });
         }

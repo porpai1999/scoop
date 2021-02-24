@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'profile/:p1', component: ProfileComponent},
   { path: 'homeout', component: HomeoutComponent},
   { path: 'feed', component: FeedComponent},
-  { path: 'edit', component: EditprofileComponent},
+  { path: 'editprofile/:p1', component: EditprofileComponent},
 
   
 

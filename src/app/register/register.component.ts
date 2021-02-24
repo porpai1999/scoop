@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatapassService } from '../datapass.service';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -83,18 +84,14 @@ export class RegisterComponent implements OnInit {
     this.recaptcha = true;
     console.log(`reCaptcha : ${this.recaptcha}`);
   }
-  getFile(target: EventTarget) {
-
-    let files = (target as HTMLInputElement).files;
-    if (files != null) {
-      // console.log(files[0].name)
-      let file = files[0]
-      this.filename = file?.name
-      console.log(this.filename)
-      let reader = new FileReader()
-      reader.readAsDataURL(files[0])
-      reader.onload = () => {
+  urls="./assets/images/userprofile.png"
+  getFile(e) {
+    if (e.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0])
+      reader.onload = (event:any) => {
         // console.log(reader.result)
+        this.urls=event.target.result;
         this.base64 = reader.result
       }
       console.log('file ok');
@@ -102,5 +99,6 @@ export class RegisterComponent implements OnInit {
       console.log('No file');
     }
   }
+ 
 
 }

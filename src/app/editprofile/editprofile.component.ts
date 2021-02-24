@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editprofile',
@@ -7,15 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditprofileComponent implements OnInit {
 
-  stateOptions: any[];
-  gender: string = "";
-
-  constructor() 
-  {
-    this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
-   }
+  id;
+  constructor(private http: HttpClient,private acRouter: ActivatedRoute) { 
+    let ids = acRouter.snapshot.params['p1'];
+      this.id = ids;
+      console.log(ids);
+  }
 
   ngOnInit(): void {
   }
+  
   
 }

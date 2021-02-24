@@ -39,6 +39,16 @@ routes.get('/', (req, res) => {
     res.send({'log': 'users.js'})
 });
 
+// post text
+routes.post('/post', (req, res) => {
+    res.send("Post");
+});
+
+// add photos in post
+routes.post('/add_photo', (req, res) => {
+    res.send("add_photo_in_post");
+});
+
 // upload image
 routes.post('/upload_image', async (req, res) => {
     await upload(req, res, (err) => {
@@ -67,8 +77,30 @@ routes.post('/upload_image', async (req, res) => {
 });
 
 // update
-routes.get('/update', (req, res) => {
-    res.send({'log' : 'update'})
+routes.put('/update', (req, res) => {
+    //res.send({'log' : 'update'});
+    const { first_name, last_name, user_id } = req.body;
+    let sql = "UPDATE users SET first_name=?, last_name=? WHERE user_id=?";
+    sql = mysql.format(sql, [
+        first_name,
+        last_name,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            res.json({
+                status: false,
+                message: err
+            });
+        } else {
+            if (results.affectedRows > 0) {
+                return res.status(200).json({ status: true, results: results });
+            } else {
+                return res.status(501).json({ status: false, results: results });
+            }
+        }
+        
+    });
 });
 
 // delete
@@ -76,9 +108,9 @@ routes.get('/delete', (req, res) => {
     res.send({'log' : 'delete'})
 });
 
-routes.get('/select_some/:email', (req, res) => {
-    let sql = "select * from users where email=?"
-    connection.query(sql, [req.params.email], (error, results, fields) => {
+routes.get('/select_some/:user_id', (req, res) => {
+    let sql = "select * from users where user_id=?"
+    connection.query(sql, [req.params.user_id], (error, results, fields) => {
         if (error) {
             throw error;
         }
