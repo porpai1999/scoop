@@ -1,12 +1,12 @@
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <div class="_card_center">
     <div class="register-form">
-        <p-card header="Scoop" [style]="{'width': '25rem'}">
+        <p-card header="Scoop" [style]="{'width': '30rem'}">
             <hr style="margin-top: -5%;">
             <h5 style="font-weight: bold; margin-top: -3%;">Register</h5>
-            <input type="text" pInputText placeholder="name" name="first_name" [(ngModel)]="first_name">
-            <input type="text" pInputText placeholder="surname" name="last_name" [(ngModel)]="last_name">
-            <input type="text" pInputText placeholder="Username" name="email" [(ngModel)]="email">
+            <input type="text" pInputText placeholder="Name" name="first_name" [(ngModel)]="first_name">
+            <input type="text" pInputText placeholder="Surname" name="last_name" [(ngModel)]="last_name">
+            <input type="text" pInputText placeholder="E-mail" name="email" [(ngModel)]="email">
             <input type="password" pInputText placeholder="New password" name="password" [(ngModel)]="password">
             <div style="width: 100%; margin-bottom: 5%;">
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Birthday</label>
@@ -16,12 +16,12 @@
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Sex</label>
                 <p-selectButton [options]="stateOptions" [(ngModel)]="gender" optionLabel="label" optionValue="value"></p-selectButton>
             </div><br>
-                    <div class="form-group files">
-                      <label class="my-auto">Upload Your File </label>
-                       <input id="file" type="file" (change)="getFile($event.target)">
-                       <!-- (change)="getFile($event.target.files)" -->
+                    <div class="form-group files" style="text-align: center;">
+                      <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Upload Your File </label><br><br>
+                      <img [src]="urls" height="100" ><br><br>
+                       <input id="file" type="file" (change)="getFile($event)">
                       </div>
-                      <a href="{{this.url}}" target="_blank">{{this.url}}</a>
+                      <a  href="{{this.url}}" target="_blank">{{this.url}}</a>
 
             <hr style="margin-top: 5%; margin-bottom: 5%;">
             <div>

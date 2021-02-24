@@ -8,7 +8,7 @@ routes.get('/', (req, res) => {
 });
 
 // show user profile
-routes.get('/profile/', (req, res) => {
+routes.get('/profile/:user_id', (req, res) => {
     let id = req.query.id;
     let sql = "select * from users where user_id=?"
     connection.query(sql, [id], (error, results, fields) => {
