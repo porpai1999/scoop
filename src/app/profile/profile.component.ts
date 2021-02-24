@@ -10,17 +10,17 @@ import { DatapassService } from '../datapass.service';
 })
 export class ProfileComponent implements OnInit {
 
-  emails;
   fullname;
+  id;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
-      let email = acRouter.snapshot.params['p1'];
-      this.emails = email;
-      console.log('----',this.emails);
+      let ids = acRouter.snapshot.params['p1'];
+      this.id = ids;
+      console.log(ids);
     }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/users/select_some/'+this.emails)
+    this.http.get('http://localhost:3000/users/select_some/'+this.id)
        .subscribe(response => {
         this.fullname = response[0].first_name +' '+response[0].last_name;
         console.log('fullname :',this.fullname);
@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       });
     
-
         //สร้าง session 
         sessionStorage.profile = "Profile";
         if(typeof(Storage) !== "undefined"){
@@ -45,5 +44,6 @@ export class ProfileComponent implements OnInit {
         else{
           sessionStorage.getItem("result");
         }
-  }
-}
+      }
+      
+    }

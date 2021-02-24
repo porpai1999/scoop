@@ -11,5 +11,5 @@ export class EditprofileComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
 }

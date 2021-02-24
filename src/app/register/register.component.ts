@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatapassService } from '../datapass.service';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -45,7 +46,7 @@ export class RegisterComponent implements OnInit {
           console.log(json);
           let jsonObj: any = response;
           this.url = jsonObj.url;
-          // this.router.navigateByUrl('/login');
+          this.router.navigateByUrl('/login');
         } else {
           console.log('Status : failed');
         }
