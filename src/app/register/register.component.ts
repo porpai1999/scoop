@@ -31,15 +31,15 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    if (this.recaptcha==false) {
+    if (this.recaptcha==true) {
       console.log(this.first_name);
       // let date = ("0" + this.birthDay.getDate()).slice(-2);
       // let month = ("0" + (this.birthDay.getMonth() + 1)).slice(-2);
       // let year = this.birthDay.getFullYear();
       // let date_of_birth = year + "-" + month + "-" + date;
-      let json = { photo_id: this.base64, email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: "0", gender: "0" };
+      let json = { photo_id: 0, email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: "0", gender: "0" };
       // this.router.navigateByUrl('/login');
-      this.http.post('http://localhost:3000/users/register', json).subscribe(response => {
+      this.http.post('http://localhost:3000/auth/register', json).subscribe(response => {
         if (response) {
           console.log(response);
           console.log(json);

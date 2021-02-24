@@ -39,6 +39,16 @@ routes.get('/', (req, res) => {
     res.send({'log': 'users.js'})
 });
 
+// post text
+routes.post('/post', (req, res) => {
+    res.send("Post");
+});
+
+// add photos in post
+routes.post('/add_photo', (req, res) => {
+    res.send("add_photo_in_post");
+});
+
 // upload image
 routes.post('/upload_image', async (req, res) => {
     await upload(req, res, (err) => {
@@ -67,8 +77,30 @@ routes.post('/upload_image', async (req, res) => {
 });
 
 // update
-routes.get('/update', (req, res) => {
-    res.send({'log' : 'update'})
+routes.post('/update', (req, res) => {
+    //res.send({'log' : 'update'});
+    const { first_name, last_name, user_id } = req.body;
+    let sql = "UPDATE users SET first_name=?, last_name=? WHERE user_id=?";
+    sql = mysql.format(sql, [
+        first_name,
+        last_name,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            res.json({
+                status: false,
+                message: err
+            });
+        } else {
+            if (results.affectedRows > 0) {
+                return res.status(200).json({ status: true, results: results });
+            } else {
+                return res.status(501).json({ status: false, results: results });
+            }
+        }
+        
+    });
 });
 
 // delete
