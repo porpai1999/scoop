@@ -10,10 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 export class EditprofileComponent implements OnInit {
 
   id;
+  stateOptions: any[];
+  gender: string = "";
   constructor(private http: HttpClient,private acRouter: ActivatedRoute) { 
     let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
       console.log(ids);
+      this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
   }
 
   ngOnInit(): void {
