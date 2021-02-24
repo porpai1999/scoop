@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditprofileComponent implements OnInit {
 
-  constructor() { }
+  stateOptions: any[];
+  gender: string = "";
+
+  constructor() 
+  {
+    this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
+   }
 
   ngOnInit(): void {
   }
