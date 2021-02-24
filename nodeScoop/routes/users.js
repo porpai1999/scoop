@@ -77,7 +77,7 @@ routes.post('/upload_image', async (req, res) => {
 });
 
 // update
-routes.post('/update', (req, res) => {
+routes.put('/update', (req, res) => {
     //res.send({'log' : 'update'});
     const { first_name, last_name, user_id } = req.body;
     let sql = "UPDATE users SET first_name=?, last_name=? WHERE user_id=?";
