@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { HomeoutComponent } from './homeout/homeout.component';
 import { LoginComponent } from './login/login.component';
+import { PostsComponent } from './posts/posts.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 
@@ -23,7 +24,7 @@ const routes: Routes = [
   { path: 'homeout', component: HomeoutComponent},
   { path: 'feed', component: FeedComponent},
   { path: 'editprofile/:p1', component: EditprofileComponent},
-
+  { path: 'posts', component: PostsComponent}
   
 
 ];

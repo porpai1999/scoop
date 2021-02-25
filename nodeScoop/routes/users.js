@@ -91,9 +91,10 @@ routes.post('/upload_image', async (req, res) => {
 });
 
 // update
-routes.put('/update', (req, res) => {
+routes.put('/update/:user_id', (req, res) => {
     //res.send({'log' : 'update'});
-    const { first_name, last_name, user_id } = req.body;
+    const { first_name, last_name } = req.body;
+    const user_id = req.params.user_id;
     let sql = "UPDATE users SET first_name=?, last_name=? WHERE user_id=?";
     sql = mysql.format(sql, [
         first_name,
