@@ -2,16 +2,13 @@ const express = require("express");
 const routes = express.Router();
 const connection = require("../dbconnection");
 const mysql = require('mysql');
-const jwt = require('jsonwebtoken');
-const config = require('../config/config');
 var passwordHash = require('password-hash');
 
-const { checkAuth } = require('../middleware/middle.js');
-// const checkAuth = require('../middleware/middle.js');
+const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 
 routes.get('/', (req, res) => {
-    res.send({'log': 'auth.js'})
-    
+    res.send({'api': 'auth'});
 });
 
 // login
@@ -32,7 +29,7 @@ routes.post('/login', (req, res, next) => {
                             id: results[0].user_id,
                             email: email
                         },
-                        config.JWT_SECRET
+                        config.JWT_SECRET //, { expiresIn: '30s'}
                     );
                     return res.json({ status: true, email: email, user_id: results[0].user_id , token: token});
                 } else {
@@ -109,41 +106,5 @@ routes.get("/token", (req, res) => {
     const token = jwt.sign(payload, config.JWT_SECRET);
     res.send(token);
   });
-  
-// routes.get("/customer", checkAuth("customer:read"), (req, res) => {
-// res.send("You are in Profile Page!!");
-// });
 
 module.exports = routes;
-
-/*
-// user_profile
-routes.post('/profiler', (req, res) => {
-    // res.send("Profiler");
-    const { user_id, email, token} = req.body;
-    let is_verify = false;
-    let verifyJWT_result = verifyJWT(token, JWT_SECRET);
-    is_verify = verifyJWT_result.status;
-
-    if (!user_id || typeof user_id !== "number") {
-        console.log(is_verify);
-        return res.json({ status: false, error: 'Session lossed!'});
-    }
-    if (!email || typeof email !== 'string') {
-        return res.json({ status: false, error: 'Session lossed!'});
-    }
-
-    if (is_verify) {
-        connection.query( mysql.format("select * from users where user_id=? and email=?", [user_id, email]), (error, results, fields) => {
-            if (error) throw error;
-            if(results.length > 0) {
-                return res.json(results[0]);
-            } else {
-                return res.json({ status: false, error: 'Session lossed!'});
-            }
-        });
-    } else {
-        return res.json({ status: false, verify: is_verify});
-    }
-    
-});*/

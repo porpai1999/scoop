@@ -15,10 +15,13 @@ export class EditprofileComponent implements OnInit {
   last_name;
   base64;
   email;
+  stateOptions: any[];
+  gender: string = "";
   constructor(private http: HttpClient,private acRouter: ActivatedRoute,private router:Router) { 
     let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
       console.log(ids);
+      this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
       this.http.get('http://localhost:3000/profiler/profile/'+this.id)
     .subscribe(response =>{
       console.log(response)
