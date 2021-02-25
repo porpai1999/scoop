@@ -117,6 +117,29 @@ routes.put('/update', (req, res) => {
     });
 });
 
+// update
+routes.put('/update/:user_id', (req, res) => {
+    //res.send({'log' : 'update'});
+    let user = req.params.user_id
+    const { first_name, last_name,email } = req.body;
+    let sql = "UPDATE users SET first_name=?, last_name=?,email=? WHERE user_id=?";
+    connection.query(sql,[first_name,last_name,email,user], (error, results, fields) => {
+        if (error) {
+            res.json({
+                status: false,
+                message: err
+            });
+        } else {
+            if (results.affectedRows > 0) {
+                return res.status(200).json({ status: true, results: results });
+            } else {
+                return res.status(501).json({ status: false, results: results });
+            }
+        }
+        
+    });
+});
+
 // delete
 routes.get('/delete', (req, res) => {
     res.send({'log' : 'delete'})
