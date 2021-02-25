@@ -12,12 +12,12 @@ routes.get('/', (req, res) => {
 });
 
 // show user profile
-routes.get('/profile/', verifyToken, (req, res) => {
+routes.get('/profile/:user_id', verifyToken, (req, res) => {
     jwt.verify(req.token, config.JWT_SECRET, (error) => {
         if(error) {
             res.sendStatus(403);
         } else {
-            let id = req.query.id;
+            let id = req.params.user_id;
             let sql = "select * from users where user_id=?"
             connection.query(sql, [id], (error, results, fields) => {
                 if (error) {
