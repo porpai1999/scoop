@@ -24,12 +24,22 @@
         :host >>> .mystyle{
             background-color: rgb(111, 182, 182);
         }
+        div.c {
+  position: absolute;
+  right: 0px;  
+  width: 200px;
+  height: 120px;
+  /* border: 3px solid green; */
+}
     </style>
     <body>
        <!-- {{email}} -->
        <!-- <button (click)="list()"> Send</button> -->
         <div >
             <br><br>
+            <div class="c">
+                <button type="button" class="btn btn-light" [routerLink]="['/posts']">Post</button>
+            </div>
             <div class="row">
                 &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-3" >
                     <!-- <h3 class="first"></h3>
@@ -93,6 +103,7 @@
             </div>
         </div>
 
+       
     </body>
 </html>
         <!-- <h3 class="first"></h3>

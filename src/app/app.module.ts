@@ -49,6 +49,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { FeedComponent } from './feed/feed.component';
 import { EditprofileComponent } from './editprofile/editprofile.component'; 
 
+import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     HomeoutComponent,
     FeedComponent,
     EditprofileComponent,
+    PostsComponent,
 
 
   ],
@@ -91,10 +94,12 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     TieredMenuModule,
     SlideMenuModule,
     FormsModule,
+    EditorModule,
 
     NgxCaptchaModule
   ],
-  providers: [CookieService],
+  providers: [CookieService,
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

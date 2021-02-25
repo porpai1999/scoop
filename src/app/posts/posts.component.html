@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+            .novel{
+            height: 500px;
+            width: 1000px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 50px; 
+        }
+    </style>
+  <script src="/path/to/tinymce.min.js"></script>
+  <script type="text/javascript">
+  tinymce.init({
+    selector: 'textarea',
+    language: 'sv',
+    language_url: '/js/sv.js',
+    plugins: 'myplugin',
+    external_plugins: {
+        'myplugin': '/js/myplugin/plugin.min.js'
+    }
+  });
+  </script>
+</head>
+<body>
+    <div class="row" >
+    <p-card title="Simple Card" class="novel" >
+        <h3>Your article</h3>
+        <editor [init]="{
+            base_url: '/tinymce', 
+            suffix: '.min'        
+          }" >
+        </editor>
+    </p-card>
+</div>
+</body>
+</html>
