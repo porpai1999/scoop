@@ -80,10 +80,23 @@ routes.post('/upload_image', async (req, res) => {
                     message: "Errror: No file Selected"
                 });
             } else {
-                res.json({
-                    status: true,
-                    message: "File Uploaded",
-                    file: req.file.filename
+                console.log(req.file.path);
+                const { user_id, post_id, caption, image, datetime } = req.body;
+                let sql = 'insert into photos (user_id, post_id, caption, image, datetime) values(?, ?, ?, ?, ?)';
+                sql = mysql.format(sql, [
+                    user_id,
+                    post_id,
+                    caption,
+                    image,
+                    datetime
+                ]);
+                connection.query(sql, (error, results, fields) => {
+                    if (error) throw error;
+                    if (results.affectedRows > 0) {
+                        res.send({status: "good"});
+                    } else {
+                        res.send({status: "bad"});
+                    }
                 });
             }
         }
