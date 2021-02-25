@@ -20,6 +20,25 @@ routes.get('/', (req, res) => {
     res.send({'api': 'users'})
 });
 
+// accepted follow
+routes.post('/follow', (req, res) => {
+    const userID_1 = req.body.userID_1;
+    const userID_2 = req.body.userID_2;
+    let sql = "insert into posts (userID_1, userID_2) valuse (?, ?)";
+    sql = mysql.format(sql, [
+        userID_1,
+        userID_2
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
+});
+
 // post text
 routes.post('/post', (req, res) => {
     const text = req.body.text;
