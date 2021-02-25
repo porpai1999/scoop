@@ -7,7 +7,6 @@ var passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 
-
 routes.get('/', (req, res) => {
     res.send({'api': 'auth'});
 });

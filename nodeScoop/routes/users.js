@@ -2,37 +2,18 @@ const express = require("express");
 const routes = express.Router();
 const connection = require("../dbconnection");
 const mysql = require('mysql');
-const phppass = require("node-php-password");
+
 const jwt = require('jsonwebtoken');
-const multer = require('multer');
-const path = require('path');
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'images/')
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + path.extname(file.originalname));
+const config = require('../config/config');
+const { verifyToken, upload } = require('../middleware/middle.js');
+/*
+verifyToken
+jwt.verify(req.token, config.JWT_SECRET, (error) => {
+    if (error) { res.sendStatus(403); }
+    else {
     }
-})
-
-const upload = multer({ 
-    storage: storage,
-    fileFilter: function(req, file, cb) {
-        checkFileType(file, cb);
-    }
-}).single("file");
-
-function checkFileType(file, cb){
-    const filetypes = /jpeg|jpg|png|gif/;
-    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-    const mimetype = filetypes.test(file.mimetype);
-    if(mimetype && extname){
-      return cb(null,true);
-    } else {
-      cb('Error: Images Only!');
-    }
-}
+});
+*/
 
 // users.js
 routes.get('/', (req, res) => {
@@ -41,7 +22,21 @@ routes.get('/', (req, res) => {
 
 // post text
 routes.post('/post', (req, res) => {
-    res.send("Post");
+    const text = req.body.text;
+    const user_id = req.body.user_id;
+    let sql = "insert into posts (text, user_id) values (?, ?)";
+    sql = mysql.format(sql, [
+        text,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
 });
 
 // add photos in post

@@ -2,7 +2,6 @@ const express = require("express");
 const routes = express.Router();
 const connection = require("../dbconnection");
 
-
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const { verifyToken } = require('../middleware/middle.js');
@@ -28,7 +27,6 @@ routes.get('/profile/', verifyToken, (req, res) => {
             });
         }
     });
-    
 });
 
 // show post in profile
