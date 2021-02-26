@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: '', component: HomeoutComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent },
-  { path: 'home', component: HomeComponent},
+  // { path: 'home', component: HomeComponent},
   { path: 'home/:p1', component: HomeComponent},
   { path: 'Header/:p1', component: HeaderComponent},
   { path: 'profile', component: ProfileComponent},
@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'homeout', component: HomeoutComponent},
   { path: 'feed', component: FeedComponent},
   { path: 'editprofile/:p1', component: EditprofileComponent},
-  { path: 'posts', component: PostsComponent}
+  { path: 'posts/:p1', component: PostsComponent}
   
 
 ];

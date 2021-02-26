@@ -25,14 +25,14 @@ export class EditprofileComponent implements OnInit {
       this.http.get('http://localhost:3000/users/select_some/'+this.id)
       .subscribe(response =>{
       console.log(response)
-      this.user = response[0];
+      this.user = response[0]
       console.log(response[0])
       this.first_name = response[0].first_name;
+      console.log(this.first_name)
       this.last_name = response[0].last_name;
       this.email = response[0].email;
     },error=>{
       console.log('error')
-
     });
 
   }
@@ -40,21 +40,21 @@ export class EditprofileComponent implements OnInit {
   saveprofile(){
     let json = { email: this.email,first_name:this.first_name,last_name: this.last_name };
     this.http.put('http://localhost:3000/users/update/'+this.id,json,{observe:'response'})
-    .subscribe(response=>{
+    .subscribe(response =>{
       if (response) {
         console.log(response.body);
-        console.log(response.status);
         if(response.status === 200){
           console.log('Back profile page');
+          console.log('Status is true ',response.status)
           this.router.navigateByUrl('/profile/'+this.id);
         }else{
-          console.log('Error');
+          console.log('Error 501');
         }
       }else{
-        console.log('Login fail');
+        console.log('Fail Fail');
       }
     },error=>{
-      console.log('error');
+      console.log('Error',error);
     });
   }
 
