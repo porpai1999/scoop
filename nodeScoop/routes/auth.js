@@ -6,6 +6,7 @@ var passwordHash = require('password-hash');
 
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
+const e = require("express");
 
 routes.get('/', (req, res) => {
     res.send({'api': 'auth'});
@@ -68,7 +69,6 @@ routes.post('/register', (req, res) => {
 
     let sql = 'insert into users (photo_id, email, password, first_name, last_name, date_of_birth, gender)' +
     'values(?, ?, ?, ?, ?, ?, ?)';
-
     sql = mysql.format(sql, [
         photo_id,
         email,
@@ -89,7 +89,7 @@ routes.post('/register', (req, res) => {
             
         }
         if (results.affectedRows > 0) {
-            return res.status(200).json({ status: true });
+            return res.status(200).json({ status: true, user_id: results.insertId });
         } else {
             return res.status(501).json({ status: false });
         }

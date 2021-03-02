@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatapassService } from '../datapass.service';
@@ -20,7 +20,13 @@ export class ProfileComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/users/select_some/'+this.id)
+    const token= "Bearer "+ sessionStorage.getItem("token");
+    console.log('token: '+sessionStorage.getItem("token"))
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization' : token
+    });
+    this.http.get('http://localhost:3000/users/select_some/'+this.id, {headers: httpHeaders})
        .subscribe(response => {
         this.fullname = response[0].first_name +' '+response[0].last_name;
         console.log('fullname :',this.fullname);
