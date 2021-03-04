@@ -3,10 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { FeedComponent } from './feed/feed.component';
+import { FollowComponent } from './follow/follow.component';
+import { FollowingComponent } from './following/following.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { HomeoutComponent } from './homeout/homeout.component';
 import { LoginComponent } from './login/login.component';
+import { PhotoComponent } from './photo/photo.component';
 import { PostsComponent } from './posts/posts.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
@@ -24,7 +27,12 @@ const routes: Routes = [
   { path: 'homeout', component: HomeoutComponent},
   { path: 'feed', component: FeedComponent},
   { path: 'editprofile/:p1', component: EditprofileComponent},
-  { path: 'posts/:p1', component: PostsComponent}
+  { path: 'posts/:p1', component: PostsComponent},
+  { path: 'posts', component: PostsComponent},
+  { path: 'photo', component: PhotoComponent},
+  { path: 'follow', component: FollowComponent},
+  { path: 'following', component: FollowingComponent}
+
   
 
 ];
