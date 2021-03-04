@@ -10,16 +10,17 @@
             <input type="password" pInputText placeholder="New password" name="password" [(ngModel)]="password">
             <div style="width: 100%; margin-bottom: 5%;">
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Birthday</label>
-                <p-calendar  [showIcon]="true" inputId="icon" name="birthDay" [(ngModel)]="birthDay"></p-calendar>
+                <p-calendar  [showIcon]="true" inputId="icon" name="birthDay" [(ngModel)]="birthDay" dateFormat="yy-mm-dd" ></p-calendar>
             </div>
             <div>
-                <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Sex</label>
+                <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Gender</label>
                 <p-selectButton [options]="stateOptions" [(ngModel)]="gender" optionLabel="label" optionValue="value"></p-selectButton>
+                <div>{{gender}}</div>
             </div><br>
                     <div class="form-group files" style="text-align: center;">
                       <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Upload Your File </label><br><br>
                       <img [src]="urls" height="100" ><br><br>
-                       <input id="file" type="file" (change)="getFile($event)">
+                       <input id="file" type="file" #imageInput (change)="getFile(imageInput)">
                       </div>
                       <a  href="{{this.url}}" target="_blank">{{this.url}}</a>
 
@@ -28,12 +29,11 @@
                 <ngx-recaptcha2 [siteKey]="siteKey" (success)="handleSuccess($event)" ></ngx-recaptcha2>
             </div>
             <hr style="margin-top: 5%; margin-bottom: -2%;">
-            <!-- <h1>reCAPTCHA</h1> -->
+
             <form action="?" method="POST" id="reCAPTCHA">
                 <div class="g-recaptcha" data-sitekey="6LebNC0aAAAAAOC8dWexryo1xwYyLCy8G3Ipa7a7"></div>
                 <br/>
-                <!-- <input type="submit" value="Submit"> -->
-              </form>
+            </form>
         
               <script>
                   document.getElementById("reCAPTCHA").addEventListener('submit', submitForm);

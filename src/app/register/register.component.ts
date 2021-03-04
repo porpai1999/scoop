@@ -1,5 +1,8 @@
+import { DatePipe, formatDate } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatapassService } from '../datapass.service';
 
@@ -24,29 +27,100 @@ export class RegisterComponent implements OnInit {
   base64;
   url;
 
+  //sanitizer;
+  file_img:any;
+  file :any;
+
+  urls: any = "./assets/images/userprofile.png"
+
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
-    private http: HttpClient) { 
+    private http: HttpClient, private sanitizer: DomSanitizer, private formBuilder: FormBuilder) { 
     this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
+
     this.siteKey = "6LebNC0aAAAAAOC8dWexryo1xwYyLCy8G3Ipa7a7";
     this.recaptcha= false;
   }
 
   register() {
+    let date = new Date();
+    let currentDate = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
+    let items = [];
     if (this.recaptcha==true) {
-      console.log(this.first_name);
-      // let date = ("0" + this.birthDay.getDate()).slice(-2);
-      // let month = ("0" + (this.birthDay.getMonth() + 1)).slice(-2);
-      // let year = this.birthDay.getFullYear();
-      // let date_of_birth = year + "-" + month + "-" + date;
-      let json = { photo_id: 0, email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: "0", gender: "0" };
-      // this.router.navigateByUrl('/login');
-      this.http.post('http://localhost:3000/auth/register', json).subscribe(response => {
+      let date_of_birth = this.birthDay.getFullYear() + "-" + (this.birthDay.getMonth()+1) + "-" + this.birthDay.getDate();
+      let register_json = { photo_id: 0, email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: date_of_birth, gender: this.gender };
+      this.http.post('http://localhost:3000/auth/register', register_json).subscribe(response => {
         if (response) {
-          console.log(response);
-          console.log(json);
           let jsonObj: any = response;
           this.url = jsonObj.url;
-          this.router.navigateByUrl('/login');
+
+          for (let key in response) {
+            if (response.hasOwnProperty(key)) {
+              items.push(response[key]);
+            }
+          }
+          let registered_userID = items[1];
+
+          if (this.file == undefined) {
+            this.router.navigateByUrl('/login');
+          } else {
+            let formData: any = new FormData();
+            formData.append("file", this.file);
+            this.http.post('http://localhost:3000/users/upload_image', formData).subscribe(response => {
+              if (response) {
+
+                items = [];
+                for (let key in response) {
+                  if (response.hasOwnProperty(key)) {
+                    items.push(response[key]);
+                  }
+                }
+                let uploaded_image_path = items[2];
+
+                let post_json = { text: "", user_id: registered_userID};
+                this.http.post('http://localhost:3000/users/post/'+registered_userID, post_json).subscribe(response => {
+                      if (response) {
+
+                        items = [];
+                        for (let key in response) {
+                          if (response.hasOwnProperty(key)) {
+                            items.push(response[key]);
+                          }
+                        }
+                        let posted_postID = items[1];
+
+                        let insert_photos_json = { user_id: registered_userID, post_id: posted_postID, caption: "", image: uploaded_image_path, datetime: currentDate};
+                        this.http.post('http://localhost:3000/users/insert_photos/', insert_photos_json).subscribe(response => {
+                          if (response) {
+
+                            items = [];
+                            for (let key in response) {
+                              if (response.hasOwnProperty(key)) {
+                                items.push(response[key]);
+                              }
+                            }
+                            let inserted_photo_id = items[1];
+
+                            let profile_photo_json = { photo_id: inserted_photo_id };
+                            this.http.put('http://localhost:3000/users/profile_photo/'+registered_userID, profile_photo_json).subscribe(response => {
+                              if (response) {
+                                this.router.navigateByUrl('/login');
+                              } else {
+                                console.log('Status : insert_failed');
+                              }
+                            });
+                          } else {
+                            console.log('Status : insert_failed');
+                          }
+                        });
+                      } else {
+                        console.log('Status : insert_failed');
+                      }
+                    });
+              } else {
+                console.log('Status : file not found');
+              }
+            });
+          }
         } else {
           console.log('Status : failed');
         }
@@ -74,31 +148,31 @@ export class RegisterComponent implements OnInit {
     } else {
       console.log(`reCaptcha : ${this.recaptcha}`);
     }
+    
   }
 
   ngOnInit(): void {
-    
   }
 
   handleSuccess($even) {
     this.recaptcha = true;
     console.log(`reCaptcha : ${this.recaptcha}`);
   }
-  urls="./assets/images/userprofile.png"
-  getFile(e) {
-    if (e.target.files) {
-      var reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0])
-      reader.onload = (event:any) => {
-        // console.log(reader.result)
-        this.urls=event.target.result;
-        this.base64 = reader.result
-      }
-      console.log('file ok');
-    } else {
-      console.log('No file');
-    }
-  }
- 
 
+  getFile(imageInput: any){
+    console.log(imageInput.files[0]);
+    let file = imageInput.files[0];
+    let reader = new FileReader();
+    let file_img = imageInput.files[0];
+    this.file=file_img;
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.base64 = reader.result;
+      let json = {
+        base64: this.base64
+      }
+        this.urls = this.sanitizer.bypassSecurityTrustResourceUrl(this.base64);
+    };
+    
+  }
 }

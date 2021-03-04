@@ -28,11 +28,14 @@
     <div class="row" >
     <p-card title="Simple Card" class="novel" >
         <h3>Your article</h3>
-        <editor [init]="{
+        <editor
+        [(ngModel)]="text"
+         [init]="{
             base_url: '/tinymce', 
             suffix: '.min'        
           }" >
         </editor>
+        <button class="form-control" (click)="post()">Post</button>
     </p-card>
 </div>
 </body>

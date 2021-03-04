@@ -23,10 +23,12 @@ export class LoginComponent implements OnInit {
   }
   
   login() {
+    console.log(this.email)
     let json = { email : this.email , password : this.password };
     this.http.post('http://localhost:3000/auth/login', json)
     .subscribe(response => {
       if (response) {
+        console.log('res : '+response)
         for (let key in response) {
           if (response.hasOwnProperty(key)) {
             this.items.push(response[key]);
@@ -37,8 +39,8 @@ export class LoginComponent implements OnInit {
           this.value = this.items;
           sessionStorage.setItem("key",this.value);
           sessionStorage.setItem("keyemail",this.email);
-          console.log(this.items[2])
-  
+          sessionStorage.setItem('token', this.items[3]);
+          console.log(sessionStorage.getItem('token'))
           this.router.navigateByUrl('/home/'+this.items[2]);
         } else {
           console.log({ message: "login failed" });

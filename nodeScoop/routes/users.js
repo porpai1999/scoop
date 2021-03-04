@@ -6,14 +6,6 @@ const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const { verifyToken, upload } = require('../middleware/middle.js');
-/*
-verifyToken
-jwt.verify(req.token, config.JWT_SECRET, (error) => {
-    if (error) { res.sendStatus(403); }
-    else {
-    }
-});
-*/
 
 // users.js
 routes.get('/', (req, res) => {
@@ -40,10 +32,10 @@ routes.post('/follow', (req, res) => {
 });
 
 // post text
-routes.post('/post', (req, res) => {
+routes.post('/post/:user_id', (req, res) => {
     const text = req.body.text;
-    const user_id = req.body.user_id;
-    let sql = "insert into posts (text, user_id) values (?, ?)";
+    const user_id = req.params.user_id;
+    let sql = "insert into posts (text, user_id) values (?, ?);";
     sql = mysql.format(sql, [
         text,
         user_id
@@ -52,23 +44,35 @@ routes.post('/post', (req, res) => {
         if (error) throw error;
         else {
             res.json({
-                results: results
+                status: true,
+                user_id: results.insertId
             });
         }
     });
 });
 
-// add photos in post
-routes.post('/add_photo', (req, res) => {
-    res.send("add_photo_in_post");
+// insert_photos in post
+routes.post('/insert_photos', (req, res) => {
+    const { user_id, post_id, caption, image, datetime } = req.body;
+    let sql = "insert into photos (user_id, post_id, caption, image, datetime) values (?, ?, ?, ?, ?)";
+    sql = mysql.format(sql, [
+        user_id, post_id, caption, image, datetime
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                status: true,
+                user_id: results.insertId
+            });
+        }
+    });
 });
 
 // upload image
 routes.post('/upload_image', async (req, res) => {
     await upload(req, res, (err) => {
-        console.log(req);
         if(err) {
-            
             res.json({
                 status: false,
                 message: err
@@ -82,9 +86,34 @@ routes.post('/upload_image', async (req, res) => {
             } else {
                 res.json({
                     status: true,
-                    message: "File Uploaded",
-                    file: req.file.filename
+                    message: "File Selected",
+                    path: 'localhost/images/'+req.file.filename
                 });
+            }
+        }
+    });
+});
+
+// update profile_photo
+routes.put('/profile_photo/:user_id', (req, res) => {
+    const photo_id = req.body.photo_id;
+    const user_id = req.params.user_id;
+    let sql = "UPDATE users SET photo_id=? WHERE user_id=?";
+    sql = mysql.format(sql, [
+        photo_id,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            res.json({
+                status: false,
+                message: err
+            });
+        } else {
+            if (results.affectedRows > 0) {
+                return res.status(200).json({ status: true, results: results });
+            } else {
+                return res.status(501).json({ status: false, results: results });
             }
         }
     });
@@ -114,6 +143,28 @@ routes.put('/update/:user_id', (req, res) => {
                 return res.status(501).json({ status: false, results: results });
             }
         }
+    });
+});
+
+// update
+routes.put('/update/:user_id', (req, res) => {
+    //res.send({'log' : 'update'});
+    let user = req.params.user_id
+    const { first_name, last_name,email } = req.body;
+    let sql = "UPDATE users SET first_name=?, last_name=?,email=? WHERE user_id=?";
+    connection.query(sql,[first_name,last_name,email,user], (error, results, fields) => {
+        if (error) {
+            res.json({
+                status: false,
+                message: err
+            });
+        } else {
+            if (results.affectedRows > 0) {
+                return res.status(200).json({ status: true, results: results });
+            } else {
+                return res.status(501).json({ status: false, results: results });
+            }
+        }
         
     });
 });
@@ -123,14 +174,28 @@ routes.get('/delete', (req, res) => {
     res.send({'log' : 'delete'})
 });
 
-routes.get('/select_some/:user_id', (req, res) => {
-    let sql = "select * from users where user_id=?"
+/*
+verifyToken
+jwt.verify(req.token, config.JWT_SECRET, (error) => {
+    if (error) { res.sendStatus(403); }
+    else {
+    }
+});
+*/
+routes.get('/select_some/:user_id', verifyToken, (req, res) => {
+    jwt.verify(req.token, config.JWT_SECRET, (error) => {
+        if (error) { res.sendStatus(403); }
+        else {
+            let sql = "select * from users where user_id=?"
     connection.query(sql, [req.params.user_id], (error, results, fields) => {
         if (error) {
             throw error;
         }
         return res.send(results);
     });
+        }
+    });
+    
 });
 
 module.exports = routes;

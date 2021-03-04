@@ -14,9 +14,11 @@ export class HomeComponent implements OnInit {
 
   //constructor(private http: HttpClient) { }
   // email:string[];
+  ids;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) {
       let id = acRouter.snapshot.params['p1'];
+      this.ids = id;
       console.log('id home page',id);
     }
   items: MenuItem[];
@@ -45,7 +47,8 @@ export class HomeComponent implements OnInit {
 
     // //สร้าง session 
     var data = sessionStorage.getItem("key");
-    var data1 = sessionStorage.getItem("keyemail");
+    var data1 = sessionStorage.getItem("token");
+    console.log(data1);
 //----------------------------------------------------
     // //สร้าง session 
     // sessionStorage.home = "Home";
