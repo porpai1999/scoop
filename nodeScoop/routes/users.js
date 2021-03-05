@@ -182,20 +182,14 @@ jwt.verify(req.token, config.JWT_SECRET, (error) => {
     }
 });
 */
-routes.get('/select_some/:user_id', verifyToken, (req, res) => {
-    jwt.verify(req.token, config.JWT_SECRET, (error) => {
-        if (error) { res.sendStatus(403); }
-        else {
-            let sql = "select * from users where user_id=?"
+routes.get('/select_some/:user_id', (req, res) => {
+    let sql = "select * from users where user_id=?"
     connection.query(sql, [req.params.user_id], (error, results, fields) => {
         if (error) {
             throw error;
         }
         return res.send(results);
     });
-        }
-    });
-    
 });
 
 module.exports = routes;
