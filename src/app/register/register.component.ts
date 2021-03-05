@@ -59,6 +59,7 @@ export class RegisterComponent implements OnInit {
             }
           }
           let registered_userID = items[1];
+          console.log("1"+registered_userID);
 
           if (this.file == undefined) {
             this.router.navigateByUrl('/login');
@@ -67,6 +68,7 @@ export class RegisterComponent implements OnInit {
             formData.append("file", this.file);
             this.http.post('http://localhost:3000/users/upload_image', formData).subscribe(response => {
               if (response) {
+                console.log(response)
 
                 items = [];
                 for (let key in response) {
@@ -75,6 +77,7 @@ export class RegisterComponent implements OnInit {
                   }
                 }
                 let uploaded_image_path = items[2];
+                console.log("2"+uploaded_image_path);
 
                 let post_json = { text: "", user_id: registered_userID};
                 this.http.post('http://localhost:3000/users/post/'+registered_userID, post_json).subscribe(response => {
@@ -87,6 +90,7 @@ export class RegisterComponent implements OnInit {
                           }
                         }
                         let posted_postID = items[1];
+                        console.log("3"+posted_postID);
 
                         let insert_photos_json = { user_id: registered_userID, post_id: posted_postID, caption: "", image: uploaded_image_path, datetime: currentDate};
                         this.http.post('http://localhost:3000/users/insert_photos/', insert_photos_json).subscribe(response => {
@@ -99,6 +103,7 @@ export class RegisterComponent implements OnInit {
                               }
                             }
                             let inserted_photo_id = items[1];
+                            console.log("4"+inserted_photo_id);
 
                             let profile_photo_json = { photo_id: inserted_photo_id };
                             this.http.put('http://localhost:3000/users/profile_photo/'+registered_userID, profile_photo_json).subscribe(response => {

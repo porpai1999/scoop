@@ -12,27 +12,21 @@ routes.get('/', (req, res) => {
 });
 
 // show user profile
-routes.get('/profile/:user_id', verifyToken, (req, res) => {
-    jwt.verify(req.token, config.JWT_SECRET, (error) => {
-        if(error) {
-            res.sendStatus(403);
-        } else {
-            let id = req.params.user_id;
-            let sql = "select * from users where user_id=?"
-            connection.query(sql, [id], (error, results, fields) => {
-                if (error) {
-                    throw error;
-                }
-                return res.send(results);
-            });
+routes.get('/profile/:user_id', (req, res) => {
+    let id = req.params.user_id;
+    let sql = "select * from users where user_id=?"
+    connection.query(sql, [id], (error, results, fields) => {
+        if (error) {
+            throw error;
         }
+        return res.send(results);
     });
 });
 
 // show post in profile
-routes.get('/posts_profile/', (req, res) => {
-    let id = req.query.id;
-    let sql = "select * from post where user_id=?"
+routes.get('/posts_profile/:user_id', (req, res) => {
+    let id = req.params.user_id;
+    let sql = "select * from posts where user_id=?"
     connection.query(sql, [id], (error, results, fields) => {
         if (error) {
             throw error;
