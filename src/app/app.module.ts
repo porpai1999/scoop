@@ -51,6 +51,7 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
 
 import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { PostsComponent } from './posts/posts.component';
+import { PostFrameComponent } from './post-frame/post-frame.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { PostsComponent } from './posts/posts.component';
     FeedComponent,
     EditprofileComponent,
     PostsComponent,
+    PostFrameComponent,
 
 
   ],

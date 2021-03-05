@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { HomeoutComponent } from './homeout/homeout.component';
 import { LoginComponent } from './login/login.component';
 import { PhotoComponent } from './photo/photo.component';
+import { PostFrameComponent } from './post-frame/post-frame.component';
 import { PostsComponent } from './posts/posts.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
@@ -31,7 +32,9 @@ const routes: Routes = [
   { path: 'posts', component: PostsComponent},
   { path: 'photo', component: PhotoComponent},
   { path: 'follow', component: FollowComponent},
-  { path: 'following', component: FollowingComponent}
+  { path: 'following', component: FollowingComponent},
+  { path: 'postframe/:p1', component: PostFrameComponent},
+
 
   
 

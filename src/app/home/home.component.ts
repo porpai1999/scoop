@@ -15,11 +15,26 @@ export class HomeComponent implements OnInit {
   //constructor(private http: HttpClient) { }
   // email:string[];
   ids;
+  text;
+  name;
+  lastn;
+  firstn;
+  array :any;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) {
       let id = acRouter.snapshot.params['p1'];
       this.ids = id;
       console.log('id home page',id);
+      
+      http.get('http://localhost:3000/profiler/posts_profile/'+this.ids)
+      .subscribe(Response=>{
+        this.array = Response;
+        console.log(Response)
+        // this.text = Response.text;
+        console.log(this.text)
+        
+        
+      })
     }
   items: MenuItem[];
   email;
@@ -36,7 +51,13 @@ export class HomeComponent implements OnInit {
   //   console.log("Continue");
   //   console.log("Next statement");
   // }
-  ngOnInit(): void {
+  async ngOnInit(){
+    let response = await this.getname();
+    console.log(response)
+    this.firstn = response[0].first_name
+    this.lastn = response[0].last_name
+    this.name = this.firstn+' '+this.lastn
+    console.log(this.name)
     
     this.items = [
       {
@@ -68,6 +89,12 @@ export class HomeComponent implements OnInit {
     //   sessionStorage.getItem("result");
     // }
 
+  }
+
+  async getname(){
+    let response = this.http.get('http://localhost:3000/users/select_some/'+this.ids)
+    .toPromise()
+      return response;
   }
 
 }

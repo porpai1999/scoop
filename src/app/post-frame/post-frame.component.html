@@ -1,14 +1,3 @@
-<!-- <p>home works!</p> -->
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" >SCOOP</a>
-</nav> -->
-
-<app-header></app-header>
-<!-- <div>
-    <h3 class="first"></h3>
-    <p-tieredMenu [model]="items" ></p-tieredMenu>
-</div> -->
-
 <html>
     <style>
         .novel{
@@ -33,19 +22,15 @@
 }
     </style>
     <body>
-       <!-- {{email}} -->
-       <!-- <button (click)="list()"> Send</button> -->
         <div >
             <br><br>
-            <div class="c">
-                <button type="button" class="btn btn-light" [routerLink]="['/posts',ids]">Post</button>
-            </div>
             <div class="row">
                 &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-3" >
                 </div>
 
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-6">
-                   <div *ngFor="let item of array">
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                <div class="col-sm-6">
+                    <div *ngFor="let item of array">
                     <p-card title="Simple Card" class="novel" >
                         <div class="row">
                             <div class="col-sm-6">
@@ -54,30 +39,19 @@
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
                                 <i class="pi pi-user" style="color: darkred;"></i>
                                 <i class="pi pi-ellipsis-v" style="color: darkred;"></i>
-                                {{name}}</h2>
+                                {{name}}
+                            </h2>
                             </div>
                             <div class="col-sm-5">
-                               <!-- <h1 style="color: black;">Universal Children's Day</h1> -->
                                <p>
+                                <!-- {{text}} -->
                                 {{item.text}}
                                </p>
                                <br>
-                                <!-- Button seemore -->
-                                <!-- <button type="button" class="btn btn-dark" ><i class="pi pi-arrow-circle-down"></i>&nbsp; See more</button> -->
                             </div>
                         </div>
                     </p-card><br><br>
 
-
-
-
-
-
-
-
-
-
-                    
                     <br><br>
                    </div>  
 
@@ -85,21 +59,5 @@
                 
             </div>
         </div>
-
-       
     </body>
 </html>
-        <!-- <h3 class="first"></h3>
-        <p-slideMenu [model]="items" [viewportHeight]="250"></p-slideMenu>
-        <br><br>
-        <table align="center">
-            <tr>
-                <td>
-                    <div>
-                        <p-card title="Simple Card" [style]="{width: '360px'}">
-                            <div>บทความ</div>
-                        </p-card>
-                      </div>
-                </td>
-            </tr>
-        </table> -->

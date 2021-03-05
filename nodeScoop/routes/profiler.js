@@ -24,9 +24,9 @@ routes.get('/profile/:user_id', (req, res) => {
 });
 
 // show post in profile
-routes.get('/posts_profile/:userid', (req, res) => {
+routes.get('/posts_profile/:user_id', (req, res) => {
     let id = req.params.user_id;
-    let sql = "select * from post where user_id=?"
+    let sql = "select * from posts where user_id=?"
     connection.query(sql, [id], (error, results, fields) => {
         if (error) {
             throw error;

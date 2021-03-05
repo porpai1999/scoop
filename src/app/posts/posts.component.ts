@@ -26,7 +26,7 @@ export class PostsComponent implements OnInit {
     post(){
           let json = {user_id: this.user_id,text:this.text }
           console.log(json)
-          this.http.post('http://localhost:3000/users/post',json)
+          this.http.post('http://localhost:3000/users/post/'+this.user_id,json)
           .subscribe(response =>{
             if(response){
               console.log(response)
