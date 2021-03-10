@@ -92,7 +92,7 @@ export class RegisterComponent implements OnInit {
                         let posted_postID = items[1];
                         console.log("3"+posted_postID);
 
-                        let insert_photos_json = { user_id: registered_userID, post_id: posted_postID, caption: "", image: uploaded_image_path, datetime: currentDate};
+                        let insert_photos_json = { user_id: registered_userID, post_id: posted_postID, image: uploaded_image_path};
                         this.http.post('http://localhost:3000/users/insert_photos/', insert_photos_json).subscribe(response => {
                           if (response) {
 
