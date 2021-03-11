@@ -20,6 +20,8 @@ export class HomeComponent implements OnInit {
   firstn;
   array :any;
   indexofComment;
+  indexOfPosts;
+  account_name;
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) {
@@ -95,6 +97,14 @@ export class HomeComponent implements OnInit {
   }
   isToggle(e){
     this.indexofComment = e;
+
+  }
+
+  postBy(e) {
+    console.log("e : "+e)
+    this.indexOfPosts = e;
+    this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
+    console.log(this.array[this.indexOfPosts].first_name)
   }
 
 }
