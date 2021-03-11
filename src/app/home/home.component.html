@@ -10,6 +10,7 @@
 </div> -->
 
 <html>
+    <head>
     <style>
         .novel{
             height: 500px;
@@ -25,20 +26,51 @@
             background-color: rgb(111, 182, 182);
         }
         div.c {
-  position: absolute;
-  right: 0px;  
-  width: 200px;
-  height: 120px;
-  /* border: 3px solid green; */
-}
+            position: absolute;
+            right: 0px;  
+            width: 200px;
+            height: 120px;
+            /* border: 3px solid green; */
+        }
     </style>
+    <!-- <script src="node_modules/tinymce/tinymce.min.js"></script> -->
+
+    </head>
     <body>
        <!-- {{email}} -->
        <!-- <button (click)="list()"> Send</button> -->
         <div >
             <br><br>
             <div class="c">
-                <button type="button" class="btn btn-light" [routerLink]="['/posts',ids]">Post</button>
+                <!-- <button type="button" class="btn btn-light" [routerLink]="['/posts',ids]">Post -->
+                    <p-button (click)="showModalDialog()" icon="pi pi-external-link" label="Post" styleClass="p-button-warning"></p-button>
+                    
+                    
+                    <p-dialog header="Your article" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+                        [draggable]="false" [resizable]="false" class="novel">
+                        <script type="text/javascript">
+                            tinymce.init({
+                              selector: 'tinymce',
+                              language: 'sv',
+                              language_url: '/js/sv.js',
+                              plugins: 'myplugin',
+                              external_plugins: {
+                                  'myplugin': '/js/myplugin/plugin.min.js'
+                              }
+                            });
+                            </script>
+                        <editor
+                        [(ngModel)]="text"
+                         [init]="{
+                            base_url: '/tinymce', 
+                            suffix: '.min'        
+                          }" >
+                        </editor>
+                            <ng-template pTemplate="footer">
+                            <p-button icon="pi pi-check" (click)="displayModal=false" label="Post" styleClass="p-button-text"></p-button>
+                            </ng-template>
+                    </p-dialog>
+                <!-- </button> -->
             </div>
             <div class="row">
                 &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-3" >

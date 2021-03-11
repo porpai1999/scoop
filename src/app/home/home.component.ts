@@ -20,8 +20,10 @@ export class HomeComponent implements OnInit {
   lastn;
   firstn;
   array :any;
+  displayModal: boolean;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) {
+      // this.displayModal = true;
       let id = acRouter.snapshot.params['p1'];
       this.ids = id;
       console.log('id home page',id);
@@ -36,6 +38,7 @@ export class HomeComponent implements OnInit {
         
       })
     }
+    
   items: MenuItem[];
   email;
 
@@ -58,7 +61,7 @@ export class HomeComponent implements OnInit {
     this.lastn = response[0].last_name
     this.name = this.firstn+' '+this.lastn
     console.log(this.name)
-    
+    // this.displayModal=true;
     this.items = [
       {
           label: 'Profile',
@@ -96,5 +99,8 @@ export class HomeComponent implements OnInit {
     .toPromise()
       return response;
   }
+  showModalDialog() {
+    this.displayModal = true; //----------
+}
 
 }

@@ -34,6 +34,7 @@ const routes: Routes = [
   { path: 'follow', component: FollowComponent},
   { path: 'following', component: FollowingComponent},
   { path: 'postframe/:p1', component: PostFrameComponent},
+  { path: 'home', component: HomeComponent},
 
 
   

@@ -13,7 +13,7 @@
             margin-top: 50px; 
         }
     </style>
-  <script src="/path/to/tinymce.min.js"></script>
+  <script src="node_modules/tinymce/tinymce.min.js"></script>
   <script type="text/javascript">
   tinymce.init({
     selector: 'tinymce',
@@ -37,7 +37,7 @@
             suffix: '.min'        
           }" >
         </editor>
-        <button class="form-control" (click)="post()">Post</button>
+        <button class="form-control" (click)="post()" [routerLink]="['/profile']">Post</button>
     </p-card>
 </div>
 </body>
