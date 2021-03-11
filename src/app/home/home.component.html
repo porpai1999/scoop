@@ -43,33 +43,21 @@
             <br><br>
             <div class="c">
                 <!-- <button type="button" class="btn btn-light" [routerLink]="['/posts',ids]">Post -->
-                    <p-button (click)="showModalDialog()" icon="pi pi-external-link" label="Post" styleClass="p-button-warning"></p-button>
-                    
-                    
+                    <p-button (click)="showModalDialog()" icon="pi pi-external-link" 
+                    label="Post" styleClass="p-button-warning" ></p-button>
+     
                     <p-dialog header="Your article" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
                         [draggable]="false" [resizable]="false" class="novel">
-                        <script type="text/javascript">
-                            tinymce.init({
-                              selector: 'tinymce',
-                              language: 'sv',
-                              language_url: '/js/sv.js',
-                              plugins: 'myplugin',
-                              external_plugins: {
-                                  'myplugin': '/js/myplugin/plugin.min.js'
-                              }
-                            });
-                            </script>
-                        <editor
-                        [(ngModel)]="text"
-                         [init]="{
-                            base_url: '/tinymce', 
-                            suffix: '.min'        
-                          }" >
-                        </editor>
-                            <ng-template pTemplate="footer">
-                            <p-button icon="pi pi-check" (click)="displayModal=false" label="Post" styleClass="p-button-text"></p-button>
-                            </ng-template>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="10" [(ngModel)]="text" ></textarea>
+                        </div>
+                        <ng-template pTemplate="footer">
+                        <p-button icon="pi pi-check" (click)="displayModal=false" label="Post" 
+                        styleClass="p-button-text" (click)="post()" [routerLink]="['/home']" >
+                        </p-button>
+                        </ng-template>
                     </p-dialog>
+
                 <!-- </button> -->
             </div>
             <div class="row">
@@ -101,15 +89,6 @@
                     </p-card><br><br>
 
 
-
-
-
-
-
-
-
-
-                    
                     <br><br>
                    </div>  
 

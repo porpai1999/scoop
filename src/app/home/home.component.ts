@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
 import { DatapassService } from '../datapass.service';
@@ -19,9 +20,12 @@ export class HomeComponent implements OnInit {
   lastn;
   firstn;
   array :any;
+
   displayModal: boolean;
+  text;
+  user_id;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
-    private http: HttpClient) {
+    private http: HttpClient , public dialog: MatDialog) {
       // this.displayModal = true;
       let id = acRouter.snapshot.params['p1'];
       this.ids = id;
@@ -33,12 +37,15 @@ export class HomeComponent implements OnInit {
         console.log(Response)        
         
       })
+
+      let id1 = acRouter.snapshot.params['p2'];
+      this.user_id = id1;
+      console.log(this.user_id)
+      console.log('id post: -> ',id1);
     }
     
   items: MenuItem[];
   email;
-
-
   // list(){
   //   console.log('Ok');
   //   let request = this.http.get('http://localhost:3000/users/profiler')
@@ -95,8 +102,29 @@ export class HomeComponent implements OnInit {
     .toPromise()
       return response;
   }
+
   showModalDialog() {
     this.displayModal = true; //----------
+  }
+
+  post(){
+  let json = {user_id: this.user_id,text:this.text }
+  console.log(json)
+  this.http.post('http://localhost:3000/users/post/'+this.user_id,json)
+  .subscribe(response1 =>{
+    if(response1){
+      console.log(response1)
+
+    }else{
+      console.log('error')
+    }
+  },error =>{
+    console.log('error',error)
+  }
+
+  )
 }
 
 }
+
+

@@ -28,7 +28,7 @@ const routes: Routes = [
   { path: 'homeout', component: HomeoutComponent},
   { path: 'feed', component: FeedComponent},
   { path: 'editprofile/:p1', component: EditprofileComponent},
-  { path: 'posts/:p1', component: PostsComponent},
+  { path: 'posts/:p2', component: PostsComponent},
   { path: 'posts', component: PostsComponent},
   { path: 'photo', component: PhotoComponent},
   { path: 'follow', component: FollowComponent},

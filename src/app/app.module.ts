@@ -20,10 +20,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { HomeComponent } from './home/home.component';
 
 import {DialogModule} from 'primeng/dialog';
+
 import { PhotoComponent } from './photo/photo.component';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatSliderModule } from '@angular/material/slider';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+
 import { Routes, RouterModule } from '@angular/router';
 import { FollowComponent } from './follow/follow.component';
 import { MenubarComponent } from './menubar/menubar.component';
@@ -98,7 +102,8 @@ import { PostFrameComponent } from './post-frame/post-frame.component';
     SlideMenuModule,
     FormsModule,
     EditorModule,
-    
+    MatDialogModule,
+    MatButtonModule,
 
     NgxCaptchaModule
   ],
