@@ -15,14 +15,19 @@ export class PostFrameComponent implements OnInit {
   ids;
   firstn;
   lastn;
+  indexofComment;
+
+
   constructor(private acRouter:ActivatedRoute,private http:HttpClient,private router: Router) {
     let id = acRouter.snapshot.params['p1'];
       this.ids = id;
       console.log('id postframe page',id);
       http.get('http://localhost:3000/profiler/posts_profile/'+this.ids)
-      .subscribe(Response=>{
+      .subscribe((Response : any) =>{
         this.array = Response;
         console.log(Response)
+
+        
       })
    }
 
@@ -39,6 +44,9 @@ export class PostFrameComponent implements OnInit {
     let response = this.http.get('http://localhost:3000/users/select_some/'+this.ids)
     .toPromise()
       return response;
+  }
+  isToggle(e){
+    this.indexofComment = e;
   }
 
 }

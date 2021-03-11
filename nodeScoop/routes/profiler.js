@@ -38,7 +38,7 @@ routes.get('/posts_profile/:user_id', (req, res) => {
 // show posts
 routes.get('/posts/', (req, res) => {
     let id = req.query.id;
-    let sql = "select * from post"
+    let sql = "select * from posts"
     connection.query(sql, [], (error, results, fields) => {
         if (error) {
             throw error;

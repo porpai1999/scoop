@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
     let date = new Date();
     let currentDate = date.getDate() + "-" + (date.getMonth()+1) + "-" + date.getFullYear();
     let items = [];
-    if (this.recaptcha==true) {
+    if (this.recaptcha == true) {
       let date_of_birth = this.birthDay.getFullYear() + "-" + (this.birthDay.getMonth()+1) + "-" + this.birthDay.getDate();
       let register_json = { photo_id: 0, email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: date_of_birth, gender: this.gender };
       this.http.post('http://localhost:3000/auth/register', register_json).subscribe(response => {
@@ -130,7 +130,7 @@ export class RegisterComponent implements OnInit {
           console.log('Status : failed');
         }
       }, error => {
-        console.log('Error!');
+        console.log('Error!',error);
       });
 
     //---- Session ---------

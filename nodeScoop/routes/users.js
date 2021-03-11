@@ -192,4 +192,14 @@ routes.get('/select_some/:user_id', (req, res) => {
     });
 });
 
+routes.get('/select_some', (req, res) => {
+    let sql = "select * from users"
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            throw error;
+        }
+        return res.send(results);
+    });
+});
+
 module.exports = routes;
