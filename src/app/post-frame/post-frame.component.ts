@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-post-frame',
   templateUrl: './post-frame.component.html',
@@ -10,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PostFrameComponent implements OnInit {
 
   name;
-  text;
   array;
   ids;
   firstn;

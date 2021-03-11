@@ -31,6 +31,7 @@ import { FollowingComponent } from './following/following.component';
 
 import { NgxCaptchaModule } from 'ngx-captcha';
 
+
 const routes: Routes = [
   { path: '', component: AppComponent},
   { path: 'profile', component: ProfileComponent},
@@ -97,6 +98,7 @@ import { PostFrameComponent } from './post-frame/post-frame.component';
     SlideMenuModule,
     FormsModule,
     EditorModule,
+    
 
     NgxCaptchaModule
   ],

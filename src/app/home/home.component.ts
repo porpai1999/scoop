@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   //constructor(private http: HttpClient) { }
   // email:string[];
   ids;
-  text;
   name;
   lastn;
   firstn;
@@ -31,10 +30,7 @@ export class HomeComponent implements OnInit {
       http.get('http://localhost:3000/profiler/posts_profile/'+this.ids)
       .subscribe(Response=>{
         this.array = Response;
-        console.log(Response)
-        // this.text = Response.text;
-        console.log(this.text)
-        
+        console.log(Response)        
         
       })
     }
