@@ -20,10 +20,15 @@ export class HomeComponent implements OnInit {
   lastn;
   firstn;
   array :any;
+  indexofComment;
+  indexOfPosts;
+  account_name;
 
-  displayModal: boolean;
-  text;
   user_id;
+  post_id;
+
+  comment;
+
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
       // this.displayModal = true;
@@ -31,11 +36,11 @@ export class HomeComponent implements OnInit {
       this.ids = id;
       console.log('id home page',id);
       
-      http.get('http://localhost:3000/profiler/posts_profile/'+this.ids)
+      http.get('http://localhost:3000/profiler/posts/')
       .subscribe(Response=>{
         this.array = Response;
-        console.log(Response)        
-        
+        console.log(Response)
+        console.log(this.array[0].post_id)
       })
 
       let id1 = acRouter.snapshot.params['p2'];
@@ -98,33 +103,41 @@ export class HomeComponent implements OnInit {
   }
 
   async getname(){
-    let response = this.http.get('http://localhost:3000/users/select_some/'+this.ids)
+    let response = this.http.get('http://localhost:3000/users/select_some')
     .toPromise()
       return response;
   }
-
-  showModalDialog() {
-    this.displayModal = true; //----------
+  isToggle(e){
+    this.indexofComment = e;
+    this.comment="";
+    this.user_id = this.array[this.indexofComment].user_id;
+    this.post_id = this.array[this.indexofComment].post_id;
   }
 
-  post(){
-  let json = {user_id: this.user_id,text:this.text }
-  console.log(json)
-  this.http.post('http://localhost:3000/users/post/'+this.user_id,json)
-  .subscribe(response1 =>{
-    if(response1){
-      console.log(response1)
-
-    }else{
-      console.log('error')
-    }
-  },error =>{
-    console.log('error',error)
+  postBy(e) {
+    //console.log("e : "+e)
+    this.indexOfPosts = e;
+    this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
+   // console.log(this.array[this.indexOfPosts].first_name)
   }
 
-  )
+   async onComment(comment) {
+    console.log(comment);
+    let comment_json = {post_id: this.post_id, text: this.comment, user_id: this.user_id};
+    await this.http.post('http://localhost:3000/users/comment/'+this.ids, comment_json).subscribe(response => {
+      if (response) {
+        let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+          this.router.navigate([currentUrl]);
+        });
+        console.log('posted');
+      } else {
+        console.log('Status : failed');
+      }
+    });
+  }
 }
 
-}
+
 
 

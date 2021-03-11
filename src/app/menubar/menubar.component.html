@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark justify-content-center">
     <ul class="nav nav-tabs justify-content-center">
         <!-- <li class="nav-item"><a routerLink='/home' class="nav-link" data-toggle="tab" >&nbsp;&nbsp;<i class="pi pi-home"></i></a></li> -->
-        <li class="nav-item"><a routerLink='/posts' class="nav-link" data-toggle="tab" >Posts</a></li>
+        <li class="nav-item"><a [routerLink]="['/posts/',user_id]"_id class="nav-link" data-toggle="tab" >Posts</a></li>
         <li class="nav-item"><a routerLink='/photo' class="nav-link" data-toggle="tab" (click)="photos()">Photos</a></li>
         <li class="nav-item"><a routerLink='/follow' class="nav-link" data-toggle="tab" (click)="followers()">Followers</a></li>
         <li class="nav-item"><a routerLink='/following' class="nav-link" data-toggle="tab" (click)="following()">Following</a></li>

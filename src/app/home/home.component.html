@@ -8,99 +8,128 @@
     <h3 class="first"></h3>
     <p-tieredMenu [model]="items" ></p-tieredMenu>
 </div> -->
-
 <html>
-    <head>
-    <style>
-        .novel{
-            height: 500px;
-            width: 800px;
-        }
-        .avatar {
-            vertical-align: middle;
-            width: 250px;
-            height: 250px;
-            border-radius: 100%;
-        }
-        :host >>> .mystyle{
-            background-color: rgb(111, 182, 182);
-        }
-        div.c {
-            position: absolute;
-            right: 0px;  
-            width: 200px;
-            height: 120px;
-            /* border: 3px solid green; */
-        }
-    </style>
-    <!-- <script src="node_modules/tinymce/tinymce.min.js"></script> -->
+<style>
+    .novel {
+        height: 500px;
+        width: 800px;
+    }
 
-    </head>
-    <body>
-       <!-- {{email}} -->
-       <!-- <button (click)="list()"> Send</button> -->
-        <div >
-            <br><br>
-            <div class="c">
-                <!-- <button type="button" class="btn btn-light" [routerLink]="['/posts',ids]">Post -->
-                    <p-button (click)="showModalDialog()" icon="pi pi-external-link" 
-                    label="Post" styleClass="p-button-warning" ></p-button>
-     
-                    <p-dialog header="Your article" [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
-                        [draggable]="false" [resizable]="false" class="novel">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="10" [(ngModel)]="text" ></textarea>
-                        </div>
-                        <ng-template pTemplate="footer">
-                        <p-button icon="pi pi-check" (click)="displayModal=false" label="Post" 
-                        styleClass="p-button-text" (click)="post()" [routerLink]="['/home']" >
-                        </p-button>
-                        </ng-template>
-                    </p-dialog>
+    .multi_lines_text {
+        padding-left: 5%;
+        padding-right: 5%;
+        max-width:800px;
+        word-wrap:break-word;
+    }
 
-                <!-- </button> -->
+    .avatar {
+        vertical-align: middle;
+        width: 250px;
+        height: 250px;
+        border-radius: 100%;
+    }
+
+    :host>>>.mystyle {
+        background-color: rgb(111, 182, 182);
+    }
+
+    div.c {
+        position: absolute;
+        right: 0px;
+        width: 200px;
+        height: 120px;
+        /* border: 3px solid green; */
+    }
+</style>
+
+<body>
+    <!-- {{email}} -->
+    <!-- <button (click)="list()"> Send</button> -->
+    <div>
+        <br><br>
+        <div class="c">
+            <button type="button" class="btn btn-light" [routerLink]="['/posts',ids]">Post</button>
+        </div>
+        <div class="row">
+            &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-3">
             </div>
-            <div class="row">
-                &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-3" >
-                </div>
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="col-sm-6">
+                <div *ngFor="let item of array;let num = index;">
+                    {{postBy(num)}}
+                        <p-card title="Simple Card" class="novel">
+                            <div class="row">  
+                                <div class="col-sm-1">
+                                    <img class="rounded-circle" src="../../assets/images/userprofile.png" width="50"
+                                        alt="Avatar">
+                                </div>
+                                &nbsp;&nbsp;
+                                
+                                <div class="col-sm-10">
+                                    <div class="d-flex flex-column justify-content-start ml-2">
+                                        <span *ngIf="num == indexOfPosts;" class="font-weight-bold name">{{account_name}}
+                                           </span>
 
-                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-6">
-                   <div *ngFor="let item of array">
-                    <p-card title="Simple Card" class="novel" >
-                        <div class="row">
-                            <div class="col-sm-6">
-                                &nbsp;&nbsp;&nbsp;&nbsp;<img  src="../../assets/images/userprofile.png" alt="Avatar" class="avatar"><br><br>
-                                <h2 style="color: black;"> 
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-                                <i class="pi pi-user" style="color: darkred;"></i>
-                                <i class="pi pi-ellipsis-v" style="color: darkred;"></i>
-                                {{name}}</h2>
+                                        <span class="date text-black-50">Shared publicly - {{item.datetime | slice:0:10 }}</span>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="col-sm-5">
-                               <!-- <h1 style="color: black;">Universal Children's Day</h1> -->
-                               <p>
-                                {{item.text}}
-                               </p>
-                               <br>
-                                <!-- Button seemore -->
-                                <!-- <button type="button" class="btn btn-dark" ><i class="pi pi-arrow-circle-down"></i>&nbsp; See more</button> -->
+                            <br>
+                            <div class="row">
+                                <div class="col-sm-12" >
+                                    <p class="multi_lines_text" [innerHTML]="item.text"></p>
+                                </div>
+
+                                <!-- <div>
+                                    <div class="d-flex justify-content-center row ">
+                                        <img class="img-circle" src="../../assets/images/wang.jpg" width="90%">
+    
+                                        <br>
+                                    </div>
+                                </div> -->
                             </div>
-                        </div>
-                    </p-card><br><br>
+                            <div class="d-flex flex-column comment-section" id="myGroup">
 
-
-                    <br><br>
-                   </div>  
-
+                                <div class="bg-white p-2">
+                                    <div class="d-flex flex-row fs-12">
+                                        <div class="like p-2 cursor">
+                                            <span class="ml-1">
+                                                <button pButton pRipple icon="pi pi-thumbs-up" type="button" label="  Like" style="color: rgb(49, 50, 57);" class="p-button-text"></button>
+                                            </span>
+                                        </div>
+                                        <div class="like p-2 cursor action-collapse" data-toggle="collapse"
+                                            aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
+                                            <span class="ml-1">
+                                                <button (click)="isToggle(num)" pButton pRipple icon="pi pi-comments" type="button" label="  Comment" style="color: rgb(49, 50, 57);" class="p-button-text"></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="num == indexofComment">
+                                    <div id="collapse-1" class="p-2 collapse" data-parent="#myGroup">
+                                        <div class="d-flex flex-row align-items-start"><img class="rounded-circle"
+                                                src="../../assets/images/userprofile.png" width="40">
+                                            <textarea class="form-control ml-1 shadow-none textarea" [rows]="1"
+                                                [cols]="30" pInputTextarea autoResize="autoResize" [(ngModel)]="comment"
+                                                placeholder="เขียนความคิดเห็น"></textarea>
+                                            &nbsp;&nbsp;
+                                            <button icon=" pi pi-send" pButton pRipple type="button" label=" " (click) = "onComment(comment)"
+                                                class="p-button-rounded p-button-outlined">
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </p-card><br>
+                    </div>
                 </div>
-                
             </div>
         </div>
+</body>
 
-       
-    </body>
 </html>
-        <!-- <h3 class="first"></h3>
+<!-- <h3 class="first"></h3>
         <p-slideMenu [model]="items" [viewportHeight]="250"></p-slideMenu>
         <br><br>
         <table align="center">

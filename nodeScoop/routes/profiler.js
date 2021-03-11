@@ -35,15 +35,16 @@ routes.get('/posts_profile/:user_id', (req, res) => {
     });
 });
 
-// show posts
+// show all posts
 routes.get('/posts/', (req, res) => {
-    let id = req.query.id;
-    let sql = "select * from post"
+    // let id = req.query.id;
+    let sql = "select * from posts, users where posts.user_id = users.user_id"
     connection.query(sql, [], (error, results, fields) => {
         if (error) {
             throw error;
+        } else {
+            return res.send(results);
         }
-        return res.send(results);
     });
 });
 

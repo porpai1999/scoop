@@ -34,6 +34,8 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { FollowingComponent } from './following/following.component';
 
 import { NgxCaptchaModule } from 'ngx-captcha';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+
 
 
 const routes: Routes = [
@@ -104,6 +106,8 @@ import { PostFrameComponent } from './post-frame/post-frame.component';
     EditorModule,
     MatDialogModule,
     MatButtonModule,
+    ConfirmDialogModule,
+    
 
     NgxCaptchaModule
   ],
