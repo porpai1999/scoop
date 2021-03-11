@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { HomeoutComponent } from './homeout/homeout.component';
 import { LoginComponent } from './login/login.component';
+import { MenubarComponent } from './menubar/menubar.component';
 import { PhotoComponent } from './photo/photo.component';
 import { PostFrameComponent } from './post-frame/post-frame.component';
 import { PostsComponent } from './posts/posts.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
   { path: 'follow', component: FollowComponent},
   { path: 'following', component: FollowingComponent},
   { path: 'postframe/:p1', component: PostFrameComponent},
+  { path: 'menubar/:p1', component: MenubarComponent},
 
 
   

@@ -37,7 +37,7 @@
             suffix: '.min'        
           }" >
         </editor>
-        <button class="form-control" (click)="post()">Post</button>
+        <button class="form-control" (click)="post()" [routerLink]="['/home/',user_id]">Post</button>
     </p-card>
 </div>
 </body>

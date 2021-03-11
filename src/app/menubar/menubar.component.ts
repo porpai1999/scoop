@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-menubar',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenubarComponent implements OnInit {
 
-  constructor() { }
+
+  user_id;
+  constructor(private acRouter: ActivatedRoute) {
+    let id = acRouter.snapshot.params['p1'];
+      this.user_id = id;
+      console.log(this.user_id)
+   }
 
   post(){
     //สร้าง session 
