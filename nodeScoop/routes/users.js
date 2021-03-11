@@ -51,6 +51,27 @@ routes.post('/post/:user_id', (req, res) => {
     });
 });
 
+routes.post('/comment/:user_id', (req, res) => {
+    const text = req.body.text;
+    const user_id = req.params.user_id;
+    const post_id = req.body.post_id;
+    let sql = "insert into comments (post_id, text, user_id) values (?, ?, ?);";
+    sql = mysql.format(sql, [
+        post_id,
+        text,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                status: true,
+                user_id: results.insertId
+            });
+        }
+    });
+});
+
 // insert_photos in post
 routes.post('/insert_photos', (req, res) => {
     const { user_id, post_id, caption, image, datetime } = req.body;

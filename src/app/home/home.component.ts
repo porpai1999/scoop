@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import {MenuItem} from 'primeng/api';
 import { DatapassService } from '../datapass.service';
@@ -23,6 +24,11 @@ export class HomeComponent implements OnInit {
   indexOfPosts;
   account_name;
 
+  user_id;
+  post_id;
+
+  comment;
+
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) {
       let id = acRouter.snapshot.params['p1'];
@@ -32,8 +38,8 @@ export class HomeComponent implements OnInit {
       http.get('http://localhost:3000/profiler/posts/')
       .subscribe(Response=>{
         this.array = Response;
-        console.log(Response)        
-        
+        console.log(Response)
+        console.log(this.array[0].post_id)
       })
     }
   items: MenuItem[];
@@ -97,14 +103,31 @@ export class HomeComponent implements OnInit {
   }
   isToggle(e){
     this.indexofComment = e;
-
+    this.comment="";
+    this.user_id = this.array[this.indexofComment].user_id;
+    this.post_id = this.array[this.indexofComment].post_id;
   }
 
   postBy(e) {
-    console.log("e : "+e)
+    //console.log("e : "+e)
     this.indexOfPosts = e;
     this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
-    console.log(this.array[this.indexOfPosts].first_name)
+   // console.log(this.array[this.indexOfPosts].first_name)
   }
 
+   async onComment(comment) {
+    console.log(comment);
+    let comment_json = {post_id: this.post_id, text: this.comment, user_id: this.user_id};
+    await this.http.post('http://localhost:3000/users/comment/'+this.ids, comment_json).subscribe(response => {
+      if (response) {
+        let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+          this.router.navigate([currentUrl]);
+        });
+        console.log('posted');
+      } else {
+        console.log('Status : failed');
+      }
+    });
+  }
 }
