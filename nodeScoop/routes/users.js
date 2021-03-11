@@ -54,9 +54,9 @@ routes.post('/post/:user_id', (req, res) => {
 // insert_photos in post
 routes.post('/insert_photos', (req, res) => {
     const { user_id, post_id, caption, image, datetime } = req.body;
-    let sql = "insert into photos (user_id, post_id, caption, image, datetime) values (?, ?, ?, ?, ?)";
+    let sql = "insert into photos (user_id, post_id, image) values (?, ?, ?)";
     sql = mysql.format(sql, [
-        user_id, post_id, caption, image, datetime
+        user_id, post_id, image
     ]);
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
