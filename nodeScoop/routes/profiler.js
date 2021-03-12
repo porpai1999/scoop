@@ -48,7 +48,43 @@ routes.get('/posts/', (req, res) => {
     });
 });
 
+// show liked_commented
+routes.get('/like_comment/', (req, res) => {
+    const comment_id = req.body.post_id;
+    let sql = "SELECT COUNT(user_id) FROM liked_comment where comment_id = ?";
+    sql = mysql.format(sql, [
+        comment_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
+});
+
+// show liked post
+routes.get('/like_post/', (req, res) => {
+    const post_id = req.body.post_id;
+    let sql = "SELECT COUNT(user_id) FROM liked_post where post_id = ?";
+    sql = mysql.format(sql, [
+        post_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
+});
+
 module.exports = routes;
+
+
 
 
 /*

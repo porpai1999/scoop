@@ -51,6 +51,7 @@ routes.post('/post/:user_id', (req, res) => {
     });
 });
 
+// comment
 routes.post('/comment/:user_id', (req, res) => {
     const text = req.body.text;
     const user_id = req.params.user_id;
@@ -59,6 +60,46 @@ routes.post('/comment/:user_id', (req, res) => {
     sql = mysql.format(sql, [
         post_id,
         text,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                status: true,
+                user_id: results.insertId
+            });
+        }
+    });
+});
+
+// like post
+routes.post('/like_post/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    const post_id = req.body.post_id;
+    let sql = "insert into liked_post (post_id, user_id) values (?, ?);";
+    sql = mysql.format(sql, [
+        post_id,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                status: true,
+                user_id: results.insertId
+            });
+        }
+    });
+});
+
+// like post
+routes.post('/like_comment/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    const post_id = req.body.post_id;
+    let sql = "insert into liked_post (post_id, user_id) values (?, ?);";
+    sql = mysql.format(sql, [
+        post_id,
         user_id
     ]);
     connection.query(sql, (error, results, fields) => {

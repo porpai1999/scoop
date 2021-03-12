@@ -12,10 +12,12 @@ export class ProfileComponent implements OnInit {
 
   fullname;
   id;
+  imgpath;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
       let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
+      this.imgpath = "http://nodescoop.comsciproject.com/images/jpfunnyface.png"
       console.log(ids);
     }
 
