@@ -32,8 +32,11 @@ const routes: Routes = [
   { path: 'posts/:p1', component: PostsComponent},
   { path: 'posts', component: PostsComponent},
   { path: 'photo', component: PhotoComponent},
+  { path: 'photo/:p1', component: PhotoComponent},
   { path: 'follow', component: FollowComponent},
+  { path: 'follow/:p1', component: FollowComponent},
   { path: 'following', component: FollowingComponent},
+  { path: 'following/:p1', component: FollowingComponent},
   { path: 'postframe/:p1', component: PostFrameComponent},
   { path: 'menubar/:p1', component: MenubarComponent},
 
