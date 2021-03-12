@@ -26,7 +26,7 @@ routes.get('/profile/:user_id', (req, res) => {
 // show post in profile
 routes.get('/posts_profile/:user_id', (req, res) => {
     let id = req.params.user_id;
-    let sql = "select * from posts where user_id=?"
+    let sql = "select * from posts where user_id=? ORDER by datetime DESC"
     connection.query(sql, [id], (error, results, fields) => {
         if (error) {
             throw error;
@@ -38,7 +38,7 @@ routes.get('/posts_profile/:user_id', (req, res) => {
 // show all posts
 routes.get('/posts/', (req, res) => {
     // let id = req.query.id;
-    let sql = "select * from posts, users where posts.user_id = users.user_id"
+    let sql = "select * from posts, users where posts.user_id = users.user_id ORDER by datetime DESC"
     connection.query(sql, [], (error, results, fields) => {
         if (error) {
             throw error;
@@ -48,7 +48,43 @@ routes.get('/posts/', (req, res) => {
     });
 });
 
+// show liked_commented
+routes.get('/like_comment/', (req, res) => {
+    const comment_id = req.body.post_id;
+    let sql = "SELECT COUNT(user_id) FROM liked_comment where comment_id = ?";
+    sql = mysql.format(sql, [
+        comment_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
+});
+
+// show liked post
+routes.get('/like_post/', (req, res) => {
+    const post_id = req.body.post_id;
+    let sql = "SELECT COUNT(user_id) FROM liked_post where post_id = ?";
+    sql = mysql.format(sql, [
+        post_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
+});
+
 module.exports = routes;
+
+
 
 
 /*
