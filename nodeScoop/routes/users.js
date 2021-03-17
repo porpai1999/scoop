@@ -86,8 +86,7 @@ routes.post('/like_post/:user_id', (req, res) => {
         if (error) throw error;
         else {
             res.json({
-                status: true,
-                user_id: results.insertId
+                results: results
             });
         }
     });
@@ -106,8 +105,26 @@ routes.post('/like_comment/:user_id', (req, res) => {
         if (error) throw error;
         else {
             res.json({
-                status: true,
-                user_id: results.insertId
+                results: results
+            });
+        }
+    });
+});
+
+// follow
+routes.post('/follow/:user_id', (req, res) => {
+    const userID_1 = req.params.user_id;
+    const userID_2 = req.body.myID;
+    let sql = "insert into follows (userID_1, userID_2) values (?, ?);";
+    sql = mysql.format(sql, [
+        userID_1,
+        userID_2
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
             });
         }
     });
