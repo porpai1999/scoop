@@ -38,13 +38,21 @@ export class HomeComponent implements OnInit {
   is_liked: any;
   liked;
 
+  post_data: any;
+
+  text;
+
+  myID;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
       // this.displayModal = true;
       let id = acRouter.snapshot.params['p1'];
       this.ids = id;
+      
       console.log('id home page',id);
       
+      this.myID = sessionStorage.getItem("keyuser_id");
+
       http.get('http://localhost:3000/profiler/home_posts/')
       .subscribe(Response=>{
         this.array = Response;
@@ -57,6 +65,15 @@ export class HomeComponent implements OnInit {
           .subscribe(res =>{
             if (res) {
               this.is_liked = res;
+              
+              
+              this.post_data = {
+                Response,
+                res
+              }
+
+              console.log(this.post_data.res);
+              
               console.log("res2");
               console.log(this.is_liked)
             }
@@ -207,6 +224,28 @@ export class HomeComponent implements OnInit {
 
       )
   }
+
+  post(){
+    let json = {user_id:  this.ids,text: this.text }
+    console.log(this.text);
+    
+    console.log(json)
+    this.http.post('http://localhost:3000/users/post/'+this.ids,json)
+    .subscribe(response =>{
+      if(response){
+        console.log(response)
+
+      }else{
+        console.log('error')
+      }
+    },error =>{
+      console.log('error',error)
+    }
+
+    )
+
+  }
+
 }
 
 
