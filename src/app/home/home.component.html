@@ -4,6 +4,7 @@
 </nav> -->
 
 <app-header></app-header>
+<h5>Default</h5>
 <!-- <div>
     <h3 class="first"></h3>
     <p-tieredMenu [model]="items" ></p-tieredMenu>
@@ -65,7 +66,8 @@
                 <p-dialog header="สร้างโพส" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw'}"
                     [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
-                    <p-editor [(ngModel)]="text2" [style]="{'height':'320px'}">
+                    
+                    <!-- <p-editor [(ngModel)]="text2" [style]="{'height':'10px'}">
                         <ng-template pTemplate="header">
                             <span class="ql-format-group">
                                 <span title="Bold" class="ql-format-button ql-bold"></span>
@@ -77,7 +79,7 @@
                                 <span title="Strikethrough" class="ql-format-button ql-strike"></span>
                             </span>
                         </ng-template>
-                    </p-editor>
+                    </p-editor> -->
                     <!-- <p>Value: {{text2||'empty'}}</p> -->
 
 
@@ -155,8 +157,10 @@
                                 <div class="d-flex flex-row fs-12">
                                     <div class="like p-2 cursor">
                                         <span class="ml-1">
+                                            <!-- <div *ngIf=""> -->
                                             <button pButton pRipple icon="pi pi-thumbs-up" type="button" label="  Like"
-                                                style="color: rgb(49, 50, 57);" class="p-button-text"></button>
+                                                style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)"></button>
+                                            <!-- </div> -->
                                         </span>
                                     </div>
                                     <div class="like p-2 cursor action-collapse" data-toggle="collapse"

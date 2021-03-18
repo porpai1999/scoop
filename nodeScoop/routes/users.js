@@ -248,6 +248,28 @@ routes.put('/update/:user_id', (req, res) => {
     });
 });
 
+routes.get('/search_all', (req, res) => {
+    let sql = "select user_id, first_name, last_name from users"
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            throw error;
+        }
+        return res.send(results);
+    });
+});
+
+// search
+routes.get('/search', (req, res) => {
+    let search = req.body.search;
+    let sql = "select user_id, first_name, last_name from users where first_name like " + `'%${search}%'`
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            throw error;
+        }
+        return res.send(results);
+    });
+});
+
 // delete
 routes.get('/delete', (req, res) => {
     res.send({'log' : 'delete'})

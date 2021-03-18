@@ -16,6 +16,7 @@ import { PostFrameComponent } from './post-frame/post-frame.component';
 import { PostsComponent } from './posts/posts.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { SearchListComponent } from './search-list/search-list.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'menubar/:p1', component: MenubarComponent},
   { path: 'comment/:p1', component: CommentComponent},
+  { path: 'search', component: SearchListComponent},
 
 
   

@@ -30,13 +30,13 @@
     <div class="row" >
       <p-card title="Simple Card" class="novel" >
         <h3>Your article</h3>
-        <editor
+        <!-- <editor
         [(ngModel)]="text"
          [init]="{
             base_url: '/tinymce', 
             suffix: '.min'        
           }" >
-        </editor>
+        </editor> -->
         <button class="form-control" (click)="post()" [routerLink]="['/home/',user_id]">Post</button>
     </p-card>
 </div>
