@@ -195,13 +195,16 @@ export class HomeComponent implements OnInit {
       )
   }
   
-  liked(){
-    this.http.get('http://localhost:3000/profiler/user_liked_post/'+this.ids+'/'+this.indexOfPosts)
+  liked(e){
+    this.http.get('http://localhost:3000/profiler/user_liked_post/'+this.ids+'/'+e)
       .subscribe(data =>{
         if (data) {
           console.log(data)
           this.is_liked = data;
           console.log(this.is_liked)
+          for (let item of this.is_liked) {
+            
+          }
         }
       })
   }
