@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { async } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { DatapassService } from '../datapass.service';
@@ -71,6 +69,10 @@ export class HomeComponent implements OnInit {
     let response = await this.getname();
     console.log(response)
     this.name = response;
+
+    // let selectcommen = this.selectcomment();
+    // console.log(selectcommen);
+    
 
     
     this.items = [
@@ -171,6 +173,22 @@ export class HomeComponent implements OnInit {
         if (response) {
           console.log(response)
           console.log(this.ids)
+
+        } else {
+          console.log('error')
+        }
+      }, error => {
+        console.log('error', error)
+      }
+
+      )
+  }
+  selectcomment(){
+    this.http.get('http://localhost:3000/profiler/selectcomment/'+this.post_id)
+      .subscribe(response => {
+        if (response) {
+          console.log(response)
+          console.log(this.post_id)
 
         } else {
           console.log('error')
