@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { HomeoutComponent } from './homeout/homeout.component';
 import { LoginComponent } from './login/login.component';
 import { MenubarComponent } from './menubar/menubar.component';
+import { OtherProfileComponent } from './other-profile/other-profile.component';
 import { PhotoComponent } from './photo/photo.component';
 import { PostFrameComponent } from './post-frame/post-frame.component';
 import { PostsComponent } from './posts/posts.component';
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'search', component: SearchListComponent},
   { path: 'search/:p1/:p2', component: SearchListComponent},
   { path: 'search/:p1/:p2/', component: SearchListComponent},
+  { path: 'otherprofile', component: OtherProfileComponent},
 
 
   
