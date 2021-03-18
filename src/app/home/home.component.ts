@@ -227,23 +227,24 @@ export class HomeComponent implements OnInit {
 
   post(){
     let json = {user_id:  this.ids,text: this.text }
-    console.log(this.text);
-    
-    console.log(json)
-    this.http.post('http://localhost:3000/users/post/'+this.ids,json)
-    .subscribe(response =>{
-      if(response){
-        console.log(response)
+    if (this.text=undefined) {
+      console.log("Error!");
+    } else {
+      console.log(this.text);
+      console.log(json)
+      this.http.post('http://localhost:3000/users/post/'+this.ids,json)
+      .subscribe(response =>{
+        if(response){
+          console.log(response)
 
-      }else{
-        console.log('error')
+        }else{
+          console.log('error')
+        }
+      },error =>{
+        console.log('error',error)
       }
-    },error =>{
-      console.log('error',error)
+      )
     }
-
-    )
-
   }
 
 }
