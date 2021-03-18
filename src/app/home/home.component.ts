@@ -39,10 +39,13 @@ export class HomeComponent implements OnInit {
 
     http.get('http://localhost:3000/profiler/posts/')
       .subscribe(Response => {
+       
         this.array = Response;
         console.log(Response)
         console.log(this.array[0].post_id)
       })
+
+
   }
   items: MenuItem[];
   email;
@@ -64,8 +67,7 @@ export class HomeComponent implements OnInit {
     console.log(response)
     this.name = response;
 
-
-
+    
     this.items = [
       {
         label: 'Profile',
@@ -115,6 +117,7 @@ export class HomeComponent implements OnInit {
     this.indexOfPosts = e;
     this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
     // console.log(this.array[this.indexOfPosts].first_name)
+    
   }
 
   async onComment(comment) {
@@ -137,8 +140,6 @@ export class HomeComponent implements OnInit {
   }
 
   like(post_id) {
-    
-    
     let json = { post_id: post_id, user_id: this.ids }
     console.log(json)
     console.log(post_id)
@@ -159,4 +160,7 @@ export class HomeComponent implements OnInit {
 
       )
   }
+  
+
+
 }
