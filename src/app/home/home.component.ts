@@ -24,6 +24,9 @@ export class HomeComponent implements OnInit {
   indexOfPosts;
   account_name;
 
+  text1: string = '<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>';
+  
+
   user_id;
   post_id;
 
@@ -36,6 +39,8 @@ export class HomeComponent implements OnInit {
     let id = acRouter.snapshot.params['p1'];
     this.ids = id;
     console.log('id home page', id);
+
+    
 
     http.get('http://localhost:3000/profiler/posts/')
       .subscribe(Response => {
@@ -114,6 +119,22 @@ export class HomeComponent implements OnInit {
     //console.log("e : "+e)
     this.indexOfPosts = e;
     this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
+
+   /* let json = { post_id: post_id, user_id: this.ids }
+    this.http.post('http://localhost:3000/users/like_post/' + this.ids, json)
+      .subscribe(response => {
+        if (response) {
+          console.log(response)
+          console.log(this.ids)
+
+        } else {
+          console.log('error')
+        }
+      }, error => {
+        console.log('error', error)
+      }
+
+      )*/
     // console.log(this.array[this.indexOfPosts].first_name)
   }
 
