@@ -88,7 +88,7 @@ routes.get('/user_liked_post/', (req, res) => {
     
     const post_id = req.body.post_id;
     const user_id = req.body.user_id;
-    let sql = "SELECT COUNT(user_id) FROM liked_post where post_id = ? and user_id = ?";
+    let sql = "SELECT COUNT(user_id) as liked FROM liked_post where post_id = ? and user_id = ?";
     sql = mysql.format(sql, [
         post_id,
         user_id
