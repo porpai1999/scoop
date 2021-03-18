@@ -51,11 +51,7 @@ export class HomeComponent implements OnInit {
         console.log(this.array[0].post_id)
       })
 
-      http.get('http://localhost:3000/profiler/user_liked_post/')
-      .subscribe(data =>{
-        console.log("data vv")
-        console.log(data)
-      })
+      
 
       let id1 = acRouter.snapshot.params['p2'];
       this.user_id = id1;
@@ -88,8 +84,6 @@ export class HomeComponent implements OnInit {
 
     // let selectcommen = this.selectcomment();
     // console.log(selectcommen);
-    
-
     
     this.items = [
       {
@@ -158,7 +152,6 @@ export class HomeComponent implements OnInit {
     this.indexOfPosts = e;
     this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
     // console.log(this.array[this.indexOfPosts].first_name)
-    
   }
 
   async onComment(comment) {
@@ -202,6 +195,16 @@ export class HomeComponent implements OnInit {
       )
   }
   
+  liked(){
+    this.http.get('http://localhost:3000/profiler/user_liked_post/'+this.ids+'/'+this.indexOfPosts)
+      .subscribe(data =>{
+        if (data) {
+          console.log(data)
+          this.is_liked = data;
+          console.log(this.is_liked)
+        }
+      })
+  }
 
 
 }
