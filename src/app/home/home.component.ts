@@ -35,6 +35,8 @@ export class HomeComponent implements OnInit {
   displayMaximizable: boolean;
   text2: string;
 
+  is_liked: any;
+
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
       // this.displayModal = true;
@@ -42,11 +44,17 @@ export class HomeComponent implements OnInit {
       this.ids = id;
       console.log('id home page',id);
       
-      http.get('http://localhost:3000/profiler/posts/')
+      http.get('http://localhost:3000/profiler/home_posts/')
       .subscribe(Response=>{
         this.array = Response;
         console.log(Response)
         console.log(this.array[0].post_id)
+      })
+
+      http.get('http://localhost:3000/profiler/user_liked_post/')
+      .subscribe(data =>{
+        console.log("data vv")
+        console.log(data)
       })
 
       let id1 = acRouter.snapshot.params['p2'];
@@ -149,13 +157,12 @@ export class HomeComponent implements OnInit {
     //console.log("e : "+e)
     this.indexOfPosts = e;
     this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
-
     // console.log(this.array[this.indexOfPosts].first_name)
     
   }
 
   async onComment(comment) {
-    console.log(comment);
+    console.log("Comment"+comment);
     let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
     await this.http.post('http://localhost:3000/users/comment/' + this.ids, comment_json).subscribe(response => {
       if (response) {
