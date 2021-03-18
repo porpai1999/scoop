@@ -20,7 +20,7 @@
 
   <form class="form-inline my-2 my-lg-0">
     <div>
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" size="50px">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" [(ngModel)]="searchs" name="search" size="50px">
     </div>
     <button class="btn btn-success my-2 my-sm-0 col-md" type="submit" (click)="search()">Search</button>
     &nbsp;

@@ -12,6 +12,8 @@ export class HeaderComponent implements OnInit {
 
 
   id;
+  searchs;
+
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
@@ -26,11 +28,13 @@ export class HeaderComponent implements OnInit {
     
   }
   search(){
-    this.http.get('http://localhost:3000/users/search')
+    console.log(this.searchs);
+    
+    this.http.get('http://localhost:3000/users/search/'+this.searchs)
   .subscribe(res=>{
     if(res){
       console.log(res);
-      this.router.navigateByUrl('/search/'+this.id);
+      this.router.navigateByUrl('/search/'+this.id+'/'+this.searchs);
       
     }else{
       console.log('error');     
