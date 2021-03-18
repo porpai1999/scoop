@@ -82,7 +82,8 @@ export class HomeComponent implements OnInit {
     // //สร้าง session 
     var data = sessionStorage.getItem("key");
     var data1 = sessionStorage.getItem("token");
-    console.log(data1);
+    var datause = sessionStorage.getItem("token1");
+    console.log(datause);
 //----------------------------------------------------
     // //สร้าง session 
     // sessionStorage.home = "Home";

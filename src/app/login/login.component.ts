@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   displayModal: boolean;
   email;
   password;
+  user_id;
   items = [];
   value;
 
@@ -39,6 +40,8 @@ export class LoginComponent implements OnInit {
           this.value = this.items;
           sessionStorage.setItem("key",this.value);
           sessionStorage.setItem("keyemail",this.email);
+          sessionStorage.setItem("keyuser_id",this.user_id);
+          sessionStorage.setItem('token1', this.items[2]);
           sessionStorage.setItem('token', this.items[3]);
           console.log(sessionStorage.getItem('token'))
           this.router.navigateByUrl('/home/'+this.items[2]);
