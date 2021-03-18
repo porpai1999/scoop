@@ -82,6 +82,25 @@ routes.get('/like_post/', (req, res) => {
     });
 });
 
+// show user liked post
+routes.get('/user_liked_post/', (req, res) => {
+    const post_id = req.body.post_id;
+    const user_id = req.body.user_id;
+    let sql = "SELECT COUNT(user_id) FROM liked_post where post_id = ? and user_id = ?";
+    sql = mysql.format(sql, [
+        post_id,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
+});
+
 module.exports = routes;
 
 
