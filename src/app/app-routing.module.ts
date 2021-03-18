@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'menubar/:p1', component: MenubarComponent},
   { path: 'comment/:p1', component: CommentComponent},
   { path: 'search', component: SearchListComponent},
+  { path: 'search/:p1', component: SearchListComponent},
 
 
   

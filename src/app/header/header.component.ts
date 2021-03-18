@@ -12,6 +12,7 @@ export class HeaderComponent implements OnInit {
 
 
   id;
+
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
       
@@ -22,10 +23,23 @@ export class HeaderComponent implements OnInit {
     }
 
   ngOnInit(): void {
-
+    
   }
   search(){
-    this.router.navigateByUrl('/search');
+    this.http.get('http://localhost:3000/users/search')
+  .subscribe(res=>{
+    if(res){
+      console.log(res);
+      this.router.navigateByUrl('/search/'+this.id);
+      
+    }else{
+      console.log('error');     
+    }
+  },error=>{
+    console.log(error);
+    
+  })
+    
   }
 
 }

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-list',
@@ -8,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchListComponent implements OnInit {
 
-
+  id;
   results;
-  constructor(private http: HttpClient) {
-
+  constructor(private http: HttpClient,private acRouter: ActivatedRoute) {
+    let ids = acRouter.snapshot.params['p1'];
+    this.id = ids;
+    console.log(this.id);
     
   }
 

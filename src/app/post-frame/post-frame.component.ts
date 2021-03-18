@@ -22,7 +22,11 @@ export class PostFrameComponent implements OnInit {
   firstn;
   lastn;
   indexofComment;
+  comment;
+  user_id;
+  post_id;
   p2;
+  comments;
   msgs: Message[] = [];
 
   position: string;
@@ -60,6 +64,24 @@ export class PostFrameComponent implements OnInit {
   }
   isToggle(e){
     this.indexofComment = e;
+    this.comment = "";
+    this.user_id = this.array[this.indexofComment].user_id;
+    this.post_id = this.array[this.indexofComment].post_id;
+
+    this.http.get('http://localhost:3000/users/show_comment/'+this.post_id)
+      .subscribe(response => {
+        if (response) {
+          this.comments = response
+       
+
+        } else {
+          console.log('error')
+        }
+      }, error => {
+        console.log('error', error)
+      }
+
+      )
   }
    confirm2() {
         this.confirmationService.confirm({
