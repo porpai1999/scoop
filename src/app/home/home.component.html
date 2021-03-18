@@ -59,7 +59,7 @@
                 <p-dialog header="สร้างโพส" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw'}"
                     [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
-                    
+
                     <!-- <p-editor [(ngModel)]="text2" [style]="{'height':'10px'}">
                         <ng-template pTemplate="header">
                             <span class="ql-format-group">
@@ -187,23 +187,24 @@
                                         </button>
                                     </div>
                                     <div *ngFor="let select of comments">
-                                    <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ">
-                                        <div class="row justify-content-around ">
-                                            <img class="circular"
-                                                src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
-                                        </div>
-                                        <div class="p-d-flex p-p-3 card ml-4 " style="top: 10px;">
-                                            <div class="p-mr-2 p-as-center ml-2">
-                                                <a href="#">
-                                                    <h4><strong>{{select.first_name}} &nbsp;{{select.last_name}}</strong></h4>
-                                                </a>
-                                                <strong>{{select.text}}</strong>
-                                                &nbsp;&nbsp;
+                                        <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ">
+                                            <div class="row justify-content-around ">
+                                                <img class="circular"
+                                                    src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
                                             </div>
-                                        </div>
+                                            <div class="p-d-flex p-p-5 card ml-4  " style="top: 10px;">
+                                                <div class="p-mr-2 p-as-center ml-2">
+                                                    <a href="#">
+                                                        <h4><strong>{{select.first_name}}
+                                                                &nbsp;{{select.last_name}}&nbsp;&nbsp;</strong></h4>
+                                                    </a>
+                                                    <strong>{{select.text}}</strong>
+                                                    &nbsp;&nbsp;
+                                                </div>
+                                            </div>
 
+                                        </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
