@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SearchListComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  results;
+  constructor(private http:HttpClient) {
+    
   }
+
+  ngOnInit(){
+      this.http.get('http://localhost:3000/users/search')
+      .subscribe(res=>{
+        if(res){
+          console.log(res);
+          this.results = res
+          
+        }else{
+          console.log('error');     
+        }
+      },error=>{
+        console.log(error);
+        
+      })
+    
+
+  }
+
+
 
 }

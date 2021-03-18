@@ -27,16 +27,41 @@
 
 <body>
     <div>
-        <br><br>
+        <br>
         <div class="row">
-            &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-3">
+            &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-2">
             </div>
 
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-sm-6">
+            <div class="col-sm-7">
                 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
                 </p-confirmDialog>
                 <div *ngFor="let item of array ;let num = index;">
+
+                    <!-- แสดงรายชื่อคนอื่นให้เราติดตาม -->
+                    <p-card header="Suggestions For You" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+                        <div class="row"> 
+                            <div class="col-md-12">
+                                <div class="row justify-content-around">
+                                    <div>
+                                        <h3>ชื่อคน</h3><br>
+                                        <h3>ชื่อคน</h3>
+                                    </div>
+                                    <div >
+                                        <div class="row justify-content-center">
+                                            <strong style="font-size: xx-large;">
+                                                 <button pButton pRipple type="button" label="Follow" class="p-button-raised p-button-success"></button> <br>
+                                                 <button pButton pRipple type="button" label="Follow" class="p-button-raised p-button-success"></button>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;
+                            </div>
+                        </div>
+                    </p-card>
+                    <!--  -->
+
                     <p-card title="Simple Card" class="novel">
                         <div class="row">
                             <div class="col-sm-1 ">
@@ -74,7 +99,7 @@
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 ml-1">
                                 <p class="multi_lines_text" [innerHTML]="item.text"></p>
 
                             </div>
@@ -139,6 +164,7 @@
                             </div>
                         </div>
                     </p-card><br>
+
                 </div>
             </div>
         </div>
