@@ -47,6 +47,7 @@ routes.post('/login', (req, res, next) => {
 routes.post('/register', (req, res) => {
     const { email, password: plainTextPassword, first_name, last_name, date_of_birth, gender, photo_id} = req.body;
     const password = passwordHash.generate(plainTextPassword);
+    console.log('hahahahahha')
     if (!email || typeof email !== 'string') {
         return res.json({ status: false, error: 'Invalid email'});
     }
@@ -66,6 +67,7 @@ routes.post('/register', (req, res) => {
     if (!gender || typeof gender !== 'string') {
         return res.json({ status: false, error: 'Invalid gender'});
     }
+    console.log('dadadadadada')
 
     let sql = 'insert into users (photo_id, email, password, first_name, last_name, date_of_birth, gender)' +
     'values(?, ?, ?, ?, ?, ?, ?)';
@@ -80,14 +82,17 @@ routes.post('/register', (req, res) => {
     ]);
 
     connection.query(sql, (error, results, fields) => {
+        console.log('saqqqsaa85')
         if (error) {
             if (error.sqlMessage) {
+                console.log('sasasasaa92')
                 return res.status(500).json({ status: false, message: error.sqlMessage, duplicate_email: true });
             } else {
                 return res.status(404).json({ status: false, message: "error"});
             }
             
         }
+        console.log('szzzzzzzz94')
         if (results.affectedRows > 0) {
             return res.status(200).json({ status: true, user_id: results.insertId });
         } else {

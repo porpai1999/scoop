@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
+import { CommentComponent } from './comment/comment.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { FeedComponent } from './feed/feed.component';
 import { FollowComponent } from './follow/follow.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
   { path: 'postframe/:p1', component: PostFrameComponent},
   { path: 'home', component: HomeComponent},
   { path: 'menubar/:p1', component: MenubarComponent},
+  { path: 'comment/:p1', component: CommentComponent},
 
 
   

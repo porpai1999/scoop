@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FeedComponent implements OnInit {
 
+  text2: string;
   constructor() { }
 
   ngOnInit(): void {

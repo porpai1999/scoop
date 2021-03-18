@@ -60,19 +60,19 @@ export class EditprofileComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  // urls = "http://ssl.gstatic.com/accounts/ui/avatar_2x.png";
-  // getFile(e) {
-  //   if (e.target.files) {
-  //     var reader = new FileReader();
-  //     reader.readAsDataURL(e.target.files[0])
-  //     reader.onload = (event:any) => {
-  //       // console.log(reader.result)
-  //       this.urls=event.target.result;
-  //       this.base64 = reader.result
-  //     }
-  //     console.log('file ok');
-  //   } else {
-  //     console.log('No file');
-  //   }
-  // }
+  urls = "http://ssl.gstatic.com/accounts/ui/avatar_2x.png";
+  getFile(e) {
+    if (e.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0])
+      reader.onload = (event:any) => {
+        // console.log(reader.result)
+        this.urls=event.target.result;
+        this.base64 = reader.result
+      }
+      console.log('file ok');
+    } else {
+      console.log('No file');
+    }
+  }
 }

@@ -22,6 +22,7 @@ export class PostFrameComponent implements OnInit {
   firstn;
   lastn;
   indexofComment;
+  p2;
   msgs: Message[] = [];
 
   position: string;
@@ -88,6 +89,10 @@ export class PostFrameComponent implements OnInit {
   //         },
   //         key: "positionDialog"
   //     });
+  // }
+  // click(){
+  //   this.p2 = 
+
   // }
 
 }

@@ -28,6 +28,8 @@ export class HomeComponent implements OnInit {
   post_id;
 
   comment;
+  displayMaximizable: boolean;
+  text2: string;
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
@@ -136,6 +138,9 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+  showMaximizableDialog() {
+    this.displayMaximizable = true;
+}
 }
 
 
