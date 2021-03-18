@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'Header/:p1', component: HeaderComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'profile/:p1', component: ProfileComponent},
+  { path: 'profile/:p1/', component: ProfileComponent},
   { path: 'homeout', component: HomeoutComponent},
   { path: 'feed', component: FeedComponent},
   { path: 'editprofile/:p1', component: EditprofileComponent},

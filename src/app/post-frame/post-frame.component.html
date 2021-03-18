@@ -39,7 +39,7 @@
                 <div *ngFor="let item of array ;let num = index;">
 
                     <!-- แสดงรายชื่อคนอื่นให้เราติดตาม -->
-                    <p-card header="Suggestions For You" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
+                    <!-- <p-card header="Suggestions For You" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
                         <div class="row"> 
                             <div class="col-md-12">
                                 <div class="row justify-content-around">
@@ -59,7 +59,7 @@
                                 &nbsp;&nbsp;&nbsp;
                             </div>
                         </div>
-                    </p-card>
+                    </p-card> -->
                     <!--  -->
 
                     <p-card title="Simple Card" class="novel">
@@ -84,7 +84,7 @@
                                             <div class="dropdown-menu dropdown-primary">
                                                 <!-- <a class="dropdown-item"><i
                                                         class="pi pi-pencil"></i>&nbsp;&nbsp;Edit Post</a> -->
-                                                <a class="dropdown-item" (click)="confirm2()"><i
+                                                <a class="dropdown-item" (click)="confirm2(num)"><i
                                                         class="pi pi-trash"></i>&nbsp;&nbsp;Delete</a>
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@
                                             <img class="circular"
                                                 src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
                                         </div>
-                                        <textarea class="form-control ml-4 shadow-none textarea" [rows]="1" [cols]="30"
+                                        <textarea class="form-control ml-4 shadow-none textarea" [rows]="1" [cols]="20"
                                             pInputTextarea autoResize="autoResize"
                                             placeholder="เขียนความคิดเห็น"></textarea>
 
