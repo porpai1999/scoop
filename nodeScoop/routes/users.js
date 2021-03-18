@@ -259,6 +259,18 @@ routes.get('/search_all', (req, res) => {
 });
 
 // search
+routes.get('/show_comment', (req, res) => {
+    let post_id = req.body.post_id;
+    let sql = "select * from comments where post_id = ?";
+    connection.query(sql, [post_id], (error, results, fields) => {
+        if (error) {
+            throw error;
+        }
+        return res.send(results);
+    });
+});
+
+// search
 routes.get('/search', (req, res) => {
     let search = req.body.search;
     let sql = "select user_id, first_name, last_name from users where first_name like " + `'%${search}%'`
