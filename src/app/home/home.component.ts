@@ -22,6 +22,7 @@ export class HomeComponent implements OnInit {
   indexofComment;
   indexOfPosts;
   account_name;
+  comment;
 
   text1: string = '<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>';
   
@@ -29,7 +30,8 @@ export class HomeComponent implements OnInit {
   user_id;
   post_id;
 
-  comment;
+  comments ;
+
   displayMaximizable: boolean;
   text2: string;
 
@@ -126,19 +128,12 @@ export class HomeComponent implements OnInit {
     this.comment = "";
     this.user_id = this.array[this.indexofComment].user_id;
     this.post_id = this.array[this.indexofComment].post_id;
-  }
 
-  postBy(e) {
-    //console.log("e : "+e)
-    this.indexOfPosts = e;
-    this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
-
-   let json = { post_id: this.indexOfPosts, user_id: this.ids }
-    this.http.post('http://localhost:3000/users/like_post/' + this.ids, json)
+    this.http.get('http://localhost:3000/users/show_comment/'+this.post_id)
       .subscribe(response => {
         if (response) {
-          console.log(response)
-          console.log(this.ids)
+          this.comments = response
+       
 
         } else {
           console.log('error')
@@ -148,6 +143,13 @@ export class HomeComponent implements OnInit {
       }
 
       )
+  }
+
+  postBy(e) {
+    //console.log("e : "+e)
+    this.indexOfPosts = e;
+    this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
+
     // console.log(this.array[this.indexOfPosts].first_name)
     
   }
@@ -182,22 +184,6 @@ export class HomeComponent implements OnInit {
         if (response) {
           console.log(response)
           console.log(this.ids)
-
-        } else {
-          console.log('error')
-        }
-      }, error => {
-        console.log('error', error)
-      }
-
-      )
-  }
-  selectcomment(){
-    this.http.get('http://localhost:3000/profiler/selectcomment/'+this.post_id)
-      .subscribe(response => {
-        if (response) {
-          console.log(response)
-          console.log(this.post_id)
 
         } else {
           console.log('error')

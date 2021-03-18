@@ -182,6 +182,7 @@
                                             (click)="onComment(comment)" class="p-button-rounded p-button-outlined">
                                         </button>
                                     </div>
+                                    <div *ngFor="let select of comments">
                                     <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ">
                                         <div class="row justify-content-around ">
                                             <img class="circular"
@@ -190,14 +191,15 @@
                                         <div class="p-d-flex p-p-3 card ml-4 " style="top: 10px;">
                                             <div class="p-mr-2 p-as-center ml-2">
                                                 <a href="#">
-                                                    <h4><strong>name</strong></h4>
+                                                    <h4><strong>{{select.first_name}} &nbsp;{{select.last_name}}</strong></h4>
                                                 </a>
-                                                <strong>0224544545456121544</strong>
+                                                <strong>{{select.text}}</strong>
                                                 &nbsp;&nbsp;
                                             </div>
                                         </div>
 
                                     </div>
+                                </div>
                                 </div>
                             </div>
                         </div>
