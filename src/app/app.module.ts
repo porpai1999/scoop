@@ -54,7 +54,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { FeedComponent } from './feed/feed.component';
 import { EditprofileComponent } from './editprofile/editprofile.component'; 
 
-import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { EditorModule } from 'primeng/editor';
 import { PostsComponent } from './posts/posts.component';
 import { PostFrameComponent } from './post-frame/post-frame.component';
 import { CommentComponent } from './comment/comment.component';
