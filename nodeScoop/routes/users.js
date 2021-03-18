@@ -258,9 +258,9 @@ routes.get('/search_all', (req, res) => {
     });
 });
 
-// search
+// show_comment
 routes.get('/show_comment', (req, res) => {
-    let post_id = req.body.post_id;
+    let post_id = req.params.post_id;
     let sql = "select * from comments where post_id = ?";
     connection.query(sql, [post_id], (error, results, fields) => {
         if (error) {
