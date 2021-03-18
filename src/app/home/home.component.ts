@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
   text2: string;
 
   is_liked: any;
+  liked;
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
@@ -47,8 +48,20 @@ export class HomeComponent implements OnInit {
       http.get('http://localhost:3000/profiler/home_posts/')
       .subscribe(Response=>{
         this.array = Response;
-        console.log(Response)
+        console.log("res1");
+        
+        console.log(this.array)
         console.log(this.array[0].post_id)
+
+        this.http.get('http://localhost:3000/profiler/user_liked_post/')
+          .subscribe(res =>{
+            if (res) {
+              this.is_liked = res;
+              console.log("res2");
+              console.log(this.is_liked)
+            }
+          })
+
       })
 
       
@@ -194,22 +207,6 @@ export class HomeComponent implements OnInit {
 
       )
   }
-  
-  liked(e){
-    this.http.get('http://localhost:3000/profiler/user_liked_post/'+this.ids+'/'+e)
-      .subscribe(data =>{
-        if (data) {
-          console.log(data)
-          this.is_liked = data;
-          console.log(this.is_liked)
-          for (let item of this.is_liked) {
-            
-          }
-        }
-      })
-  }
-
-
 }
 
 

@@ -111,8 +111,19 @@ routes.get('/like_post/', (req, res) => {
     });
 });
 
-// show user liked post
-routes.get('/user_liked_post/:user_id/:post_id', (req, res) => {
+// show all user liked post
+routes.get('/user_liked_post/', (req, res) => {
+    let sql = "SELECT post_id, user_id ,COUNT(user_id) as liked FROM liked_post GROUP BY post_id";
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.send(results)
+        }
+    });
+});
+
+// not working
+routes.get('/not_user_liked_post/:user_id/:post_id', (req, res) => {
     
     const post_id = req.params.post_id;
     const user_id = req.params.user_id;
@@ -128,6 +139,7 @@ routes.get('/user_liked_post/:user_id/:post_id', (req, res) => {
         }
     });
 });
+// SELECT post_id, user_id ,COUNT(user_id) as liked FROM liked_post GROUP BY post_id
 
 module.exports = routes;
 

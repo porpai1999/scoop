@@ -107,7 +107,6 @@
                 </p-card>
 
                 <br>
-
                 <div *ngFor="let item of array;let num = index;">
                     {{postBy(num)}}
                     <p-card title="Simple Card" class="novel">
@@ -149,21 +148,34 @@
                                 <div class="d-flex flex-row fs-12">
                                     <div class="like p-2 cursor">
                                         <span class="ml-1">
-                                            <div *ngFor="let liked of is_liked">
-                                                {{liked.liked}}
-                                                {{item.post_id}}
-                                                <div *ngIf="liked.liked == 0">
-                                                    <button pButton pRipple icon="pi pi-thumbs-up" type="button" label="  Like"
-                                                        style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
-                                                    </button>
+
+                                            <div *ngFor="let item_2 of is_liked;">
+                                                <div *ngIf="item.post_id == item_2.post_id; then thenBlock else elseBlock">
+                                                    <!-- <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked"
+                                                    style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)">
+                                                    </button> -->
                                                 </div>
                                             </div>
+
+                                            <div #thenBlock>
+                                                <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked"
+                                                    style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)">
+                                                </button>
+                                            </div>
+
+                                            <div #elseBlock>
+                                                <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Like"
+                                                style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
+                                                </button>
+                                            </div>
+                                            
+
                                         </span>
                                     </div>
                                     <div class="like p-2 cursor action-collapse" data-toggle="collapse"
                                         aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
                                         <span class="ml-1">
-                                            <button (click)="isToggle(num)" pButton pRipple icon="pi pi-comments"
+                                            <button (click)="isToggle(num)" (click)="liked(item.post_id)"  pButton pRipple icon="pi pi-comments"
                                                 type="button" label="  Comment" style="color: rgb(49, 50, 57);"
                                                 class="p-button-text"></button>
                                         </span>
