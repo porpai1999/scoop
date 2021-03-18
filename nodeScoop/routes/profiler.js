@@ -36,8 +36,21 @@ routes.get('/posts_profile/:user_id', (req, res) => {
     });
 });
 
+// show all posts signed in
+routes.get('/home_posts/', (req, res) => {
+    // let id = req.query.id;
+    let sql = "select * from posts, users where posts.user_id = users.user_id ORDER by datetime DESC"
+    connection.query(sql, [], (error, results, fields) => {
+        if (error) {
+            throw error;
+        } else {
+            return res.send(results);
+        }
+    });
+});
+
 // show all posts
-routes.get('/posts/', (req, res) => {
+routes.get('/home_posts/', (req, res) => {
     // let id = req.query.id;
     let sql = "select * from posts, users where posts.user_id = users.user_id ORDER by datetime DESC"
     connection.query(sql, [], (error, results, fields) => {
@@ -96,10 +109,9 @@ routes.get('/user_liked_post/', (req, res) => {
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
         else {
-            res.send(results)
-            /*res.json({
+            res.json({
                 results: results
-            });*/
+            });
         }
     });
 });

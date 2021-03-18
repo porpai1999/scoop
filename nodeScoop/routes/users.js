@@ -272,8 +272,8 @@ routes.get('/show_comment/:post_id', (req, res) => {
 });
 
 // search
-routes.get('/search', (req, res) => {
-    let search = req.body.search;
+routes.get('/search/:search', (req, res) => {
+    let search = req.params.search;
     let sql = "select user_id, first_name, last_name from users where first_name like " + `'%${search}%'`
     connection.query(sql, (error, results, fields) => {
         if (error) {
