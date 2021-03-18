@@ -19,8 +19,9 @@ export class HeaderComponent implements OnInit {
     private http: HttpClient) { 
       
       let ids = acRouter.snapshot.params['p1'];
-      this.id = ids;
-      console.log(this.id);
+      this.id = sessionStorage.getItem("keyuser_id");;
+      console.log(sessionStorage.getItem("keyuser_id"));
+      
       
     }
 

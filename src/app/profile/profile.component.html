@@ -17,10 +17,14 @@
     
                                 <button type="button" class="btn btn-outline-success "
                                     style="border-color: rgb(22, 177, 156);" [routerLink]="['/editprofile',id]" >Edit Profile</button>
+                                    &nbsp;<button type="button" class="btn btn-outline-success "
+                                    style="border-color: rgb(22, 177, 156);" [routerLink]="['/editprofile',id]" >Follow </button>
                                 <br><br>
-                                0 &nbsp;Posts &nbsp;
-                                3 &nbsp;Follower &nbsp;
-                                1 &nbsp;Following &nbsp;
+                                <div style="font-size: medium; color: darkgrey;">
+                                    {{followers}} &nbsp;Followers &nbsp;
+                                    {{following}} &nbsp;Following &nbsp;
+                                </div>
+
                             </strong>
                         </div>
                     </div>
