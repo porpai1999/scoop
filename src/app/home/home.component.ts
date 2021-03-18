@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { DatapassService } from '../datapass.service';
@@ -32,28 +33,28 @@ export class HomeComponent implements OnInit {
   displayMaximizable: boolean;
   text2: string;
 
-  constructor(private router: Router, private data: DatapassService, private acRouter: ActivatedRoute,
-    private http: HttpClient) {
-    let id = acRouter.snapshot.params['p1'];
-    this.ids = id;
-    console.log('id home page', id);
-
-    
-
-    http.get('http://localhost:3000/profiler/posts/')
-      .subscribe(Response => {
-       
+  constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
+    private http: HttpClient , public dialog: MatDialog) {
+      // this.displayModal = true;
+      let id = acRouter.snapshot.params['p1'];
+      this.ids = id;
+      console.log('id home page',id);
+      
+      http.get('http://localhost:3000/profiler/posts/')
+      .subscribe(Response=>{
         this.array = Response;
         console.log(Response)
         console.log(this.array[0].post_id)
       })
 
-
-  }
+      let id1 = acRouter.snapshot.params['p2'];
+      this.user_id = id1;
+      console.log(this.user_id)
+      console.log('id post: -> ',id1);
+    }
+    
   items: MenuItem[];
   email;
-
-
   // list(){
   //   console.log('Ok');
   //   let request = this.http.get('http://localhost:3000/users/profiler')
@@ -68,6 +69,11 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     let response = await this.getname();
     console.log(response)
+    this.firstn = response[0].first_name
+    this.lastn = response[0].last_name
+    this.name = this.firstn+' '+this.lastn
+    console.log(this.name)
+    // this.displayModal=true;
     this.name = response;
 
     // let selectcommen = this.selectcomment();
@@ -85,6 +91,9 @@ export class HomeComponent implements OnInit {
     // //สร้าง session 
     var data = sessionStorage.getItem("key");
     var data1 = sessionStorage.getItem("token");
+    var datause = sessionStorage.getItem("token1");
+    console.log(datause);
+//----------------------------------------------------
     console.log(data1);
     //----------------------------------------------------
     // //สร้าง session 
@@ -124,7 +133,7 @@ export class HomeComponent implements OnInit {
     this.indexOfPosts = e;
     this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
 
-   /* let json = { post_id: post_id, user_id: this.ids }
+   let json = { post_id: this.indexOfPosts, user_id: this.ids }
     this.http.post('http://localhost:3000/users/like_post/' + this.ids, json)
       .subscribe(response => {
         if (response) {
@@ -138,7 +147,7 @@ export class HomeComponent implements OnInit {
         console.log('error', error)
       }
 
-      )*/
+      )
     // console.log(this.array[this.indexOfPosts].first_name)
     
   }
@@ -203,3 +212,7 @@ export class HomeComponent implements OnInit {
 
 
 }
+
+
+
+
