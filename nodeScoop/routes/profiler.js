@@ -80,7 +80,7 @@ routes.get('/like_comment/', (req, res) => {
 });
 
 // show count_commented
-routes.get('/like_comment/:post_id', (req, res) => {
+routes.get('/count_commented/:post_id', (req, res) => {
     const post_id = req.params.post_id;
     let sql = "SELECT COUNT(comment_id) FROM comments where post_id = ?";
     sql = mysql.format(sql, [
