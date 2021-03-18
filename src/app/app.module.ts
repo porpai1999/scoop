@@ -30,6 +30,8 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { FollowingComponent } from './following/following.component';
 
 import { NgxCaptchaModule } from 'ngx-captcha';
+import {NgxPhotoEditorModule} from "ngx-photo-editor";
+
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 
@@ -56,6 +58,7 @@ import { EditorModule, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { PostsComponent } from './posts/posts.component';
 import { PostFrameComponent } from './post-frame/post-frame.component';
 import { CommentComponent } from './comment/comment.component';
+import { SearchListComponent } from './search-list/search-list.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +78,7 @@ import { CommentComponent } from './comment/comment.component';
     PostsComponent,
     PostFrameComponent,
     CommentComponent,
+    SearchListComponent,
 
 
   ],
@@ -103,6 +107,7 @@ import { CommentComponent } from './comment/comment.component';
     FormsModule,
     EditorModule,
     ConfirmDialogModule,
+    NgxPhotoEditorModule,
     
 
     NgxCaptchaModule
