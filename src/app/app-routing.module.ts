@@ -8,7 +8,6 @@ import { FollowComponent } from './follow/follow.component';
 import { FollowingComponent } from './following/following.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
-import { HomeoutComponent } from './homeout/homeout.component';
 import { LoginComponent } from './login/login.component';
 import { MenubarComponent } from './menubar/menubar.component';
 import { OtherProfileComponent } from './other-profile/other-profile.component';
@@ -22,16 +21,14 @@ import { SearchListComponent } from './search-list/search-list.component';
 
 
 const routes: Routes = [
-  { path: '', component: HomeoutComponent},
+  { path: '', component: LoginComponent},
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent },
-  // { path: 'home', component: HomeComponent},
   { path: 'home/:p1', component: HomeComponent},
   { path: 'Header/:p1', component: HeaderComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'profile/:p1', component: ProfileComponent},
   { path: 'profile/:p1/', component: ProfileComponent},
-  { path: 'homeout', component: HomeoutComponent},
   { path: 'feed', component: FeedComponent},
   { path: 'editprofile/:p1', component: EditprofileComponent},
   { path: 'posts/:p2', component: PostsComponent},
