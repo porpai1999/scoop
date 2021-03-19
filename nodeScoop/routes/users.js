@@ -123,9 +123,7 @@ routes.post('/follow/:user_id', (req, res) => {
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
         else {
-            res.json({
-                results: results
-            });
+            res.send(results);
         }
     });
 });
