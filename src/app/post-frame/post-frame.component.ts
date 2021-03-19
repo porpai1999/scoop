@@ -37,16 +37,14 @@ export class PostFrameComponent implements OnInit {
 
   constructor(private acRouter: ActivatedRoute, private http: HttpClient, private router: Router,
     private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) {
-    let id = acRouter.snapshot.params['p1'];
+    let id = acRouter.snapshot.params['p3'];
     this.ids = id;
     this.myID = sessionStorage.getItem("keyuser_id");
     console.log('id postframe page', id);
-    http.get('http://localhost:3000/profiler/posts_profile/' + this.myID)
+    http.get('http://localhost:3000/profiler/posts_profile/' + this.ids)
       .subscribe((Response: any) => {
         this.array = Response;
         console.log(Response)
-
-
 
       })
   }
