@@ -25,11 +25,8 @@ export class HomeComponent implements OnInit {
   comment;
 
   text1: string = '<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>';
-  
-
   user_id;
   post_id;
-
   comments ;
 
   displayMaximizable: boolean;
@@ -43,6 +40,7 @@ export class HomeComponent implements OnInit {
   text;
 
   myID;
+  imgpath;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
       // this.displayModal = true;
@@ -79,6 +77,9 @@ export class HomeComponent implements OnInit {
             }
           })
 
+          this.http.get('http://localhost:3000/profiler/get_user_image/'+this.myID).subscribe(response => {
+            this.imgpath = response[0].image;
+          });
       })
 
       

@@ -22,8 +22,10 @@ export class ProfileComponent implements OnInit {
       let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
       this.myID = sessionStorage.getItem("keyuser_id");
-      
-      this.imgpath = "http://nodescoop.comsciproject.com/images/jpfunnyface.png"
+      this.http.get('http://localhost:3000/profiler/get_user_image/'+this.myID).subscribe(response => {
+        this.imgpath = response[0].image;
+      });
+      //this.imgpath = "http://nodescoop.comsciproject.com/images/jpfunnyface.png"
       console.log(ids);
     }
 

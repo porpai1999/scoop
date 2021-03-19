@@ -171,6 +171,20 @@ routes.get('/show_followers_c/:user_id', (req, res) => {
     });
 });
 
+routes.get('/get_user_image/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    let sql = "SELECT users.user_id, users.photo_id, image FROM photos, users WHERE photos.photo_id = users.photo_id and photos.user_id = ?";
+    sql = mysql.format(sql, [
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            return res.send(results);
+        }
+    });
+});
+
 module.exports = routes;
 
 
