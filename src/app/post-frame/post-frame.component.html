@@ -38,37 +38,17 @@
                 </p-confirmDialog>
                 <div *ngFor="let item of array ;let num = index;">
 
-                    <!-- แสดงรายชื่อคนอื่นให้เราติดตาม -->
-                    <!-- <p-card header="Suggestions For You" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
-                        <div class="row"> 
-                            <div class="col-md-12">
-                                <div class="row justify-content-around">
-                                    <div>
-                                        <h3>ชื่อคน</h3><br>
-                                        <h3>ชื่อคน</h3>
-                                    </div>
-                                    <div >
-                                        <div class="row justify-content-center">
-                                            <strong style="font-size: xx-large;">
-                                                 <button pButton pRipple type="button" label="Follow" class="p-button-raised p-button-success"></button> <br>
-                                                 <button pButton pRipple type="button" label="Follow" class="p-button-raised p-button-success"></button>
-                                            </strong>
-                                        </div>
-                                    </div>
-                                </div>
-                                &nbsp;&nbsp;&nbsp;
-                            </div>
-                        </div>
-                    </p-card> -->
-                    <!--  -->
-
                     <p-card title="Simple Card" class="novel">
                         <div class="row">
                             <div class="col-sm-1 ">
-                                <!-- <div class="row justify-content-around"> -->
-                                <img class="circular1" src="http://nodescoop.comsciproject.com/images/jpfunnyface.png"
-                                    >
-                                <!-- </div> -->
+                                <div *ngIf="item.user_id == myID;">
+                                    <div class="justify-content-around">
+                                        <img class="circular1" style="width: 50px; height: 50px;" src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
+                                    </div>
+                                </div>
+                                <div *ngIf="item.user_id != myID;">
+                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png" >
+                                </div>
                             </div>
                             <div class="col-sm-11">
                                 <div class="d-flex justify-content-between ml-4 ">
@@ -93,7 +73,8 @@
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column justify-content-start ml-4">
-                                    <span class="date text-black-50">Shared publicly - {{item.datetime}}</span>
+                                    <span class="date text-black-50">Shared publicly - {{item.datetime | slice:0:10
+                                    }}</span>
                                 </div>
                             </div>
                         </div>
@@ -115,12 +96,19 @@
 
                             <div class="bg-white p-2">
                                 <div class="d-flex flex-row fs-12">
-                                    <div class="like p-2 cursor"><i class="pi pi-thumbs-up"></i><span
-                                            class="ml-1">Like</span></div>
+                                    <!-- <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked"
+                                                    style="color: rgb(61, 75, 179); " class="p-button-text"  (click)="like(item.post_id)">
+                                                    </button> -->
+                                    <!-- <div class="like p-2 cursor"><i class="pi pi-thumbs-up"></i><span
+                                            class="ml-1">Like</span></div> -->
+
                                     <div class="like p-2 cursor action-collapse " data-toggle="collapse"
                                         aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
-                                        <i class="pi pi-comments"></i>
-                                        <span class="ml-1" (click)="isToggle(num)">Comment</span>
+                                        <!-- <i class="pi pi-comments"></i> -->
+                                        <button (click)="isToggle(num)"  pButton pRipple icon="pi pi-comments"
+                                                type="button" label="  Comment" style="color: rgb(49, 50, 57); padding: 2% 250% ;"
+                                                class="p-button-text"></button>
+                                        <!-- <span class="ml-1" (click)="isToggle(num)">Comment</span> -->
                                     </div>
                                 </div>
                             </div>
@@ -136,13 +124,13 @@
                                                 src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
                                         </div>
                                         <textarea class="form-control ml-4 shadow-none textarea" [rows]="1" [cols]="20"
-                                            pInputTextarea autoResize="autoResize"
+                                            pInputTextarea autoResize="autoResize" [(ngModel)]="comment"
                                             placeholder="เขียนความคิดเห็น"></textarea>
 
                                         &nbsp;&nbsp;
-                                        <button icon=" pi pi-send" pButton pRipple type="button" label=" " 
-                                                class="p-button-rounded p-button-outlined">
-                                            </button>
+                                        <button icon=" pi pi-send" pButton pRipple type="button" label="Send"
+                                            (click)="onComment(comment)" class="ml-4 p-button-rounded p-button-outlined">
+                                        </button>
                                     </div>
                                     <div *ngFor="let select of comments">
                                         <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ">

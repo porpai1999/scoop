@@ -31,16 +31,21 @@ export class PostFrameComponent implements OnInit {
 
   position: string;
 
+  myID;
+  indexOfPosts;
+  account_name;
 
   constructor(private acRouter: ActivatedRoute, private http: HttpClient, private router: Router,
     private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) {
     let id = acRouter.snapshot.params['p1'];
     this.ids = id;
+    this.myID = sessionStorage.getItem("keyuser_id");
     console.log('id postframe page', id);
-    http.get('http://localhost:3000/profiler/posts_profile/' + this.ids)
+    http.get('http://localhost:3000/profiler/posts_profile/' + this.myID)
       .subscribe((Response: any) => {
         this.array = Response;
         console.log(Response)
+
 
 
       })
@@ -113,5 +118,50 @@ export class PostFrameComponent implements OnInit {
         this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
       }
     });
+  }
+
+  postBy(e) {
+    //console.log("e : "+e)
+    this.indexOfPosts = e;
+    this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
+    // console.log(this.array[this.indexOfPosts].first_name)
+  }
+
+  async onComment(comment) {
+    console.log("Comment"+comment);
+    let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
+    await this.http.post('http://localhost:3000/users/comment/' + this.ids, comment_json).subscribe(response => {
+      if (response) {
+        let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+        });
+        console.log('posted');
+      } else {
+        console.log('Status : failed');
+      }
+    });
+  }
+
+  like(post_id) {
+    let json = { post_id: post_id, user_id: this.ids }
+    console.log(json)
+    console.log(post_id)
+    // console.log(user_id)
+    
+    this.http.post('http://localhost:3000/users/like_post/' + this.ids, json)
+      .subscribe(response => {
+        if (response) {
+          console.log(response)
+          console.log(this.ids)
+
+        } else {
+          console.log('error')
+        }
+      }, error => {
+        console.log('error', error)
+      }
+
+      )
   }
 }

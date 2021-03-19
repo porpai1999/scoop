@@ -227,7 +227,7 @@ export class HomeComponent implements OnInit {
 
   post(){
     let json = {user_id:  this.ids,text: this.text }
-    if (this.text=undefined) {
+    if (this.text==undefined) {
       console.log("Error!");
     } else {
       console.log(this.text);

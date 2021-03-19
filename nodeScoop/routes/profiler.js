@@ -142,7 +142,7 @@ routes.get('/not_user_liked_post/:user_id/:post_id', (req, res) => {
 // SELECT post_id, user_id ,COUNT(user_id) as liked FROM liked_post GROUP BY post_id
 
 // show following
-routes.get('/show_following/:user_id', (req, res) => {
+routes.get('/show_following_c/:user_id', (req, res) => {
     const user_id = req.params.user_id;
     let sql = "SELECT COUNT(userID_1) as following FROM follows where userID_2 = ?";
     sql = mysql.format(sql, [
@@ -157,7 +157,7 @@ routes.get('/show_following/:user_id', (req, res) => {
 });
 
 // show followers
-routes.get('/show_followers/:user_id', (req, res) => {
+routes.get('/show_followers_c/:user_id', (req, res) => {
     const user_id = req.params.user_id;
     let sql = "SELECT COUNT(userID_2) as followers FROM follows where userID_1 = ?";
     sql = mysql.format(sql, [
