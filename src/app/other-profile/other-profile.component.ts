@@ -55,4 +55,12 @@ export class OtherProfileComponent implements OnInit {
         console.log(error);
       });
       }
+
+      follow() {
+        let json = { user_id: this.id }
+        this.http.post('http://localhost:3000/users/follow/'+sessionStorage.getItem("keyuser_id"),json).subscribe(response => {
+          console.log(response);
+          
+      });
+      }
 }

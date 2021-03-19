@@ -13,7 +13,7 @@ routes.get('/', (req, res) => {
 });
 
 // accepted follow
-routes.post('/follow', (req, res) => {
+routes.post('/follown', (req, res) => {
     const userID_1 = req.body.userID_1;
     const userID_2 = req.body.userID_2;
     let sql = "insert into posts (userID_1, userID_2) valuse (?, ?)";
