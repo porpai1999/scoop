@@ -63,6 +63,7 @@ import { PostFrameComponent } from './post-frame/post-frame.component';
 import { CommentComponent } from './comment/comment.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { OtherProfileComponent } from './other-profile/other-profile.component';
+import { PostframeotherComponent } from './postframeother/postframeother.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,8 @@ import { OtherProfileComponent } from './other-profile/other-profile.component';
     CommentComponent,
     SearchListComponent,
     OtherProfileComponent,
+    PostframeotherComponent,
+
 
 
   ],

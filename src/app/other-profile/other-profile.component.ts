@@ -19,10 +19,10 @@ export class OtherProfileComponent implements OnInit {
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
-      let ids = acRouter.snapshot.params['p1'];
+      let ids = acRouter.snapshot.params['p3'];
       this.id = ids;
       this.myID = sessionStorage.getItem("keyuser_id");
-      this.http.get('http://localhost:3000/profiler/get_user_image/'+this.myID).subscribe(response => {
+      this.http.get('http://localhost:3000/profiler/get_user_image/'+this.id).subscribe(response => {
         this.imgpath = response[0].image;
       });
       console.log(ids);
