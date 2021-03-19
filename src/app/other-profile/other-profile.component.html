@@ -1,1 +1,40 @@
-<p>other-profile works!</p>
+<app-header></app-header>
+<div class="container ">
+    <div class="d-flex justify-content-center h-100 m-3">
+        <div class="image_outer_container">
+            <div class="green_icon">
+            </div>
+            <div class="col-md-12">
+
+                <div class="row justify-content-around">
+                    <div class="circular ">
+                        <img src={{imgpath}}>&nbsp;
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="my-auto">
+                        <div class="row justify-content-center">
+                            <strong style="font-size: xx-large;">{{fullname}} &nbsp;
+    
+                                <button type="button" class="btn btn-outline-success "
+                                    style="border-color: rgb(22, 177, 156);" [routerLink]="['/editprofile',id]" >Edit Profile</button>
+                                    &nbsp;<button type="button" class="btn btn-outline-success "
+                                    style="border-color: rgb(22, 177, 156);" [routerLink]="['/editprofile',id]" >Follow </button>
+                                <br><br>
+                                <div style="font-size: medium; color: darkgrey;">
+                                    {{followers}} &nbsp;Followers &nbsp;
+                                    {{following}} &nbsp;Following &nbsp;
+                                </div>
+
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <app-menubar></app-menubar>
+            </div>
+            
+        </div>
+        <br>
+    </div>
+    <app-post-frame></app-post-frame> 
+</div>
