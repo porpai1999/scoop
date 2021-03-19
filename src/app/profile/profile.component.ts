@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
       let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
       this.myID = sessionStorage.getItem("keyuser_id");
+      
       this.imgpath = "http://nodescoop.comsciproject.com/images/jpfunnyface.png"
       console.log(ids);
     }
