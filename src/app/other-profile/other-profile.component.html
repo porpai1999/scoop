@@ -15,8 +15,9 @@
                         <div class="row justify-content-center">
                             <strong style="font-size: xx-large;">{{fullname}} &nbsp;
     
-                                <button type="button" class="btn btn-outline-success "
-                                    style="border-color: rgb(22, 177, 156);" [routerLink]="['/editprofile',id]" >Edit Profile</button>
+
+                                    <button type="button" class="btn btn-outline-success "
+                                    style="border-color: rgb(22, 177, 156);" (click)="follow()" >Follow </button>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <br><br>
                                 <div style="font-size: medium; color: darkgrey;">
@@ -35,6 +36,5 @@
         </div>
         <br>
     </div>
-    <app-post-frame></app-post-frame> 
+    <app-post-frame></app-post-frame>
 </div>
-

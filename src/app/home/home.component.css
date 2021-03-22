@@ -53,3 +53,87 @@ p {
 :host ::ng-deep .p-dialog .p-button {
     min-width: 6rem;
 }
+
+.card {
+    border-radius: 10px;
+    width: 430px;
+    /* height: 50px;
+    padding: 20px;  */
+    /* margin-top: 10px;
+    margin-bottom: 50px */
+}
+ .card1 {
+     border-radius: 50px;
+     width: 600px;
+     height: 300px;
+     /* padding: 20px; */
+     margin-top: 5px;
+     margin-bottom: 50px
+ }
+
+ .profile-pic {
+     width: 60px;
+     height: 60px;
+     border-radius: 50%;
+     object-fit: contain;
+     background-color: #E0E0E0
+ }
+ .textarea1 {
+     padding: 15px 20px;
+     border-radius: 20px;
+     box-sizing: border-box;
+     color: #443c3c;
+     border: 1px solid #7c7a7a;
+     font-size: 16px;
+     letter-spacing: 1px;
+     height: 200px ;
+     width: 100%
+ }
+
+ .textarea1:focus {
+     -moz-box-shadow: none !important;
+     -webkit-box-shadow: none !important;
+     box-shadow: none !important;
+     border: 1px solid #00C853 !important;
+     outline-width: 0 !important
+ }
+
+ select {
+     border: none;
+     font-size: 15px;
+     background-color: #fff !important
+ }
+
+ select:focus {
+     -moz-box-shadow: none !important;
+     -webkit-box-shadow: none !important;
+     box-shadow: none !important;
+     outline-width: 0 !important
+ }
+
+ ::placeholder {
+     color: #645f5f
+ }
+
+ :-ms-input-placeholder {
+     color: #110e0e
+ }
+
+ ::-ms-input-placeholder {
+     color: #1d1a1a
+ }
+
+ .btn-success {
+     border-radius: 50px;
+     padding: 4px 40px
+ }
+
+ .options {
+     font-size: 23px;
+     color: #292424;
+     cursor: pointer
+ }
+
+ .options:hover {
+     color: #000
+ }

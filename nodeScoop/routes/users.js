@@ -13,7 +13,7 @@ routes.get('/', (req, res) => {
 });
 
 // accepted follow
-routes.post('/follow', (req, res) => {
+routes.post('/follown', (req, res) => {
     const userID_1 = req.body.userID_1;
     const userID_2 = req.body.userID_2;
     let sql = "insert into posts (userID_1, userID_2) valuse (?, ?)";
@@ -123,9 +123,7 @@ routes.post('/follow/:user_id', (req, res) => {
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
         else {
-            res.json({
-                results: results
-            });
+            res.send(results);
         }
     });
 });
@@ -284,8 +282,17 @@ routes.get('/search/:search', (req, res) => {
 });
 
 // delete
-routes.get('/delete', (req, res) => {
-    res.send({'log' : 'delete'})
+routes.delete('/delete_post/:post_id', (req, res) => {
+    let post_id = req.params.post_id;
+    let sql = "DELETE FROM posts WHERE post_id="+post_id
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            throw error;
+        }
+        else {
+            return res.send(results);
+        }
+    });
 });
 
 /*

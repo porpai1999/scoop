@@ -1,20 +1,18 @@
 import { HttpClient } from '@angular/common/http';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { Message } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 
-
-
 @Component({
-  selector: 'app-post-frame',
-  templateUrl: './post-frame.component.html',
-  styleUrls: ['./post-frame.component.css'],
+  selector: 'app-postframeother',
+  templateUrl: './postframeother.component.html',
+  styleUrls: ['./postframeother.component.css'],
   providers: [ConfirmationService, MessageService]
-
 })
-export class PostFrameComponent implements OnInit {
+export class PostframeotherComponent implements OnInit {
+
 
   name;
   array;
@@ -86,38 +84,7 @@ export class PostFrameComponent implements OnInit {
 
       )
   }
-  confirm2(e) {
-
-    this.indexofComment = e;
-    this.user_id = this.array[this.indexofComment].user_id;
-    this.post_id = this.array[this.indexofComment].post_id;
-    this.confirmationService.confirm({
-      message: 'Do you want to delete this record?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-info-circle',
-      
-      accept: () => {
-        this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
-        this.http.delete('http://localhost:3000/users/delete_post/' + this.post_id)
-          .subscribe(response => {
-            if (response) {
-              console.log(this.post_id);
-              this.router.navigateByUrl('/profile/'+this.user_id+'/');
-            } else {
-              console.log('error')
-            }
-          }, error => {
-            console.log('error', error)
-          }
-
-          )
-      },
-      reject: () => {
-        this.msgs = [{ severity: 'info', summary: 'Rejected', detail: 'You have rejected' }];
-      }
-    });
-  }
-
+  
   postBy(e) {
     //console.log("e : "+e)
     this.indexOfPosts = e;
@@ -162,4 +129,5 @@ export class PostFrameComponent implements OnInit {
 
       )
   }
+
 }

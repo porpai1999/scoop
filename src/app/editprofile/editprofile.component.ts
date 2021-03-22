@@ -28,9 +28,10 @@ export class EditprofileComponent implements OnInit {
   constructor(private http: HttpClient,private acRouter: ActivatedRoute,private router:Router, private sanitizer: DomSanitizer) { 
     let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
+
       console.log(ids);
       this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
-      this.http.get('http://localhost:3000/users/select_some/'+this.id)
+      this.http.get('http://localhost:3000/users/select_some/'+sessionStorage.getItem("keyuser_id"))
       .subscribe(response =>{
       console.log(response)
       this.user = response[0]

@@ -38,8 +38,6 @@ import {NgxPhotoEditorModule} from "ngx-photo-editor";
 
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
-
-
 const routes: Routes = [
   { path: '', component: AppComponent},
   { path: 'profile', component: ProfileComponent},
@@ -64,6 +62,8 @@ import { PostsComponent } from './posts/posts.component';
 import { PostFrameComponent } from './post-frame/post-frame.component';
 import { CommentComponent } from './comment/comment.component';
 import { SearchListComponent } from './search-list/search-list.component';
+import { OtherProfileComponent } from './other-profile/other-profile.component';
+import { PostframeotherComponent } from './postframeother/postframeother.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +84,9 @@ import { SearchListComponent } from './search-list/search-list.component';
     PostFrameComponent,
     CommentComponent,
     SearchListComponent,
+    OtherProfileComponent,
+    PostframeotherComponent,
+
 
 
   ],
@@ -117,7 +120,8 @@ import { SearchListComponent } from './search-list/search-list.component';
     NgxPhotoEditorModule,
     
 
-    NgxCaptchaModule
+    NgxCaptchaModule,
+
   ],
   providers: [CookieService,
     { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' }],

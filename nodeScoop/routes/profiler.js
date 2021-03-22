@@ -111,8 +111,19 @@ routes.get('/like_post/', (req, res) => {
     });
 });
 
-// show user liked post
-routes.get('/user_liked_post/:user_id/:post_id', (req, res) => {
+// show all user liked post
+routes.get('/user_liked_post/', (req, res) => {
+    let sql = "SELECT post_id, user_id ,COUNT(user_id) as liked FROM liked_post GROUP BY post_id";
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.send(results)
+        }
+    });
+});
+
+// not working
+routes.get('/not_user_liked_post/:user_id/:post_id', (req, res) => {
     
     const post_id = req.params.post_id;
     const user_id = req.params.user_id;
@@ -125,6 +136,81 @@ routes.get('/user_liked_post/:user_id/:post_id', (req, res) => {
         if (error) throw error;
         else {
             res.send(results)
+        }
+    });
+});
+// SELECT post_id, user_id ,COUNT(user_id) as liked FROM liked_post GROUP BY post_id
+
+// show following c
+routes.get('/show_following_c/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    let sql = "SELECT COUNT(userID_1) as following FROM follows where userID_2 = ?";
+    sql = mysql.format(sql, [
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            return res.send({results});
+        }
+    });
+});
+
+// show followers c
+routes.get('/show_followers_c/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    let sql = "SELECT COUNT(userID_2) as followers FROM follows where userID_1 = ?";
+    sql = mysql.format(sql, [
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            return res.send({results});
+        }
+    });
+});
+
+// show following
+routes.get('/show_following/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    let sql = "SELECT userID_1, user_id, first_name, last_name FROM follows, users where userID_2 = ? and userID_1 = users.user_id";
+    sql = mysql.format(sql, [
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            return res.send({results});
+        }
+    });
+});
+
+// show followers
+routes.get('/show_followers/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    let sql = "SELECT userID_2, user_id, first_name, last_name FROM follows, users where userID_1 = ? and userID_2 = users.user_id";
+    sql = mysql.format(sql, [
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            return res.send({results});
+        }
+    });
+});
+
+routes.get('/get_user_image/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    let sql = "SELECT users.user_id, users.photo_id, image FROM photos, users WHERE photos.photo_id = users.photo_id and photos.user_id = ?";
+    sql = mysql.format(sql, [
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            return res.send(results);
         }
     });
 });

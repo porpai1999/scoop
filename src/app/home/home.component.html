@@ -47,37 +47,38 @@
         <div class="row">
             &nbsp;&nbsp;&nbsp;&nbsp;
             <div class="col-sm-3">
-                <div class="c">
-                    <button type="button" class="btn btn-light" [routerLink]="['/posts',ids]">Post</button>
-                </div>
-
             </div>
 
 
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <p-dialog header="สร้างโพส" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw'}"
                     [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
 
-
-                    <!-- <p-editor [(ngModel)]="text2" [style]="{'height':'10px'}">
-                        <ng-template pTemplate="header">
-                            <span class="ql-format-group">
-                                <span title="Bold" class="ql-format-button ql-bold"></span>
-                                <span class="ql-format-separator"></span>
-                                <span title="Italic" class="ql-format-button ql-italic"></span>
-                                <span class="ql-format-separator"></span>
-                                <span title="Underline" class="ql-format-button ql-underline"></span>
-                                <span class="ql-format-separator"></span>
-                                <span title="Strikethrough" class="ql-format-button ql-strike"></span>
-                            </span>
-                        </ng-template>
-                    </p-editor> -->
-                    <!-- <p>Value: {{text2||'empty'}}</p> -->
+                    <div class="row d-flex justify-content-center">
+                        <div class="card1">
+                            <div class="row px-3"> 
+                                <img class="circular1 mr-3" src={{imgpath}}>
+                                <div class="flex-column">
+                                    <h3 class="mb-0 font-weight-normal"></h3>
+                                     <select name="privacy" class="privacy">
+                                        <option>Public post</option>
+                                        <option>Private post</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row px-3 form-group"> 
+                                <textarea class="text-muted bg-light mt-4 mb-3 textarea1" placeholder="คุณเป็นยังไงบ้างวันนี้?" [(ngModel)]="text" name="text"></textarea> 
+                            </div>
+                            <div class="row px-3">
+                               
+                            </div>
+                        </div>
+                    </div>
 
 
                     <ng-template pTemplate="footer">
-                        <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Ok"
+                        <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Ok" (click)="post()"
                             styleClass="p-button-text"></p-button>
                     </ng-template>
                 </p-dialog>
@@ -85,7 +86,7 @@
                     <div class="row">
                         <div class="col-sm-1">
                             <div class="justify-content-around">
-                                <img class="circular1" src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
+                                <img class="circular1" src={{imgpath}}>
                             </div>
                         </div>
                         <div class="col-sm-10">
@@ -107,14 +108,20 @@
                 </p-card>
 
                 <br>
-
                 <div *ngFor="let item of array;let num = index;">
                     {{postBy(num)}}
                     <p-card title="Simple Card" class="novel">
                         <div class="row">
                             <div class="col-sm-1">
-                                <img class="rounded-circle" src="../../assets/images/userprofile.png" width="50"
-                                    alt="Avatar">
+                                <div *ngIf="item.user_id == myID;">
+                                    <div class="justify-content-around">
+                                        <img class="circular1" style="width: 50px; height: 50px;" src={{imgpath}}>
+                                    </div>
+                                </div>
+                                <div *ngIf="item.user_id != myID;">
+                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png" >
+                                </div>
+                                
                             </div>
                             &nbsp;&nbsp;
 
@@ -149,22 +156,36 @@
                                 <div class="d-flex flex-row fs-12">
                                     <div class="like p-2 cursor">
                                         <span class="ml-1">
-                                            <div *ngFor="let liked of is_liked">
-                                                {{liked.liked}}
-                                                {{item.post_id}}
-                                                <div *ngIf="liked.liked == 0">
-                                                    <button pButton pRipple icon="pi pi-thumbs-up" type="button" label="  Like"
-                                                        style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
+
+                                            <!-- <div *ngFor="let item_2 of is_liked;">
+                                                <div *ngIf="(item.post_id == item_2.post_id) && true;">
+                                                    {{item_2.liked}}
+                                                    <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked"
+                                                    style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)">
                                                     </button>
                                                 </div>
+                                            </div> -->
+
+                                            <!-- <div #thenBlock>
+                                                <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked"
+                                                    style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)">
+                                                </button>
                                             </div>
+
+                                            <div #elseBlock>
+                                                <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Like"
+                                                style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
+                                                </button>
+                                            </div> -->
+                                            
+
                                         </span>
                                     </div>
                                     <div class="like p-2 cursor action-collapse" data-toggle="collapse"
                                         aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
                                         <span class="ml-1">
-                                            <button (click)="isToggle(num)" pButton pRipple icon="pi pi-comments"
-                                                type="button" label="  Comment" style="color: rgb(49, 50, 57);"
+                                            <button (click)="isToggle(num)"  pButton pRipple icon="pi pi-comments"
+                                                type="button" label="  Comment" style="color: rgb(49, 50, 57); padding: 2% 120% ;"
                                                 class="p-button-text"></button>
                                         </span>
                                     </div>
@@ -178,21 +199,22 @@
                                                 src="http://nodescoop.comsciproject.com/images/jpfunnyface.png"
                                                 width="40">
                                         </div>
-                                        <textarea class="form-control ml-1 shadow-none textarea" [rows]="1" [cols]="30"
+                                        <textarea class="form-control ml-4 shadow-none textarea" [rows]="1" [cols]="30"
                                             pInputTextarea autoResize="autoResize" [(ngModel)]="comment"
                                             placeholder="เขียนความคิดเห็น"></textarea>
                                         &nbsp;&nbsp;
-                                        <button icon=" pi pi-send" pButton pRipple type="button" label=" "
-                                            (click)="onComment(comment)" class="p-button-rounded p-button-outlined">
+                                        <button icon=" pi pi-send" pButton pRipple type="button" label="Send"
+                                            (click)="onComment(comment)" class="ml-4 p-button-rounded p-button-outlined">
                                         </button>
+                                        
                                     </div>
                                     <div *ngFor="let select of comments">
-                                        <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ">
+                                        <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ml-4">
                                             <div class="row justify-content-around ">
                                                 <img class="circular"
                                                     src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
                                             </div>
-                                            <div class="p-d-flex p-p-5 card ml-4  " style="top: 10px;">
+                                            <div class="p-d-flex p-p-3 card ml-4  " style="top: 10px;">
                                                 <div class="p-mr-2 p-as-center ml-2">
                                                     <a href="#">
                                                         <h4><strong>{{select.first_name}}

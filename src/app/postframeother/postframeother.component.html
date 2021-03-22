@@ -34,39 +34,10 @@
 
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
             <div class="col-sm-7">
-<<<<<<< HEAD
-                 <!-- แสดงรายชื่อคนอื่นให้เราติดตาม -->
-                 <p-card header="Suggestions For You" [style]="{'width': '25rem', 'margin-bottom': '2em'}">
-                    <div class="row"> 
-                        <div class="col-md-12">
-                            <div class="row justify-content-around">
-                                <div>
-                                    <h3>ชื่อคน</h3><br>
-                                    <h3>ชื่อคน</h3>
-                                </div>
-                                <div >
-                                    <div class="row justify-content-center">
-                                        <strong style="font-size: xx-large;">
-                                             <button pButton pRipple type="button" label="Follow" class="p-button-raised p-button-success"></button> <br>
-                                             <button pButton pRipple type="button" label="Follow" class="p-button-raised p-button-success"></button>
-                                        </strong>
-                                    </div>
-                                </div>
-                            </div>
-                            &nbsp;&nbsp;&nbsp;
-                        </div>
-                    </div>
-                </p-card>
-                <!--  -->
-                <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
-                </p-confirmDialog>
-                <div *ngFor="let item of array ;let num = index;">
-=======
                 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
                 </p-confirmDialog>
                 <div *ngFor="let item of array ;let num = index;">
 
->>>>>>> 5828b45483ebaa879f7052573e7d3caf476c261f
                     <p-card title="Simple Card" class="novel">
                         <div class="row">
                             <div class="col-sm-1 ">
@@ -84,19 +55,7 @@
                                     <span class="font-weight-bold name">{{name}}</span>
                                     <div class="d-flex flex-row mt ellipsis ml-4">
 
-                                        <div class="dropdown ">
-                                            <!-- Trigger -->
-                                            <a type="button" id="dropdownMenu2" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false"><i
-                                                    class="pi pi-ellipsis-v "></i></a>
-                                            <!--Menu-->
-                                            <div class="dropdown-menu dropdown-primary">
-                                                <!-- <a class="dropdown-item"><i
-                                                        class="pi pi-pencil"></i>&nbsp;&nbsp;Edit Post</a> -->
-                                                <a class="dropdown-item" (click)="confirm2(num)"><i
-                                                        class="pi pi-trash"></i>&nbsp;&nbsp;Delete</a>
-                                            </div>
-                                        </div>
+                            
 
 
                                     </div>

@@ -25,30 +25,61 @@ export class HomeComponent implements OnInit {
   comment;
 
   text1: string = '<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>';
-  
-
   user_id;
   post_id;
-
   comments ;
 
   displayMaximizable: boolean;
   text2: string;
 
   is_liked: any;
+  liked;
 
+  post_data: any;
+
+  text;
+
+  myID;
+  imgpath;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
       // this.displayModal = true;
       let id = acRouter.snapshot.params['p1'];
       this.ids = id;
+      
       console.log('id home page',id);
       
+      this.myID = sessionStorage.getItem("keyuser_id");
+
       http.get('http://localhost:3000/profiler/home_posts/')
       .subscribe(Response=>{
         this.array = Response;
-        console.log(Response)
+        console.log("res1");
+        
+        console.log(this.array)
         console.log(this.array[0].post_id)
+
+        this.http.get('http://localhost:3000/profiler/user_liked_post/')
+          .subscribe(res =>{
+            if (res) {
+              this.is_liked = res;
+              
+              
+              this.post_data = {
+                Response,
+                res
+              }
+
+              console.log(this.post_data.res);
+              
+              console.log("res2");
+              console.log(this.is_liked)
+            }
+          })
+
+          this.http.get('http://localhost:3000/profiler/get_user_image/'+this.myID).subscribe(response => {
+            this.imgpath = response[0].image;
+          });
       })
 
       
@@ -194,18 +225,28 @@ export class HomeComponent implements OnInit {
 
       )
   }
-  
-  liked(){
-    this.http.get('http://localhost:3000/profiler/user_liked_post/'+this.ids+'/'+this.indexOfPosts)
-      .subscribe(data =>{
-        if (data) {
-          console.log(data)
-          this.is_liked = data;
-          console.log(this.is_liked)
-        }
-      })
-  }
 
+  post(){
+    let json = {user_id:  this.ids,text: this.text }
+    if (this.text==undefined) {
+      console.log("Error!");
+    } else {
+      console.log(this.text);
+      console.log(json)
+      this.http.post('http://localhost:3000/users/post/'+this.ids,json)
+      .subscribe(response =>{
+        if(response){
+          console.log(response)
+
+        }else{
+          console.log('error')
+        }
+      },error =>{
+        console.log('error',error)
+      }
+      )
+    }
+  }
 
 }
 
