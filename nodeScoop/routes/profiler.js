@@ -181,7 +181,7 @@ routes.get('/show_following/:user_id', (req, res) => {
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
         else {
-            return res.send({results});
+            return res.send(results);
         }
     });
 });
@@ -196,7 +196,7 @@ routes.get('/show_followers/:user_id', (req, res) => {
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
         else {
-            return res.send({results});
+            return res.send(results);
         }
     });
 });
