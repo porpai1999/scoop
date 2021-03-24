@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,34 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FollowingComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit(): void {
+  myID;
+  show;
+
+
+  constructor(private http: HttpClient) { 
+    this.myID = sessionStorage.getItem("keyuser_id");
+
+    http.get('http://localhost:3000/profiler/show_following/' + this.myID)
+    .subscribe(res=>{
+      if(res){
+        console.log(res);
+        this.show = res
+
+      }else{
+        console.log('error');
+        
+      }
+    },error=>{
+        console.log(error);
+        
+    })
   }
+
+  ngOnInit() {
+  }
+
+
+  
 
 }
