@@ -41,6 +41,8 @@ export class HomeComponent implements OnInit {
 
   myID;
   imgpath;
+  post_len;
+  like_len;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
       // this.displayModal = true;
@@ -58,22 +60,24 @@ export class HomeComponent implements OnInit {
         
         console.log(this.array)
         console.log(this.array[0].post_id)
+        // console.log();
+        this.post_len = this.array.length;
 
         this.http.get('http://localhost:3000/profiler/user_liked_post/')
           .subscribe(res =>{
             if (res) {
               this.is_liked = res;
-              
-              
               this.post_data = {
                 Response,
                 res
               }
 
+
+
               console.log(this.post_data.res);
-              
+              this.like_len = this.is_liked.length;
               console.log("res2");
-              console.log(this.is_liked)
+              console.log(this.is_liked.length)
             }
           })
 
@@ -112,6 +116,10 @@ export class HomeComponent implements OnInit {
     console.log(this.name)
     // this.displayModal=true;
     this.name = response;
+
+    
+    
+    
 
     // let selectcommen = this.selectcomment();
     // console.log(selectcommen);
@@ -249,6 +257,38 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  divLike(pid) {
+    for (let i=0 ; i < this.like_len ; i++) {
+      // console.log(this.is_liked[i].post_id);
+      // console.log(pid);
+      
+      if(this.is_liked[i].post_id == pid) {
+        console.log(pid);
+        console.log(this.is_liked[i].post_id);
+        return 1
+      }
+    }
+
+    
+    
+
+    // for (let i=0 ; i <= this.is_liked.length ; i++) {
+    //   // my_liked.push(this.is_liked[i])
+    //   if (this.is_liked[i].post_id == post_id) {
+    //     console.log(1);
+    //     return 1
+    //   } else {
+    //     console.log(0);
+    //     return 0
+    //   }
+    // }
+    // console.log(my_liked);
+
+    // for (let i=0 ; i <= this.is_liked.length ; i++) {
+    //   my_liked.push(loop)
+    // }
+    
+  }
 }
 
 
