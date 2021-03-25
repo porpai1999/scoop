@@ -57,12 +57,17 @@ export class OtherProfileComponent implements OnInit {
       }
 
       follow() {
-        let json = { user_id: this.id }
-        this.http.post('http://localhost:3000/users/follow/'+sessionStorage.getItem("keyuser_id"),json).subscribe(response => {
+        console.log(this.id);
+        console.log(sessionStorage.getItem("keyuser_id"));
+        
+        
+        let json = { myID: sessionStorage.getItem("keyuser_id") }
+        this.http.post('http://localhost:3000/users/follow/'+this.id,json).subscribe(response => {
           console.log(response);
           
       });
       }
+
       photos(){
         //สร้าง session 
         sessionStorage.photos = "Photos";

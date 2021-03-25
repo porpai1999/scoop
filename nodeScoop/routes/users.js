@@ -113,12 +113,12 @@ routes.post('/like_comment/:user_id', (req, res) => {
 
 // follow
 routes.post('/follow/:user_id', (req, res) => {
-    const userID_1 = req.params.user_id;
-    const userID_2 = req.body.myID;
+    const userID_1 = req.body.myID;
+    const userID_2 = req.params.user_id;
     let sql = "insert into follows (userID_1, userID_2) values (?, ?);";
     sql = mysql.format(sql, [
         userID_1,
-        userID_2
+        userID_2,
     ]);
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
