@@ -256,38 +256,14 @@ export class HomeComponent implements OnInit {
       )
     }
   }
-
-  divLike(pid) {
+  likedIt(pid) {
     for (let i=0 ; i < this.like_len ; i++) {
-      // console.log(this.is_liked[i].post_id);
-      // console.log(pid);
-      
       if(this.is_liked[i].post_id == pid) {
         console.log(pid);
         console.log(this.is_liked[i].post_id);
         return 1
       }
     }
-
-    
-    
-
-    // for (let i=0 ; i <= this.is_liked.length ; i++) {
-    //   // my_liked.push(this.is_liked[i])
-    //   if (this.is_liked[i].post_id == post_id) {
-    //     console.log(1);
-    //     return 1
-    //   } else {
-    //     console.log(0);
-    //     return 0
-    //   }
-    // }
-    // console.log(my_liked);
-
-    // for (let i=0 ; i <= this.is_liked.length ; i++) {
-    //   my_liked.push(loop)
-    // }
-    
   }
 }
 
