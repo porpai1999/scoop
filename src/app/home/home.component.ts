@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
     this.name = this.firstn+' '+this.lastn
     console.log(this.name)
     // this.displayModal=true;
-    this.name = response;
+    // this.name = response;
 
     
     
@@ -160,7 +160,7 @@ export class HomeComponent implements OnInit {
   }
 
   async getname() {
-    let response = this.http.get('http://localhost:3000/users/select_some')
+    let response = this.http.get('http://localhost:3000/users/select_some/'+this.myID)
       .toPromise()
     return response;
   }
