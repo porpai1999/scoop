@@ -127,8 +127,8 @@
 
                             <div class="col-sm-10">
                                 <div class="d-flex flex-column justify-content-start ml-2">
-                                    <span *ngIf="num == indexOfPosts;" class="font-weight-bold name">{{account_name}}
-                                    </span>
+                                    <a href="otherprofile/{{item.user_id}}"> <span *ngIf="num == indexOfPosts;" class="font-weight-bold name" >{{account_name}}
+                                    </span></a>
 
                                     <span class="date text-black-50">Shared publicly - {{item.datetime | slice:0:10
                                         }}</span>
@@ -185,7 +185,7 @@
                                         aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
                                         <span class="ml-1">
                                             <button (click)="isToggle(num)"  pButton pRipple icon="pi pi-comments"
-                                                type="button" label="  Comment" style="color: rgb(49, 50, 57); padding: 2% 120% ;"
+                                                type="button" label="  Comment" style="color: rgb(49, 50, 57); padding: 2% 100% ;"
                                                 class="p-button-text"></button>
                                         </span>
                                     </div>

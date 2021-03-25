@@ -20,7 +20,7 @@ export class FollowingComponent implements OnInit {
       this.id = ids;
     this.myID = sessionStorage.getItem("keyuser_id");
 
-    http.get('http://localhost:3000/profiler/show_following/' + this.myID)
+    http.get('http://localhost:3000/profiler/show_following/' + this.id)
     .subscribe(res=>{
       if(res){
         console.log(res);
