@@ -32,10 +32,12 @@
                                 </div>
                             </div>
                             <div class="d-flex flex-row align-items-center mt-2">
-                                <button class="btn button border-light" type="button">
-                                    <h4 style="color: #ffff;">Unfollow</h4>
-                                </button>
-                            </div>    
+                                <button class="btn button border-light" type="button" [routerLink]="['/otherprofile',item.userID_1]" >
+                                <span>
+                                    <h4 style="color:#ffffff">View Profile</h4>
+                                </span>
+                            </button>
+                        </div>    
                         </div>
                 </div>
             </div>

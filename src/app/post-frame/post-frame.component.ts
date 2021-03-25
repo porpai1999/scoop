@@ -34,6 +34,8 @@ export class PostFrameComponent implements OnInit {
   myID;
   indexOfPosts;
   account_name;
+  like_len;
+  is_liked:any;
 
   constructor(private acRouter: ActivatedRoute, private http: HttpClient, private router: Router,
     private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) {
@@ -95,14 +97,14 @@ export class PostFrameComponent implements OnInit {
       message: 'Do you want to delete this record?',
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
-      
+
       accept: () => {
         this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
         this.http.delete('http://localhost:3000/users/delete_post/' + this.post_id)
           .subscribe(response => {
             if (response) {
               console.log(this.post_id);
-              this.router.navigateByUrl('/profile/'+this.user_id+'/');
+              this.router.navigateByUrl('/profile/' + this.user_id + '/');
             } else {
               console.log('error')
             }
@@ -126,7 +128,7 @@ export class PostFrameComponent implements OnInit {
   }
 
   async onComment(comment) {
-    console.log("Comment"+comment);
+    console.log("Comment" + comment);
     let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
     await this.http.post('http://localhost:3000/users/comment/' + this.myID, comment_json).subscribe(response => {
       if (response) {
@@ -146,7 +148,7 @@ export class PostFrameComponent implements OnInit {
     console.log(json)
     console.log(post_id)
     // console.log(user_id)
-    
+
     this.http.post('http://localhost:3000/users/like_post/' + this.ids, json)
       .subscribe(response => {
         if (response) {
@@ -161,5 +163,14 @@ export class PostFrameComponent implements OnInit {
       }
 
       )
+  }
+  likedIt(pid) {
+    for (let i = 0; i < this.like_len; i++) {
+      if (this.is_liked[i].post_id == pid) {
+        console.log(pid);
+        console.log(this.is_liked[i].post_id);
+        return 1
+      }
+    }
   }
 }

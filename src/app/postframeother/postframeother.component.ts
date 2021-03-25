@@ -32,6 +32,9 @@ export class PostframeotherComponent implements OnInit {
   myID;
   indexOfPosts;
   account_name;
+  post_len;
+  like_len;
+  is_liked: any;
 
   constructor(private acRouter: ActivatedRoute, private http: HttpClient, private router: Router,
     private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) {
@@ -128,6 +131,15 @@ export class PostframeotherComponent implements OnInit {
       }
 
       )
+  }
+  likedIt(pid) {
+    for (let i=0 ; i < this.like_len ; i++) {
+      if(this.is_liked[i].post_id == pid) {
+        console.log(pid);
+        console.log(this.is_liked[i].post_id);
+        return 1
+      }
+    }
   }
 
 }
