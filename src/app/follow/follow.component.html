@@ -12,7 +12,8 @@
         </ul>
     </nav>
     <!-- <div class="card border-success"> -->
-    <div *ngFor="let item of show">
+    <div *ngFor="let item of show; let num = index; trackBy:listUser">
+        {{listUser(item.user_id)}}
         <div class="card-body ">
             <div class="d-flex justify-content-center row">
                 <div class="col-md-8">
@@ -27,8 +28,9 @@
                                             class="font-weight-bold">{{item.first_name}}&nbsp;&nbsp;{{item.last_name}}</span></strong>
                                 </a>
                                 <div class="d-flex flex-row">
-                                    <span class="mr-3"> followers</span>
-                                    <span>following</span>
+                                    <!-- {{item.user_id}} -->
+                                    <span class="mr-3">{{followers_c}} followers </span>
+                                    <span>{{following_c}} following </span>
                                 </div>
                             </div>
                         </div>

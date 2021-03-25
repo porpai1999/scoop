@@ -13,6 +13,9 @@ export class FollowComponent implements OnInit {
   myID;
   show;
   ids;
+  followers_c;
+  following_c;
+  list_userID;
   constructor(private http: HttpClient, private router: Router,private acRouter:ActivatedRoute) {
 
     let id = acRouter.snapshot.params['p3'];
@@ -26,6 +29,29 @@ export class FollowComponent implements OnInit {
           console.log(res);
           this.show = res
 
+          this.http.get('http://localhost:3000/profiler/show_followers_c/'+ this.list_userID).subscribe(response => {
+          let items = [];
+
+          for (let key in response) {
+            if (response.hasOwnProperty(key)) {
+              items.push(response[key]);
+            }
+          }
+          this.followers_c = items[0][0].followers
+          console.log(response);
+          this.http.get('http://localhost:3000/profiler/show_following_c/'+ this.list_userID).subscribe(response => {
+          let items = [];
+            for (let key in response) {
+              if (response.hasOwnProperty(key)) {
+                items.push(response[key]);
+              }
+            }
+            this.following_c = items[0][0].following
+            console.log(this.following_c);
+            
+        });
+        });
+
         } else {
           console.log('error');
 
@@ -37,6 +63,7 @@ export class FollowComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("this.show.user_id");
   }
   photos(){
     //สร้าง session 
@@ -100,6 +127,10 @@ export class FollowComponent implements OnInit {
       this.router.navigateByUrl('/profile/'+id);
     }
     
+  }
+
+  public listUser(x) {
+    this.list_userID = x 
   }
     
 }

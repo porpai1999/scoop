@@ -92,6 +92,25 @@ routes.post('/like_post/:user_id', (req, res) => {
     });
 });
 
+// unlike post
+routes.post('/unlike_post/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    const post_id = req.body.post_id;
+    let sql = "DELETE FROM liked_post WHERE post_id = ? and user_id = ?";
+    sql = mysql.format(sql, [
+        post_id,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
+});
+
 // like post
 routes.post('/like_comment/:user_id', (req, res) => {
     const user_id = req.params.user_id;
@@ -116,6 +135,23 @@ routes.post('/follow/:user_id', (req, res) => {
     const userID_1 = req.body.myID;
     const userID_2 = req.params.user_id;
     let sql = "insert into follows (userID_1, userID_2) values (?, ?);";
+    sql = mysql.format(sql, [
+        userID_1,
+        userID_2,
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.send(results);
+        }
+    });
+});
+
+// unfollow
+routes.post('/unfollow/:user_id', (req, res) => {
+    const userID_1 = req.body.myID;
+    const userID_2 = req.params.user_id;
+    let sql = "DELETE FROM follows WHERE userID_1 = ? and userID_2 = ?";
     sql = mysql.format(sql, [
         userID_1,
         userID_2,

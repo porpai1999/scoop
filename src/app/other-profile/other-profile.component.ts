@@ -80,6 +80,18 @@ export class OtherProfileComponent implements OnInit {
       });
       }
 
+      unfollow() {
+        console.log(this.id);
+        console.log(sessionStorage.getItem("keyuser_id"));
+        
+        
+        let json = { myID: sessionStorage.getItem("keyuser_id") }
+        this.http.post('http://localhost:3000/users/unfollow/'+this.id,json).subscribe(response => {
+          console.log(response);
+          
+      });
+      }
+
       photos(){
         //สร้าง session 
         sessionStorage.photos = "Photos";

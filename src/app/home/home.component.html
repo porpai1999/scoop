@@ -120,7 +120,7 @@
                                     </div>
                                 </div>
                                 <div *ngIf="item.user_id != myID;">
-                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png" >
+                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png">
                                 </div>
                                 
                             </div>
@@ -140,7 +140,8 @@
                         <br>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p class="multi_lines_text" [innerHTML]="item.text"></p>
+                                <p class="multi_lines_text" [innerHTML]="item.text"></p><br>
+                                <div style="margin-left: 5%; margin-bottom: -3%;">0 liked</div>
                             </div>
 
                             <!-- <div>
@@ -150,6 +151,7 @@
                                         <br>
                                     </div>
                                 </div> -->
+                                
                         </div>
                         <div class="d-flex flex-column comment-section" id="myGroup">
 
@@ -158,8 +160,10 @@
                                     <div class="like p-2 cursor">
                                         <span class="ml-1">
 
+                                        
+
                                             <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked" *ngIf="likedIt(array[num].post_id)"
-                                            style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)">
+                                            style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="unlike(item.post_id)">
                                         </button>
 
 

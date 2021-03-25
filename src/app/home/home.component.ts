@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   text2: string;
 
   is_liked: any;
-  liked;
+  liked_c =0;
 
   post_data: any;
 
@@ -71,13 +71,11 @@ export class HomeComponent implements OnInit {
                 Response,
                 res
               }
-
-
-
               console.log(this.post_data.res);
               this.like_len = this.is_liked.length;
               console.log("res2");
-              console.log(this.is_liked.length)
+              console.log(this.is_liked[0].liked)
+              console.log("end");
             }
           })
 
@@ -190,6 +188,7 @@ export class HomeComponent implements OnInit {
     //console.log("e : "+e)
     this.indexOfPosts = e;
     this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
+    
     // console.log(this.array[this.indexOfPosts].first_name)
   }
 
@@ -234,6 +233,28 @@ export class HomeComponent implements OnInit {
       )
   }
 
+  unlike(post_id) {
+    let json = { post_id: post_id, user_id: this.ids }
+    console.log(json)
+    console.log(post_id)
+    // console.log(user_id)
+    
+    this.http.post('http://localhost:3000/users/unlike_post/' + this.ids, json)
+      .subscribe(response => {
+        if (response) {
+          console.log(response)
+          console.log(this.ids)
+
+        } else {
+          console.log('error')
+        }
+      }, error => {
+        console.log('error', error)
+      }
+
+      )
+  }
+
   post(){
     let json = {user_id:  this.ids,text: this.text }
     if (this.text==undefined) {
@@ -261,6 +282,7 @@ export class HomeComponent implements OnInit {
       if(this.is_liked[i].post_id == pid) {
         console.log(pid);
         console.log(this.is_liked[i].post_id);
+        // this.liked_c = this.is_liked[i].liked
         return 1
       } 
     }
