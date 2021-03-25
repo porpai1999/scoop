@@ -262,7 +262,7 @@ export class HomeComponent implements OnInit {
         console.log(pid);
         console.log(this.is_liked[i].post_id);
         return 1
-      }
+      } 
     }
   }
 }
