@@ -21,7 +21,8 @@
                         <div class="d-flex flex-row align-items-center"><img class="rounded-circle"
                                 src="https://i.imgur.com/KmT515u.jpg" width="80">
                             <div class="d-flex flex-column align-items-start ml-4">
-                                <a href="otherprofile/{{item.userID_2}}">
+                                <!-- <a href="otherprofile/{{item.userID_2}}"> -->
+                                    <a [routerLink]=""  (click)="linkTo(item.userID_1)">
                                     <strong><span
                                             class="font-weight-bold">{{item.first_name}}&nbsp;&nbsp;{{item.last_name}}</span></strong>
                                 </a>

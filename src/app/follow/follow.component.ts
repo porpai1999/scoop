@@ -92,4 +92,14 @@ export class FollowComponent implements OnInit {
       sessionStorage.getItem("result");
     }
   }
+
+  linkTo(id) {
+    if( id != sessionStorage.getItem("keyuser_id")) {
+      this.router.navigateByUrl('/otherprofile/'+id);
+    } else {
+      this.router.navigateByUrl('/profile/'+id);
+    }
+    
+  }
+    
 }

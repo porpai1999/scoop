@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-following',
@@ -14,7 +14,7 @@ export class FollowingComponent implements OnInit {
   show;
   id;
 
-  constructor(private http: HttpClient,private acRouter: ActivatedRoute) { 
+  constructor(private http: HttpClient,private acRouter: ActivatedRoute, private router: Router) { 
 
     let ids = acRouter.snapshot.params['p3'];
       this.id = ids;
@@ -93,7 +93,13 @@ export class FollowingComponent implements OnInit {
     }
   }
 
-
-  
+  linkTo(id) {
+    if( id != sessionStorage.getItem("keyuser_id")) {
+      this.router.navigateByUrl('/otherprofile/'+id);
+    } else {
+      this.router.navigateByUrl('/profile/'+id);
+    }
+    
+  }
 
 }
