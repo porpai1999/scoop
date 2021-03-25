@@ -17,6 +17,8 @@ export class OtherProfileComponent implements OnInit {
   followers;
   following;
 
+  is_followed;
+
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
       let ids = acRouter.snapshot.params['p3'];
@@ -49,6 +51,16 @@ export class OtherProfileComponent implements OnInit {
               }
             }
             this.following = items[0][0].following
+            
+            let user_followed = {my_id : sessionStorage.getItem("keyuser_id")}
+            this.http.post('http://localhost:3000/profiler/user_followed/'+this.id , user_followed).subscribe(response => {
+              // this.is_followed = 0;
+              this.is_followed = response
+              this.is_followed = this.is_followed.length
+              console.log("here");
+              
+              console.log(this.is_followed);
+            });
         });
         });
       },error =>{
@@ -121,5 +133,9 @@ export class OtherProfileComponent implements OnInit {
         else{
           sessionStorage.getItem("result");
         }
+      }
+
+      isFollowed() {
+        
       }
 }
