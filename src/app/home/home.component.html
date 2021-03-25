@@ -109,7 +109,16 @@
 
                 <br>
                 <div *ngFor="let item of array;let num = index;">
-                    {{postBy(num)}}
+                    <!-- {{postBy(num)}} -->
+                    <!-- <div *ngIf=""></div> -->
+                    <!-- {{divLike(index)}} -->
+                    
+                    <!-- <div *ngIf="post_len >= num">
+                        len : {{post_len}}
+                        {{divLike(num)}}
+                        arr : {{array[num].post_id}}
+                    </div> -->
+                    <!-- {{array[num].post_id}} -->
                     <p-card title="Simple Card" class="novel">
                         <div class="row">
                             <div class="col-sm-1">
@@ -156,6 +165,17 @@
                                 <div class="d-flex flex-row fs-12">
                                     <div class="like p-2 cursor">
                                         <span class="ml-1">
+                                            
+                                            <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked" *ngIf="divLike(array[num].post_id)"
+                                                style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)">
+                                            </button>
+
+                                            
+
+                                            <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Like" *ngIf="!divLike(array[num].post_id)"
+                                                style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
+                                            </button>
+                                            
 
                                             <!-- <div *ngFor="let item_2 of is_liked;">
                                                 <div *ngIf="(item.post_id == item_2.post_id) && true;">
