@@ -37,11 +37,11 @@ export class PostFrameComponent implements OnInit {
 
   constructor(private acRouter: ActivatedRoute, private http: HttpClient, private router: Router,
     private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) {
-    let id = acRouter.snapshot.params['p3'];
-    this.ids = id;
+    // let id = acRouter.snapshot.params['p3'];
+    // this.ids = id;
     this.myID = sessionStorage.getItem("keyuser_id");
-    console.log('id postframe page', id);
-    http.get('http://localhost:3000/profiler/posts_profile/' + this.ids)
+    console.log('id postframe page', this.myID);
+    http.get('http://localhost:3000/profiler/posts_profile/' + this.myID)
       .subscribe((Response: any) => {
         this.array = Response;
         console.log(Response)
@@ -61,7 +61,7 @@ export class PostFrameComponent implements OnInit {
 
   }
   async getname() {
-    let response = this.http.get('http://localhost:3000/users/select_some/' + this.ids)
+    let response = this.http.get('http://localhost:3000/users/select_some/' + this.myID)
       .toPromise()
     return response;
   }
@@ -128,7 +128,7 @@ export class PostFrameComponent implements OnInit {
   async onComment(comment) {
     console.log("Comment"+comment);
     let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
-    await this.http.post('http://localhost:3000/users/comment/' + this.ids, comment_json).subscribe(response => {
+    await this.http.post('http://localhost:3000/users/comment/' + this.myID, comment_json).subscribe(response => {
       if (response) {
         let currentUrl = this.router.url;
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

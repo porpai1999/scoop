@@ -95,7 +95,7 @@ export class PostframeotherComponent implements OnInit {
   async onComment(comment) {
     console.log("Comment"+comment);
     let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
-    await this.http.post('http://localhost:3000/users/comment/' + this.ids, comment_json).subscribe(response => {
+    await this.http.post('http://localhost:3000/users/comment/' + this.myID, comment_json).subscribe(response => {
       if (response) {
         let currentUrl = this.router.url;
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

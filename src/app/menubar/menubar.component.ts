@@ -11,9 +11,7 @@ export class MenubarComponent implements OnInit {
 
   user_id;
   constructor(private acRouter: ActivatedRoute) {
-    let id = acRouter.snapshot.params['p3'];
-    this.user_id = id
-    //   this.user_id = sessionStorage.getItem("keyuser_id");
+      this.user_id = sessionStorage.getItem("keyuser_id");
       console.log(this.user_id)
    }
 

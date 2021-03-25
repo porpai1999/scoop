@@ -236,6 +236,7 @@ export class HomeComponent implements OnInit {
       this.http.post('http://localhost:3000/users/post/'+this.ids,json)
       .subscribe(response =>{
         if(response){
+          window.location.reload();
           console.log(response)
 
         }else{
