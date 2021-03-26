@@ -23,13 +23,13 @@ export class FollowComponent implements OnInit {
 
     this.myID = sessionStorage.getItem("keyuser_id");
 
-    http.get('http://localhost:3000/profiler/show_followers/' + id)
+    http.get('http://nodescoop.comsciproject.com/profiler/show_followers/' + id)
       .subscribe(res => {
         if (res) {
           console.log(res);
           this.show = res
 
-          this.http.get('http://localhost:3000/profiler/show_followers_c/'+ this.list_userID).subscribe(response => {
+          this.http.get('http://nodescoop.comsciproject.com/profiler/show_followers_c/'+ this.list_userID).subscribe(response => {
           let items = [];
 
           for (let key in response) {
@@ -39,7 +39,7 @@ export class FollowComponent implements OnInit {
           }
           this.followers_c = items[0][0].followers
           console.log(response);
-          this.http.get('http://localhost:3000/profiler/show_following_c/'+ this.list_userID).subscribe(response => {
+          this.http.get('http://nodescoop.comsciproject.com/profiler/show_following_c/'+ this.list_userID).subscribe(response => {
           let items = [];
             for (let key in response) {
               if (response.hasOwnProperty(key)) {

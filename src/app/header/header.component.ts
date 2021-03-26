@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit {
   search(){
     console.log(this.searchs);
     
-    this.http.get('http://localhost:3000/users/search/'+this.searchs)
+    this.http.get('http://nodescoop.comsciproject.com/users/search/'+this.searchs)
   .subscribe(res=>{
     if(res){
       console.log(res);

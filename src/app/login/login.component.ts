@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   login() {
     console.log(this.email)
     let json = { email : this.email , password : this.password };
-    this.http.post('http://localhost:3000/auth/login', json)
+    this.http.post('http://nodescoop.comsciproject.com/auth/login', json)
     .subscribe(response => {
       if (response) {
         console.log('res : '+response)

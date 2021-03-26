@@ -24,18 +24,18 @@ export class OtherProfileComponent implements OnInit {
       let ids = acRouter.snapshot.params['p3'];
       this.id = ids;
       this.myID = sessionStorage.getItem("keyuser_id");
-      this.http.get('http://localhost:3000/profiler/get_user_image/'+this.id).subscribe(response => {
+      this.http.get('http://nodescoop.comsciproject.com/profiler/get_user_image/'+this.id).subscribe(response => {
         this.imgpath = response[0].image;
       });
       console.log(ids);
     }
 
   ngOnInit(): void {
-    this.http.get('http://localhost:3000/profiler/profile/'+this.id)
+    this.http.get('http://nodescoop.comsciproject.com/profiler/profile/'+this.id)
        .subscribe(response => {
         this.fullname = response[0].first_name +' '+response[0].last_name;
         console.log('fullname :',this.fullname);
-        this.http.get('http://localhost:3000/profiler/show_followers_c/'+this.id).subscribe(response => {
+        this.http.get('http://nodescoop.comsciproject.com/profiler/show_followers_c/'+this.id).subscribe(response => {
           let items = [];
           for (let key in response) {
             if (response.hasOwnProperty(key)) {
@@ -43,7 +43,7 @@ export class OtherProfileComponent implements OnInit {
             }
           }
           this.followers = items[0][0].followers
-          this.http.get('http://localhost:3000/profiler/show_following_c/'+this.id).subscribe(response => {
+          this.http.get('http://nodescoop.comsciproject.com/profiler/show_following_c/'+this.id).subscribe(response => {
           let items = [];
             for (let key in response) {
               if (response.hasOwnProperty(key)) {
@@ -53,7 +53,7 @@ export class OtherProfileComponent implements OnInit {
             this.following = items[0][0].following
             
             let user_followed = {my_id : sessionStorage.getItem("keyuser_id")}
-            this.http.post('http://localhost:3000/profiler/user_followed/'+this.id , user_followed).subscribe(response => {
+            this.http.post('http://nodescoop.comsciproject.com/profiler/user_followed/'+this.id , user_followed).subscribe(response => {
               // this.is_followed = 0;
               this.is_followed = response
               this.is_followed = this.is_followed.length
@@ -74,7 +74,7 @@ export class OtherProfileComponent implements OnInit {
         
         
         let json = { myID: sessionStorage.getItem("keyuser_id") }
-        this.http.post('http://localhost:3000/users/follow/'+this.id,json).subscribe(response => {
+        this.http.post('http://nodescoop.comsciproject.com/users/follow/'+this.id,json).subscribe(response => {
           console.log(response);
           
       });
@@ -86,7 +86,7 @@ export class OtherProfileComponent implements OnInit {
         
         
         let json = { myID: sessionStorage.getItem("keyuser_id") }
-        this.http.post('http://localhost:3000/users/unfollow/'+this.id,json).subscribe(response => {
+        this.http.post('http://nodescoop.comsciproject.com/users/unfollow/'+this.id,json).subscribe(response => {
           console.log(response);
           
       });

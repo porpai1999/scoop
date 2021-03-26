@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
       
       this.myID = sessionStorage.getItem("keyuser_id");
 
-      http.get('http://localhost:3000/profiler/home_posts/')
+      http.get('http://nodescoop.comsciproject.com/profiler/home_posts/')
       .subscribe(Response=>{
         this.array = Response;
         console.log("res1");
@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
         // console.log();
         this.post_len = this.array.length;
 
-        this.http.get('http://localhost:3000/profiler/user_liked_post/')
+        this.http.get('http://nodescoop.comsciproject.com/profiler/user_liked_post/')
           .subscribe(res =>{
             if (res) {
               this.is_liked = res;
@@ -79,7 +79,7 @@ export class HomeComponent implements OnInit {
             }
           })
 
-          this.http.get('http://localhost:3000/profiler/get_user_image/'+this.myID).subscribe(response => {
+          this.http.get('http://nodescoop.comsciproject.com/profiler/get_user_image/'+this.myID).subscribe(response => {
             this.imgpath = response[0].image;
           });
       })
@@ -158,7 +158,7 @@ export class HomeComponent implements OnInit {
   }
 
   async getname() {
-    let response = this.http.get('http://localhost:3000/users/select_some/'+this.myID)
+    let response = this.http.get('http://nodescoop.comsciproject.com/users/select_some/'+this.myID)
       .toPromise()
     return response;
   }
@@ -168,7 +168,7 @@ export class HomeComponent implements OnInit {
     this.user_id = this.array[this.indexofComment].user_id;
     this.post_id = this.array[this.indexofComment].post_id;
 
-    this.http.get('http://localhost:3000/users/show_comment/'+this.post_id)
+    this.http.get('http://nodescoop.comsciproject.com/users/show_comment/'+this.post_id)
       .subscribe(response => {
         if (response) {
           this.comments = response
@@ -195,7 +195,7 @@ export class HomeComponent implements OnInit {
   async onComment(comment) {
     console.log("Comment"+comment);
     let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
-    await this.http.post('http://localhost:3000/users/comment/' + this.ids, comment_json).subscribe(response => {
+    await this.http.post('http://nodescoop.comsciproject.com/users/comment/' + this.ids, comment_json).subscribe(response => {
       if (response) {
         let currentUrl = this.router.url;
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -217,7 +217,7 @@ export class HomeComponent implements OnInit {
     console.log(post_id)
     // console.log(user_id)
     
-    this.http.post('http://localhost:3000/users/like_post/' + this.ids, json)
+    this.http.post('http://nodescoop.comsciproject.com/users/like_post/' + this.ids, json)
       .subscribe(response => {
         if (response) {
           console.log(response)
@@ -239,7 +239,7 @@ export class HomeComponent implements OnInit {
     console.log(post_id)
     // console.log(user_id)
     
-    this.http.post('http://localhost:3000/users/unlike_post/' + this.ids, json)
+    this.http.post('http://nodescoop.comsciproject.com/users/unlike_post/' + this.ids, json)
       .subscribe(response => {
         if (response) {
           console.log(response)
@@ -262,7 +262,7 @@ export class HomeComponent implements OnInit {
     } else {
       console.log(this.text);
       console.log(json)
-      this.http.post('http://localhost:3000/users/post/'+this.ids,json)
+      this.http.post('http://nodescoop.comsciproject.com/users/post/'+this.ids,json)
       .subscribe(response =>{
         if(response){
           window.location.reload();

@@ -43,7 +43,7 @@ export class PostFrameComponent implements OnInit {
     // this.ids = id;
     this.myID = sessionStorage.getItem("keyuser_id");
     console.log('id postframe page', this.myID);
-    http.get('http://localhost:3000/profiler/posts_profile/' + this.myID)
+    http.get('http://nodescoop.comsciproject.com/profiler/posts_profile/' + this.myID)
       .subscribe((Response: any) => {
         this.array = Response;
         console.log(Response)
@@ -63,7 +63,7 @@ export class PostFrameComponent implements OnInit {
 
   }
   async getname() {
-    let response = this.http.get('http://localhost:3000/users/select_some/' + this.myID)
+    let response = this.http.get('http://nodescoop.comsciproject.com/users/select_some/' + this.myID)
       .toPromise()
     return response;
   }
@@ -73,7 +73,7 @@ export class PostFrameComponent implements OnInit {
     this.user_id = this.array[this.indexofComment].user_id;
     this.post_id = this.array[this.indexofComment].post_id;
 
-    this.http.get('http://localhost:3000/users/show_comment/' + this.post_id)
+    this.http.get('http://nodescoop.comsciproject.com/users/show_comment/' + this.post_id)
       .subscribe(response => {
         if (response) {
           this.comments = response
@@ -100,7 +100,7 @@ export class PostFrameComponent implements OnInit {
 
       accept: () => {
         this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
-        this.http.delete('http://localhost:3000/users/delete_post/' + this.post_id)
+        this.http.delete('http://nodescoop.comsciproject.com/users/delete_post/' + this.post_id)
           .subscribe(response => {
             if (response) {
               console.log(this.post_id);
@@ -130,7 +130,7 @@ export class PostFrameComponent implements OnInit {
   async onComment(comment) {
     console.log("Comment" + comment);
     let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
-    await this.http.post('http://localhost:3000/users/comment/' + this.myID, comment_json).subscribe(response => {
+    await this.http.post('http://nodescoop.comsciproject.com/users/comment/' + this.myID, comment_json).subscribe(response => {
       if (response) {
         let currentUrl = this.router.url;
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -149,7 +149,7 @@ export class PostFrameComponent implements OnInit {
     console.log(post_id)
     // console.log(user_id)
 
-    this.http.post('http://localhost:3000/users/like_post/' + this.ids, json)
+    this.http.post('http://nodescoop.comsciproject.com/users/like_post/' + this.ids, json)
       .subscribe(response => {
         if (response) {
           console.log(response)

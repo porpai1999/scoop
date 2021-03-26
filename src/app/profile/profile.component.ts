@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
       let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
       this.myID = sessionStorage.getItem("keyuser_id");
-      this.http.get('http://localhost:3000/profiler/get_user_image/'+this.myID).subscribe(response => {
+      this.http.get('http://nodescoop.comsciproject.com/profiler/get_user_image/'+this.myID).subscribe(response => {
         this.imgpath = response[0].image;
       });
       //this.imgpath = "http://nodescoop.comsciproject.com/images/jpfunnyface.png"
@@ -37,11 +37,11 @@ export class ProfileComponent implements OnInit {
       'Authorization' : token
     });
     
-    this.http.get('http://localhost:3000/profiler/profile/'+this.id, {headers: httpHeaders})
+    this.http.get('http://nodescoop.comsciproject.com/profiler/profile/'+this.id, {headers: httpHeaders})
        .subscribe(response => {
         this.fullname = response[0].first_name +' '+response[0].last_name;
         console.log('fullname :',this.fullname);
-        this.http.get('http://localhost:3000/profiler/show_followers_c/'+this.myID).subscribe(response => {
+        this.http.get('http://nodescoop.comsciproject.com/profiler/show_followers_c/'+this.myID).subscribe(response => {
           let items = [];
           for (let key in response) {
             if (response.hasOwnProperty(key)) {
@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
             }
           }
           this.followers = items[0][0].followers
-          this.http.get('http://localhost:3000/profiler/show_following_c/'+this.myID).subscribe(response => {
+          this.http.get('http://nodescoop.comsciproject.com/profiler/show_following_c/'+this.myID).subscribe(response => {
           let items = [];
             for (let key in response) {
               if (response.hasOwnProperty(key)) {
