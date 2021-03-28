@@ -92,6 +92,25 @@ routes.post('/like_post/:user_id', (req, res) => {
     });
 });
 
+// unlike post
+routes.post('/unlike_post/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    const post_id = req.body.post_id;
+    let sql = "DELETE FROM liked_post WHERE post_id = ? and user_id = ?";
+    sql = mysql.format(sql, [
+        post_id,
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.json({
+                results: results
+            });
+        }
+    });
+});
+
 // like post
 routes.post('/like_comment/:user_id', (req, res) => {
     const user_id = req.params.user_id;
@@ -113,12 +132,29 @@ routes.post('/like_comment/:user_id', (req, res) => {
 
 // follow
 routes.post('/follow/:user_id', (req, res) => {
-    const userID_1 = req.params.user_id;
-    const userID_2 = req.body.myID;
+    const userID_1 = req.body.myID;
+    const userID_2 = req.params.user_id;
     let sql = "insert into follows (userID_1, userID_2) values (?, ?);";
     sql = mysql.format(sql, [
         userID_1,
-        userID_2
+        userID_2,
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            res.send(results);
+        }
+    });
+});
+
+// unfollow
+routes.post('/unfollow/:user_id', (req, res) => {
+    const userID_1 = req.body.myID;
+    const userID_2 = req.params.user_id;
+    let sql = "DELETE FROM follows WHERE userID_1 = ? and userID_2 = ?";
+    sql = mysql.format(sql, [
+        userID_1,
+        userID_2,
     ]);
     connection.query(sql, (error, results, fields) => {
         if (error) throw error;
@@ -164,7 +200,7 @@ routes.post('/upload_image', async (req, res) => {
                 res.json({
                     status: true,
                     message: "File Selected",
-                    path: 'localhost/images/'+req.file.filename
+                    path: 'http://nodescoop.comsciproject.com/images/'+req.file.filename
                 });
             }
         }
@@ -172,7 +208,7 @@ routes.post('/upload_image', async (req, res) => {
 });
 
 // update profile_photo
-routes.put('/profile_photo/:user_id', (req, res) => {
+routes.post('/profile_photo/:user_id', (req, res) => {
     const photo_id = req.body.photo_id;
     const user_id = req.params.user_id;
     let sql = "UPDATE users SET photo_id=? WHERE user_id=?";
@@ -197,7 +233,7 @@ routes.put('/profile_photo/:user_id', (req, res) => {
 });
 
 // update
-routes.put('/update/:user_id', (req, res) => {
+routes.post('/update/:user_id', (req, res) => {
     //res.send({'log' : 'update'});
     const { first_name, last_name } = req.body;
     const user_id = req.params.user_id;
@@ -224,27 +260,27 @@ routes.put('/update/:user_id', (req, res) => {
 });
 
 // update
-routes.put('/update/:user_id', (req, res) => {
-    //res.send({'log' : 'update'});
-    let user = req.params.user_id
-    const { first_name, last_name,email } = req.body;
-    let sql = "UPDATE users SET first_name=?, last_name=?,email=? WHERE user_id=?";
-    connection.query(sql,[first_name,last_name,email,user], (error, results, fields) => {
-        if (error) {
-            res.json({
-                status: false,
-                message: err
-            });
-        } else {
-            if (results.affectedRows > 0) {
-                return res.status(200).json({ status: true, results: results });
-            } else {
-                return res.status(501).json({ status: false, results: results });
-            }
-        }
+// routes.put('/update/:user_id', (req, res) => {
+//     //res.send({'log' : 'update'});
+//     let user = req.params.user_id
+//     const { first_name, last_name,email } = req.body;
+//     let sql = "UPDATE users SET first_name=?, last_name=?,email=? WHERE user_id=?";
+//     connection.query(sql,[first_name,last_name,email,user], (error, results, fields) => {
+//         if (error) {
+//             res.json({
+//                 status: false,
+//                 message: err
+//             });
+//         } else {
+//             if (results.affectedRows > 0) {
+//                 return res.status(200).json({ status: true, results: results });
+//             } else {
+//                 return res.status(501).json({ status: false, results: results });
+//             }
+//         }
         
-    });
-});
+//     });
+// });
 
 routes.get('/search_all', (req, res) => {
     let sql = "select user_id, first_name, last_name from users"

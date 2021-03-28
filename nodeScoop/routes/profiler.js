@@ -111,7 +111,7 @@ routes.get('/like_post/', (req, res) => {
     });
 });
 
-// show all user liked post
+// show user_liked_post
 routes.get('/user_liked_post/', (req, res) => {
     let sql = "SELECT post_id, user_id ,COUNT(user_id) as liked FROM liked_post GROUP BY post_id";
     connection.query(sql, (error, results, fields) => {
@@ -122,23 +122,19 @@ routes.get('/user_liked_post/', (req, res) => {
     });
 });
 
-// not working
-routes.get('/not_user_liked_post/:user_id/:post_id', (req, res) => {
-    
-    const post_id = req.params.post_id;
-    const user_id = req.params.user_id;
-    let sql = "SELECT post_id, user_id ,COUNT(user_id) as liked FROM liked_post where post_id = ? and user_id = ?";
-    sql = mysql.format(sql, [
-        post_id,
-        user_id
-    ]);
-    connection.query(sql, (error, results, fields) => {
+// show user_followed
+routes.post('/user_followed/:user_id', (req, res) => {
+    const userID_1 = req.body.my_id;
+    const userID_2 = req.params.user_id;
+    let sql = "SELECT 1 as followed from follows where userID_1 = ? and userID_2 = ?";
+    connection.query(sql, [ userID_1, userID_2 ], (error, results, fields) => {
         if (error) throw error;
         else {
             res.send(results)
         }
     });
 });
+
 // SELECT post_id, user_id ,COUNT(user_id) as liked FROM liked_post GROUP BY post_id
 
 // show following c

@@ -16,7 +16,10 @@
                             <strong style="font-size: xx-large;">{{fullname}} &nbsp;
     
 
-                                    <button type="button" class="btn btn-outline-success "
+                                    <button type="button" class="btn btn-outline-success " *ngIf="is_followed == 1"
+                                    style="border-color: rgb(22, 177, 156);" (click)="unfollow()" >Unfollow </button>
+
+                                    <button type="button" class="btn btn-outline-success " *ngIf="is_followed == 0"
                                     style="border-color: rgb(22, 177, 156);" (click)="follow()" >Follow </button>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <br><br>
@@ -30,11 +33,20 @@
                     </div>
                 </div>
                 &nbsp;&nbsp;&nbsp;
-                <app-menubar></app-menubar>
+                <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark justify-content-center">
+                    <ul class="nav nav-tabs justify-content-center">
+                        <!-- <li class="nav-item"><a routerLink='/home' class="nav-link" data-toggle="tab" >&nbsp;&nbsp;<i class="pi pi-home"></i></a></li> -->
+                        <!-- <li class="nav-item"><a [routerLink]="['/home/',user_id]"_id class="nav-link" data-toggle="tab" >HOME</a></li> -->
+                        <li class="nav-item"><a [routerLink]="['/otherprofile/',id]" class="nav-link" data-toggle="tab" >Posts</a></li>
+                        <li class="nav-item"><a [routerLink]="['/photo/',id]" class="nav-link" data-toggle="tab" (click)="photos()">Photos</a></li>
+                        <li class="nav-item"><a [routerLink]="['/follow/',id]" class="nav-link" data-toggle="tab" (click)="tfollowers()">Followers</a></li>
+                        <li class="nav-item"><a [routerLink]="['/following/',id]" class="nav-link" data-toggle="tab" (click)="tfollowing()">Following</a></li>
+                    </ul>
+                </nav>
             </div>
             
         </div>
         <br>
     </div>
-    <app-post-frame></app-post-frame>
+    <app-postframeother></app-postframeother>
 </div>

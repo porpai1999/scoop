@@ -78,7 +78,7 @@
                             </div>
                             <div class="col-sm-11">
                                 <div class="d-flex justify-content-between ml-4 ">
-                                    <span class="font-weight-bold name">{{name}}</span>
+                                    <a href="otherprofile/{{item.user_id}}"><span class="font-weight-bold name">{{name}}</span></a>
                                     <div class="d-flex flex-row mt ellipsis ml-4">
 
                                         <div class="dropdown ">
@@ -122,17 +122,21 @@
 
                             <div class="bg-white p-2">
                                 <div class="d-flex flex-row fs-12">
-                                    <!-- <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked"
-                                                    style="color: rgb(61, 75, 179); " class="p-button-text"  (click)="like(item.post_id)">
-                                                    </button> -->
-                                    <!-- <div class="like p-2 cursor"><i class="pi pi-thumbs-up"></i><span
-                                            class="ml-1">Like</span></div> -->
+                                    <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked" *ngIf="likedIt(array[num].post_id)"
+                                            style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)" >
+                                        </button>
+
+
+
+                                        <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Like" *ngIf="!likedIt(array[num].post_id)"
+                                            style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
+                                        </button>
 
                                     <div class="like p-2 cursor action-collapse " data-toggle="collapse"
                                         aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
                                         <!-- <i class="pi pi-comments"></i> -->
                                         <button (click)="isToggle(num)"  pButton pRipple icon="pi pi-comments"
-                                                type="button" label="  Comment" style="color: rgb(49, 50, 57); padding: 2% 250% ;"
+                                                type="button" label="  Comment" style="color: rgb(49, 50, 57);"
                                                 class="p-button-text"></button>
                                         <!-- <span class="ml-1" (click)="isToggle(num)">Comment</span> -->
                                     </div>

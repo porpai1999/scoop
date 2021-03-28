@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   text2: string;
 
   is_liked: any;
-  liked;
+  liked_c =0;
 
   post_data: any;
 
@@ -41,6 +41,8 @@ export class HomeComponent implements OnInit {
 
   myID;
   imgpath;
+  post_len;
+  like_len;
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient , public dialog: MatDialog) {
       // this.displayModal = true;
@@ -51,33 +53,33 @@ export class HomeComponent implements OnInit {
       
       this.myID = sessionStorage.getItem("keyuser_id");
 
-      http.get('http://localhost:3000/profiler/home_posts/')
+      http.get('http://nodescoop.comsciproject.com/profiler/home_posts/')
       .subscribe(Response=>{
         this.array = Response;
         console.log("res1");
         
         console.log(this.array)
         console.log(this.array[0].post_id)
+        // console.log();
+        this.post_len = this.array.length;
 
-        this.http.get('http://localhost:3000/profiler/user_liked_post/')
+        this.http.get('http://nodescoop.comsciproject.com/profiler/user_liked_post/')
           .subscribe(res =>{
             if (res) {
               this.is_liked = res;
-              
-              
               this.post_data = {
                 Response,
                 res
               }
-
               console.log(this.post_data.res);
-              
+              this.like_len = this.is_liked.length;
               console.log("res2");
-              console.log(this.is_liked)
+              console.log(this.is_liked[0].liked)
+              console.log("end");
             }
           })
 
-          this.http.get('http://localhost:3000/profiler/get_user_image/'+this.myID).subscribe(response => {
+          this.http.get('http://nodescoop.comsciproject.com/profiler/get_user_image/'+this.myID).subscribe(response => {
             this.imgpath = response[0].image;
           });
       })
@@ -111,7 +113,11 @@ export class HomeComponent implements OnInit {
     this.name = this.firstn+' '+this.lastn
     console.log(this.name)
     // this.displayModal=true;
-    this.name = response;
+    // this.name = response;
+
+    
+    
+    
 
     // let selectcommen = this.selectcomment();
     // console.log(selectcommen);
@@ -152,7 +158,7 @@ export class HomeComponent implements OnInit {
   }
 
   async getname() {
-    let response = this.http.get('http://localhost:3000/users/select_some')
+    let response = this.http.get('http://nodescoop.comsciproject.com/users/select_some/'+this.myID)
       .toPromise()
     return response;
   }
@@ -162,7 +168,7 @@ export class HomeComponent implements OnInit {
     this.user_id = this.array[this.indexofComment].user_id;
     this.post_id = this.array[this.indexofComment].post_id;
 
-    this.http.get('http://localhost:3000/users/show_comment/'+this.post_id)
+    this.http.get('http://nodescoop.comsciproject.com/users/show_comment/'+this.post_id)
       .subscribe(response => {
         if (response) {
           this.comments = response
@@ -182,13 +188,14 @@ export class HomeComponent implements OnInit {
     //console.log("e : "+e)
     this.indexOfPosts = e;
     this.account_name = this.array[this.indexOfPosts].first_name + " " + this.array[this.indexOfPosts].last_name
+    
     // console.log(this.array[this.indexOfPosts].first_name)
   }
 
   async onComment(comment) {
     console.log("Comment"+comment);
     let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
-    await this.http.post('http://localhost:3000/users/comment/' + this.ids, comment_json).subscribe(response => {
+    await this.http.post('http://nodescoop.comsciproject.com/users/comment/' + this.ids, comment_json).subscribe(response => {
       if (response) {
         let currentUrl = this.router.url;
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -210,7 +217,29 @@ export class HomeComponent implements OnInit {
     console.log(post_id)
     // console.log(user_id)
     
-    this.http.post('http://localhost:3000/users/like_post/' + this.ids, json)
+    this.http.post('http://nodescoop.comsciproject.com/users/like_post/' + this.ids, json)
+      .subscribe(response => {
+        if (response) {
+          console.log(response)
+          console.log(this.ids)
+
+        } else {
+          console.log('error')
+        }
+      }, error => {
+        console.log('error', error)
+      }
+
+      )
+  }
+
+  unlike(post_id) {
+    let json = { post_id: post_id, user_id: this.ids }
+    console.log(json)
+    console.log(post_id)
+    // console.log(user_id)
+    
+    this.http.post('http://nodescoop.comsciproject.com/users/unlike_post/' + this.ids, json)
       .subscribe(response => {
         if (response) {
           console.log(response)
@@ -233,9 +262,10 @@ export class HomeComponent implements OnInit {
     } else {
       console.log(this.text);
       console.log(json)
-      this.http.post('http://localhost:3000/users/post/'+this.ids,json)
+      this.http.post('http://nodescoop.comsciproject.com/users/post/'+this.ids,json)
       .subscribe(response =>{
         if(response){
+          window.location.reload();
           console.log(response)
 
         }else{
@@ -247,7 +277,16 @@ export class HomeComponent implements OnInit {
       )
     }
   }
-
+  likedIt(pid) {
+    for (let i=0 ; i < this.like_len ; i++) {
+      if(this.is_liked[i].post_id == pid) {
+        console.log(pid);
+        console.log(this.is_liked[i].post_id);
+        // this.liked_c = this.is_liked[i].liked
+        return 1
+      } 
+    }
+  }
 }
 
 

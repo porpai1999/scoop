@@ -60,11 +60,12 @@
                             <div class="row px-3"> 
                                 <img class="circular1 mr-3" src={{imgpath}}>
                                 <div class="flex-column">
-                                    <h3 class="mb-0 font-weight-normal"></h3>
-                                     <select name="privacy" class="privacy">
+                                    <h3 > {{name}}</h3>
+                                       
+                                     <!-- <select name="privacy" class="privacy">
                                         <option>Public post</option>
                                         <option>Private post</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="row px-3 form-group"> 
@@ -119,7 +120,7 @@
                                     </div>
                                 </div>
                                 <div *ngIf="item.user_id != myID;">
-                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png" >
+                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png">
                                 </div>
                                 
                             </div>
@@ -127,8 +128,8 @@
 
                             <div class="col-sm-10">
                                 <div class="d-flex flex-column justify-content-start ml-2">
-                                    <span *ngIf="num == indexOfPosts;" class="font-weight-bold name">{{account_name}}
-                                    </span>
+                                    <a href="otherprofile/{{item.user_id}}"> <span *ngIf="num == indexOfPosts;" class="font-weight-bold name" >{{account_name}}
+                                    </span></a>
 
                                     <span class="date text-black-50">Shared publicly - {{item.datetime | slice:0:10
                                         }}</span>
@@ -139,7 +140,8 @@
                         <br>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p class="multi_lines_text" [innerHTML]="item.text"></p>
+                                <p class="multi_lines_text" [innerHTML]="item.text"></p><br>
+                                <div style="margin-left: 5%; margin-bottom: -3%;">0 liked</div>
                             </div>
 
                             <!-- <div>
@@ -149,6 +151,7 @@
                                         <br>
                                     </div>
                                 </div> -->
+                                
                         </div>
                         <div class="d-flex flex-column comment-section" id="myGroup">
 
@@ -157,26 +160,17 @@
                                     <div class="like p-2 cursor">
                                         <span class="ml-1">
 
-                                            <!-- <div *ngFor="let item_2 of is_liked;">
-                                                <div *ngIf="(item.post_id == item_2.post_id) && true;">
-                                                    {{item_2.liked}}
-                                                    <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked"
-                                                    style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)">
-                                                    </button>
-                                                </div>
-                                            </div> -->
+                                        
 
-                                            <!-- <div #thenBlock>
-                                                <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked"
-                                                    style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="like(item.post_id)">
-                                                </button>
-                                            </div>
+                                            <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked" *ngIf="likedIt(array[num].post_id)"
+                                            style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="unlike(item.post_id)">
+                                        </button>
 
-                                            <div #elseBlock>
-                                                <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Like"
-                                                style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
-                                                </button>
-                                            </div> -->
+
+
+                                        <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Like" *ngIf="!likedIt(array[num].post_id)"
+                                            style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
+                                        </button>
                                             
 
                                         </span>
@@ -185,7 +179,7 @@
                                         aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
                                         <span class="ml-1">
                                             <button (click)="isToggle(num)"  pButton pRipple icon="pi pi-comments"
-                                                type="button" label="  Comment" style="color: rgb(49, 50, 57); padding: 2% 120% ;"
+                                                type="button" label="  Comment" style="color: rgb(49, 50, 57); "
                                                 class="p-button-text"></button>
                                         </span>
                                     </div>
