@@ -105,9 +105,9 @@ export class EditprofileComponent implements OnInit {
                             let profile_photo_json = { photo_id: inserted_photo_id };
                             this.http.post(this.host+'/users/profile_photo/'+this.id, profile_photo_json).subscribe(response => {
                               if (response) {
-                                this.http.get(this.host+'/profiler/get_user_image/'+sessionStorage.getItem("keyuser_id")).subscribe(response => {
-                                  this.data.user_img = response[0].image;
-                                });
+                                // this.http.get(this.host+'/profiler/get_user_image/'+sessionStorage.getItem("keyuser_id")).subscribe(response => {
+                                //   this.data.user_img = response[0].image;
+                                // });
                                 this.router.navigateByUrl('/profile/'+this.id);
                               } else {
                                 console.log('Status : insert_failed');

@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
       this.id = ids;
       this.host = data.host
       this.myID = sessionStorage.getItem("keyuser_id");
-      this.user_img = data.user_img;
+      // this.user_img = data.user_img;
       this.http.get(this.host+'/profiler/get_user_image/'+this.myID).subscribe(response => {
         this.user_img = response[0].image;
       });
