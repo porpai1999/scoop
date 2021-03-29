@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private http: HttpClient) { 
     let uid = acRouter.snapshot.params[''];
     this.host = data.host
-    this.user_img = data.user_img;
+    // this.user_img = data.user_img;
   }
   
   login() {
@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem('token1', this.items[2]);
           sessionStorage.setItem('token', this.items[3]);
           console.log(sessionStorage.getItem('token'))
-          this.http.get(this.host+'/profiler/get_user_image/'+this.items[2]).subscribe(response => {
-            this.data.user_img = response[0].image;
-          });
+          // this.http.get(this.host+'/profiler/get_user_image/'+this.items[2]).subscribe(response => {
+            // this.data.user_img = response[0].image;
+          // });
           this.router.navigateByUrl('/home/'+this.items[2]);
         } else {
           console.log({ message: "login failed" });
