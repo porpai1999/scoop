@@ -32,10 +32,12 @@ export class RegisterComponent implements OnInit {
   file :any;
 
   urls: any = "./assets/images/userprofile.png"
+  host
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient, private sanitizer: DomSanitizer, private formBuilder: FormBuilder) { 
     this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
+    this.host = data.host
 
     this.siteKey = "6LebNC0aAAAAAOC8dWexryo1xwYyLCy8G3Ipa7a7";
     this.recaptcha= false;
@@ -48,7 +50,7 @@ export class RegisterComponent implements OnInit {
     if (this.recaptcha == true) {
       let date_of_birth = this.birthDay.getFullYear() + "-" + (this.birthDay.getMonth()+1) + "-" + this.birthDay.getDate();
       let register_json = { photo_id: 0, email: this.email, password: this.password, first_name: this.first_name, last_name: this.last_name, date_of_birth: date_of_birth, gender: this.gender };
-      this.http.post('http://nodescoop.comsciproject.com/auth/register', register_json).subscribe(response => {
+      this.http.post(this.host+'/auth/register', register_json).subscribe(response => {
         if (response) {
           let jsonObj: any = response;
           this.url = jsonObj.url;
@@ -66,7 +68,7 @@ export class RegisterComponent implements OnInit {
           } else {
             let formData: any = new FormData();
             formData.append("file", this.file);
-            this.http.post('http://nodescoop.comsciproject.com/users/upload_image', formData).subscribe(response => {
+            this.http.post(this.host+'/users/upload_image', formData).subscribe(response => {
               if (response) {
                 console.log(response)
 
@@ -80,7 +82,7 @@ export class RegisterComponent implements OnInit {
                 console.log("2"+uploaded_image_path);
 
                 let post_json = { text: "", user_id: registered_userID};
-                this.http.post('http://nodescoop.comsciproject.com/users/post/'+registered_userID, post_json).subscribe(response => {
+                this.http.post(this.host+'/users/post/'+registered_userID, post_json).subscribe(response => {
                       if (response) {
 
                         items = [];
@@ -93,7 +95,7 @@ export class RegisterComponent implements OnInit {
                         console.log("3"+posted_postID);
 
                         let insert_photos_json = { user_id: registered_userID, post_id: posted_postID, image: uploaded_image_path};
-                        this.http.post('http://nodescoop.comsciproject.com/users/insert_photos/', insert_photos_json).subscribe(response => {
+                        this.http.post(this.host+'/users/insert_photos/', insert_photos_json).subscribe(response => {
                           if (response) {
 
                             items = [];
@@ -106,7 +108,9 @@ export class RegisterComponent implements OnInit {
                             console.log("4"+inserted_photo_id);
 
                             let profile_photo_json = { photo_id: inserted_photo_id };
-                            this.http.post('http://nodescoop.comsciproject.com/users/profile_photo/'+registered_userID, profile_photo_json).subscribe(response => {
+                            console.log(inserted_photo_id);
+                            
+                            this.http.post(this.host+'/users/profile_photo/'+registered_userID, profile_photo_json).subscribe(response => {
                               if (response) {
                                 this.router.navigateByUrl('/login');
                               } else {

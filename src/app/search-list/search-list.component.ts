@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatapassService } from '../datapass.service';
 
 @Component({
   selector: 'app-search-list',
@@ -16,10 +17,12 @@ export class SearchListComponent implements OnInit {
   user_id;
   items;
   rekey;
+  host
 
-  constructor(private http: HttpClient, private acRouter: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpClient, private acRouter: ActivatedRoute, private router: Router, private data: DatapassService) {
     let ids = acRouter.snapshot.params['p1'];
     this.id = ids;
+    this.host = data.host
     let search = acRouter.snapshot.params['p2'];
     this.searchs = search;
     console.log(this.id);
@@ -28,7 +31,7 @@ export class SearchListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('http://nodescoop.comsciproject.com/users/search/' + this.searchs)
+    this.http.get(this.host+'/users/search/' + this.searchs)
       .subscribe(res => {
 
         if (res) {

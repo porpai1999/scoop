@@ -43,7 +43,7 @@
                             <div class="col-sm-1 ">
                                 <div *ngIf="item.user_id == myID;">
                                     <div class="justify-content-around">
-                                        <img class="circular1" style="width: 50px; height: 50px;" src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
+                                        <img class="circular1" style="width: 50px; height: 50px;" src={{user_img}}>
                                     </div>
                                 </div>
                                 <div *ngIf="item.user_id != myID;">
@@ -125,7 +125,7 @@
                                     <div class="d-flex flex-row align-items-start ">
                                         <div class="row justify-content-around ">
                                             <img class="circular"
-                                                src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
+                                                src={{user_img}}>
                                         </div>
                                         <textarea class="form-control ml-4 shadow-none textarea" [rows]="1" [cols]="20"
                                             pInputTextarea autoResize="autoResize" [(ngModel)]="comment"
@@ -140,7 +140,7 @@
                                         <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ">
                                             <div class="row justify-content-around ">
                                                 <img class="circular"
-                                                    src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
+                                                    src={{user_img}}>
                                             </div>
                                             <div class="p-d-flex p-p-5 card ml-4  " style="top: 10px;">
                                                 <div class="p-mr-2 p-as-center ml-2">

@@ -283,6 +283,7 @@ routes.post('/update/:user_id', (req, res) => {
 // });
 
 routes.get('/search_all', (req, res) => {
+    res.send("ssA");
     let sql = "select user_id, first_name, last_name from users"
     connection.query(sql, (error, results, fields) => {
         if (error) {
@@ -318,7 +319,8 @@ routes.get('/search/:search', (req, res) => {
 });
 
 // delete
-routes.delete('/delete_post/:post_id', (req, res) => {
+routes.get('/delete_post/:post_id', (req, res) => {
+    console.log("deleting...");
     let post_id = req.params.post_id;
     let sql = "DELETE FROM posts WHERE post_id="+post_id
     connection.query(sql, (error, results, fields) => {

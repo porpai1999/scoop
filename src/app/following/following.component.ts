@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatapassService } from '../datapass.service';
 
 @Component({
   selector: 'app-following',
@@ -13,14 +14,16 @@ export class FollowingComponent implements OnInit {
   myID;
   show;
   id;
+  host
 
-  constructor(private http: HttpClient,private acRouter: ActivatedRoute, private router: Router) { 
+  constructor(private http: HttpClient,private acRouter: ActivatedRoute, private router: Router, private data: DatapassService) { 
 
     let ids = acRouter.snapshot.params['p3'];
       this.id = ids;
     this.myID = sessionStorage.getItem("keyuser_id");
+    this.host = data.host
 
-    http.get('http://nodescoop.comsciproject.com/profiler/show_following/' + this.id)
+    http.get(this.host+'/profiler/show_following/' + this.id)
     .subscribe(res=>{
       if(res){
         console.log(res);
