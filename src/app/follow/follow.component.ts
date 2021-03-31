@@ -31,30 +31,6 @@ export class FollowComponent implements OnInit {
         if (res) {
           console.log(res);
           this.show = res
-
-          this.http.get(this.host+'/profiler/show_followers_c/'+ this.list_userID).subscribe(response => {
-          let items = [];
-
-          for (let key in response) {
-            if (response.hasOwnProperty(key)) {
-              items.push(response[key]);
-            }
-          }
-          this.followers_c = items[0][0].followers
-          console.log(response);
-          this.http.get(this.host+'/profiler/show_following_c/'+ this.list_userID).subscribe(response => {
-          let items = [];
-            for (let key in response) {
-              if (response.hasOwnProperty(key)) {
-                items.push(response[key]);
-              }
-            }
-            this.following_c = items[0][0].following
-            console.log(this.following_c);
-            
-        });
-        });
-
         } else {
           console.log('error');
 

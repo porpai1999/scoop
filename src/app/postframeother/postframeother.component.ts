@@ -38,12 +38,15 @@ export class PostframeotherComponent implements OnInit {
   is_liked: any;
   host
 
+  user_img;
+
   constructor(private acRouter: ActivatedRoute, private http: HttpClient, private router: Router,
     private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, private data: DatapassService) {
     let id = acRouter.snapshot.params['p3'];
     this.host = data.host
     this.ids = id;
     this.myID = sessionStorage.getItem("keyuser_id");
+    this.user_img = sessionStorage.getItem("user_img")
     console.log('id postframe page', id);
     http.get(this.host+'/profiler/posts_profile/' + this.ids)
       .subscribe((Response: any) => {
@@ -115,16 +118,19 @@ export class PostframeotherComponent implements OnInit {
   }
 
   like(post_id) {
-    let json = { post_id: post_id, user_id: this.ids }
+    let json = { post_id: post_id, user_id: this.myID }
     console.log(json)
     console.log(post_id)
     // console.log(user_id)
     
-    this.http.post(this.host+'/users/like_post/' + this.ids, json)
+    this.http.post(this.host+'/users/like_post/' + this.myID, json)
       .subscribe(response => {
         if (response) {
           console.log(response)
           console.log(this.ids)
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate(['/profile/'+this.myID]);
+          });
 
         } else {
           console.log('error')
@@ -135,6 +141,32 @@ export class PostframeotherComponent implements OnInit {
 
       )
   }
+
+  unlike(post_id) {
+    let json = { post_id: post_id, user_id: this.myID }
+    console.log(json)
+    console.log(post_id)
+    // console.log(user_id)
+    
+    this.http.post(this.host+'/users/unlike_post/' + this.myID, json)
+      .subscribe(response => {
+        if (response) {
+          console.log(response)
+          console.log(this.ids)
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate(['/profile/'+this.myID]);
+          });
+
+        } else {
+          console.log('error')
+        }
+      }, error => {
+        console.log('error', error)
+      }
+
+      )
+  }
+
   likedIt(pid) {
     for (let i=0 ; i < this.like_len ; i++) {
       if(this.is_liked[i].post_id == pid) {
@@ -144,5 +176,16 @@ export class PostframeotherComponent implements OnInit {
       }
     }
   }
+
+  linkTo(id) {
+    if( id != sessionStorage.getItem("keyuser_id")) {
+      this.router.navigateByUrl('/otherprofile/'+id);
+    } else {
+      this.router.navigateByUrl('/profile/'+id);
+    }
+    
+  }
+
+  
 
 }

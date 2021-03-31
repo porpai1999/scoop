@@ -30,7 +30,7 @@ export class SearchListComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.http.get(this.host+'/users/search/' + this.searchs)
       .subscribe(res => {
 
@@ -48,6 +48,15 @@ export class SearchListComponent implements OnInit {
       })
 
       
+  }
+
+  linkTo(id) {
+    if( id != sessionStorage.getItem("keyuser_id")) {
+      this.router.navigateByUrl('/otherprofile/'+id);
+    } else {
+      this.router.navigateByUrl('/profile/'+id);
+    }
+    
   }
 
 

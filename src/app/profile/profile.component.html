@@ -8,7 +8,8 @@
 
                 <div class="row justify-content-around">
                     <div class="circular ">
-                        <img src={{user_img}}>&nbsp;
+                        <img class="circular1" src={{user_img}} *ngIf="user_img != null">
+                        <img class="circular1" src="../../assets/images/userprofile.png" *ngIf="user_img == null">&nbsp;
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <div class="my-auto">

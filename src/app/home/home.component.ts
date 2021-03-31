@@ -56,6 +56,10 @@ export class HomeComponent implements OnInit {
       
       this.myID = sessionStorage.getItem("keyuser_id");
 
+      this.http.get(this.host+'/profiler/get_user_image/'+this.myID).subscribe(response => {
+        this.imgpath = response[0].image; 
+      });
+
       http.get(this.host+'/profiler/home_posts/')
       .subscribe(Response=>{
         this.array = Response;
@@ -82,9 +86,7 @@ export class HomeComponent implements OnInit {
             }
           })
 
-          this.http.get(this.host+'/profiler/get_user_image/'+this.myID).subscribe(response => {
-            this.imgpath = response[0].image;
-          });
+          
       })
 
       
@@ -225,6 +227,9 @@ export class HomeComponent implements OnInit {
         if (response) {
           console.log(response)
           console.log(this.ids)
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate(['/home/'+this.myID]);
+          });
 
         } else {
           console.log('error')
@@ -247,6 +252,9 @@ export class HomeComponent implements OnInit {
         if (response) {
           console.log(response)
           console.log(this.ids)
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate(['/home/'+this.myID]);
+          });
 
         } else {
           console.log('error')
@@ -289,6 +297,15 @@ export class HomeComponent implements OnInit {
         return 1
       } 
     }
+  }
+
+  linkTo(id) {
+    if( id != sessionStorage.getItem("keyuser_id")) {
+      this.router.navigateByUrl('/otherprofile/'+id);
+    } else {
+      this.router.navigateByUrl('/profile/'+id);
+    }
+    
   }
 }
 

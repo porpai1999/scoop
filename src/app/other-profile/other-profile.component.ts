@@ -152,4 +152,13 @@ export class OtherProfileComponent implements OnInit {
       isFollowed() {
         
       }
+
+      linkTo(id) {
+        if( id != sessionStorage.getItem("keyuser_id")) {
+          this.router.navigateByUrl('/otherprofile/'+id);
+        } else {
+          this.router.navigateByUrl('/profile/'+id);
+        }
+        
+      }
 }

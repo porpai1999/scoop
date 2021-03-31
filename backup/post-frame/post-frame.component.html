@@ -1,21 +1,8 @@
-<!-- <p>home works!</p> -->
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#" >SCOOP</a>
-</nav> -->
-
-<app-header></app-header>
 <html>
 <style>
     .novel {
         height: 500px;
         width: 800px;
-    }
-
-    .multi_lines_text {
-        padding-left: 5%;
-        padding-right: 5%;
-        max-width: 800px;
-        word-wrap: break-word;
     }
 
     .avatar {
@@ -39,74 +26,16 @@
 </style>
 
 <body>
-    <!-- {{email}} -->
-    <!-- <button (click)="list()"> Send</button> -->
     <div>
-        <br><br>
-
+        <br>
         <div class="row">
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-sm-3">
+            &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-2">
             </div>
 
-
             &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="col-sm-5">
-                <p-dialog header="สร้างโพส" [(visible)]="displayMaximizable" [modal]="true" [style]="{width: '50vw'}"
-                    [maximizable]="true" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-
-                    <div class="row d-flex justify-content-center">
-                        <div class="card1">
-                            <div class="row px-3"> 
-                                <img class="circular1 mr-3" src={{imgpath}}>
-                                <div class="flex-column">
-                                    <h3 > {{name}}</h3>
-                                       
-                                     <!-- <select name="privacy" class="privacy">
-                                        <option>Public post</option>
-                                        <option>Private post</option>
-                                    </select> -->
-                                </div>
-                            </div>
-                            <div class="row px-3 form-group"> 
-                                <textarea class="text-muted bg-light mt-4 mb-3 textarea1" placeholder="คุณเป็นยังไงบ้างวันนี้?" [(ngModel)]="text" name="text"></textarea> 
-                            </div>
-                            <div class="row px-3">
-                               
-                            </div>
-                        </div>
-                    </div>
-                    <ng-template pTemplate="footer">
-                        <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Ok" (click)="post()"
-                            styleClass="p-button-text"></p-button>
-                    </ng-template>
-                </p-dialog>
-                <p-card title="Simple Card" class="novel">
-                    <div class="row">
-                        <div class="col-sm-1">
-                            <div class="justify-content-around">
-                                <img class="circular1" src={{imgpath}}>
-                            </div>
-                        </div>
-                        <div class="col-sm-10">
-                            <div class="d-flex flex-column justify-content-start ml-4">
-                                <div class="sizes">
-                                    <input type="text" class="p-inputtext-lg radius" (click)="showMaximizableDialog()"
-                                        placeholder="โพสอะไรหน่อยสิ" pInputText />
-
-
-                                </div>
-                            </div>
-                        </div>
-                        &nbsp;&nbsp;
-                    </div>
-                    <!-- <p-button (click)="showMaximizableDialog()" icon="pi pi-external-link" label="Show"></p-button> -->
-
-
-
-                </p-card>
-
-                <br>
+            <div class="col-sm-7">
+                <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+                </p-confirmDialog>
                 <div *ngFor="let item of array;let num = index;">
                     {{postBy(num)}}
                     <p-card title="Simple Card" class="novel">
@@ -196,7 +125,7 @@
                                     <div class="d-flex flex-row align-items-start">
                                         <div class="justify-content-around">
                                             <img class="circular"
-                                                src={{imgpath}}
+                                                src={{user_img}}
                                                 width="40">
                                         </div>
                                         <textarea class="form-control ml-4 shadow-none textarea" [rows]="1" [cols]="30"
@@ -238,17 +167,3 @@
 </body>
 
 </html>
-<!-- <h3 class="first"></h3>
-        <p-slideMenu [model]="items" [viewportHeight]="250"></p-slideMenu>
-        <br><br>
-        <table align="center">
-            <tr>
-                <td>
-                    <div>
-                        <p-card title="Simple Card" [style]="{width: '360px'}">
-                            <div>บทความ</div>
-                        </p-card>
-                      </div>
-                </td>
-            </tr>
-        </table> -->

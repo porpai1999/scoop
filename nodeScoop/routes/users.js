@@ -296,8 +296,9 @@ routes.get('/search_all', (req, res) => {
 // show_comment
 routes.get('/show_comment/:post_id', (req, res) => {
     let post_id = req.params.post_id;
-    let sql = `select users.first_name, users.last_name, users.user_id, comments.comment_id, 
-    comments.text from comments, users where post_id = ? AND comments.user_id = users.user_id`;
+    let sql = `select users.first_name, users.last_name, users.user_id, comments.comment_id, comments.text, photos.image as user_image
+    from comments, users LEFT JOIN photos on photos.photo_id = users.photo_id
+    where comments.post_id = ? AND comments.user_id = users.user_id`;
     connection.query(sql, [post_id], (error, results, fields) => {
         if (error) {
             throw error;
@@ -309,7 +310,9 @@ routes.get('/show_comment/:post_id', (req, res) => {
 // search
 routes.get('/search/:search', (req, res) => {
     let search = req.params.search;
-    let sql = "select user_id, first_name, last_name from users where first_name like " + `'%${search}%'`
+    // "select user_id, first_name, last_name from users where first_name like " + `'%${search}%'`
+    
+    let sql = "select users.user_id, first_name, last_name, image as user_image from users LEFT JOIN photos on photos.photo_id = users.photo_id where first_name like " + `'%${search}%'` + " or last_name like" + `'%${search}%'`
     connection.query(sql, (error, results, fields) => {
         if (error) {
             throw error;

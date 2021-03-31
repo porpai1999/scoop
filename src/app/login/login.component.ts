@@ -51,6 +51,10 @@ export class LoginComponent implements OnInit {
           // this.http.get(this.host+'/profiler/get_user_image/'+this.items[2]).subscribe(response => {
             // this.data.user_img = response[0].image;
           // });
+          this.http.get(this.host+'/profiler/get_user_image/'+this.items[2]).subscribe(response => {
+            this.user_img = response[0].image; 
+            sessionStorage.setItem('user_img', this.user_img);
+          });
           this.router.navigateByUrl('/home/'+this.items[2]);
         } else {
           console.log({ message: "login failed" });

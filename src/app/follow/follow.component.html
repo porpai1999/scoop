@@ -19,8 +19,10 @@
                 <div class="col-md-8">
                     <!-- <div class="p-3 bg-white text-center"> -->
                     <div class="d-flex flex-row justify-content-between align-items-center">
-                        <div class="d-flex flex-row align-items-center"><img class="rounded-circle"
-                                src="https://i.imgur.com/KmT515u.jpg" width="80">
+                        <div class="d-flex flex-row align-items-center">
+                            <!-- <img class="rounded-circle" src={{item.image}} width="80" > -->
+                            <img class="circular1" src={{item.image}} *ngIf="item.image != null" width="80">
+                            <img class="circular1" src="../../assets/images/userprofile.png" *ngIf="item.image == null" width="80">
                             <div class="d-flex flex-column align-items-start ml-4">
                                 <!-- <a href="otherprofile/{{item.userID_2}}"> -->
                                     <a [routerLink]=""  (click)="linkTo(item.userID_2)">
@@ -29,8 +31,8 @@
                                 </a>
                                 <div class="d-flex flex-row">
                                     <!-- {{item.user_id}} -->
-                                    <span class="mr-3">{{followers_c}} followers </span>
-                                    <span>{{following_c}} following </span>
+                                    <!-- <span class="mr-3">{{item.follower}} followers </span>
+                                    <span>{{item.following}} following </span> -->
                                 </div>
                             </div>
                         </div>

@@ -102,7 +102,7 @@ export class FollowingComponent implements OnInit {
     } else {
       this.router.navigateByUrl('/profile/'+id);
     }
-    
+
   }
 
 }
