@@ -8,9 +8,30 @@
                 <input type="text" pInputText placeholder="Username" name="username" [(ngModel)]="email">
                 <input type="password" pInputText placeholder="Password" name="password" [(ngModel)]="password">
                 <hr>
-                <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Login" (click)="login()"></button>
+                <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Login" (click)="login('top')"></button>
                 <br><button routerLink="/register" pButton pRipple type="button" label="Register" class="p-button-success"></button>
             </form>
         </p-card>
     </div>
 </div>
+<p-dialog header="Login Succes " [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
+
+<h3> Log in Successfully! </h3>
+<p>Please press "OK".</p>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="click()" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+
+</p-dialog>
+
+<p-dialog header="Login Failed" [(visible)]="displayPosition1" [position]="position" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
+
+<h3> Log in Failed! </h3>
+<p>Wrong Username and Password </p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="click()" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+  
+</p-dialog>

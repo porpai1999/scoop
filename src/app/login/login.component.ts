@@ -19,6 +19,10 @@ export class LoginComponent implements OnInit {
   value;
   host
   user_img
+  displayPosition: boolean = false;
+  position: string = "";
+  loginstatus:number=0;
+  displayPosition1: boolean = false;
 
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
@@ -26,8 +30,17 @@ export class LoginComponent implements OnInit {
     this.host = data.host
     // this.user_img = data.user_img;
   }
-  
-  login() {
+  click(){
+    if (this.loginstatus == 1) {
+      this.displayPosition = false;
+      this.router.navigateByUrl('/home');
+    }
+    else{
+      this.displayPosition1 = false;
+    } 
+  }
+
+  login(position: string) {
     console.log(this.email)
     let json = { email : this.email , password : this.password };
     this.http.post(this.host+'/auth/login', json)
@@ -51,13 +64,26 @@ export class LoginComponent implements OnInit {
           // this.http.get(this.host+'/profiler/get_user_image/'+this.items[2]).subscribe(response => {
             // this.data.user_img = response[0].image;
           // });
+
           this.http.get(this.host+'/profiler/get_user_image/'+this.items[2]).subscribe(response => {
             this.user_img = response[0].image; 
             sessionStorage.setItem('user_img', this.user_img);
           });
-          this.router.navigateByUrl('/home/'+this.items[2]);
-        } else {
+          // แจ้งเตือน login success------------------
+          this.position = position;
+          this.displayPosition = true;
+          console.log("Success");
+          this.loginstatus = 1;
+          // this.router.navigateByUrl('/home/'+this.items[2]);
+        }
+         else {
+
           console.log({ message: "login failed" });
+           // แจ้งเตือน login failed------------------
+          this.loginstatus = 0;
+          this.position = position;
+          this.displayPosition1 = true;
+          console.log("failed");
         }
       }else {
         console.log({ message: "no response" });
