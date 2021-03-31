@@ -240,7 +240,7 @@ routes.get('/get_user_image/:user_id', (req, res) => {
         }
     });
 });
-
+ 
 routes.get('/show_user_image/:user_id', (req, res) => {
     const user_id = req.params.user_id;
     let sql = "SELECT image FROM photos WHERE user_id = ?";
