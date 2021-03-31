@@ -55,9 +55,41 @@
                       });
                   }
               </script>
-            <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Register" class="p-button-success" (click)="register()"></button>
+            <br><button style="margin-bottom: 2%;" pButton pRipple type="button" label="Register" class="p-button-success" (click)="checkvalue()"></button>
             <br><button routerLink="/login" pButton pRipple type="button" label="Cancel" class="p-button-danger"></button>
         </p-card>
     </div>
 </div>
+<p-dialog header="Register" [(visible)]="displayPosition" [position]="position" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
 
+<h3> Register Successfully! </h3>
+<p>Please press "OK".</p>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="click()" label="Ok" styleClass="p-button-text"></p-button>
+    </ng-template>
+
+</p-dialog>
+<p-dialog header="Register" [(visible)]="displayPosition1" [position]="position" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
+
+<h3>Register Failed</h3>
+<p>Wrong registration!!</p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="click()" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+  
+</p-dialog>
+
+<p-dialog header="Register Failed" [(visible)]="displayPosition2" [position]="position" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+[draggable]="false" [resizable]="false">
+
+<!-- <h3>Register Failed</h3> -->
+<p *ngFor="let i of namefeild ">
+    {{i}}
+</p>
+  <ng-template pTemplate="footer">
+      <p-button icon="pi pi-check" (click)="click()" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+  
+</p-dialog>
