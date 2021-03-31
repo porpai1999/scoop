@@ -10,7 +10,8 @@
             <input type="password" pInputText placeholder="New password" name="password" [(ngModel)]="password">
             <div style="width: 100%; margin-bottom: 5%;">
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Birthday</label>
-                <p-calendar  [showIcon]="true" inputId="icon" name="birthDay" [(ngModel)]="birthDay" dateFormat="yy-mm-dd" ></p-calendar>
+                <p-calendar [(ngModel)]="birthDay" [monthNavigator]="true" [yearNavigator]="true" yearRange="1800:2030" inputId="navigators"></p-calendar>
+                <!-- <p-calendar  [showIcon]="true" inputId="icon" name="birthDay" [(ngModel)]="birthDay" dateFormat="yy-mm-dd" ></p-calendar> -->
             </div>
             <div>
                 <label style="width: 100%; margin-bottom: -1%; font-size: small; color: rgb(150, 150, 150);">Gender</label>
