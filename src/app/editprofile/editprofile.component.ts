@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatapassService } from '../datapass.service';
 
 @Component({
   selector: 'app-editprofile',
@@ -18,6 +19,7 @@ export class EditprofileComponent implements OnInit {
   email;
   stateOptions: any[];
   gender: string = "";
+  host;
 
   //sanitizer;
   file_img:any;
@@ -25,13 +27,14 @@ export class EditprofileComponent implements OnInit {
   urls :any = "http://ssl.gstatic.com/accounts/ui/avatar_2x.png";
 
 
-  constructor(private http: HttpClient,private acRouter: ActivatedRoute,private router:Router, private sanitizer: DomSanitizer) { 
+  constructor(private http: HttpClient,private acRouter: ActivatedRoute,private router:Router, private sanitizer: DomSanitizer, private data:DatapassService) { 
     let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
+      this.host=data.host
 
       console.log(ids);
       this.stateOptions = [{label: 'Male', value: 'male'}, {label: 'Female', value: 'female'}];
-      this.http.get('http://nodescoop.comsciproject.com/users/select_some/'+sessionStorage.getItem("keyuser_id"))
+      this.http.get(this.host+'/users/select_some/'+sessionStorage.getItem("keyuser_id"))
       .subscribe(response =>{
       console.log(response)
       this.user = response[0]
@@ -49,7 +52,7 @@ export class EditprofileComponent implements OnInit {
   saveprofile(){
     let items = []
     let json = { email: this.email,first_name:this.first_name,last_name: this.last_name };
-    this.http.post('http://nodescoop.comsciproject.com/users/update/'+this.id,json,{observe:'response'})
+    this.http.post(this.host+'/users/update/'+this.id,json,{observe:'response'})
     .subscribe(response =>{
       if (response) {
         console.log(response.body);
@@ -60,7 +63,7 @@ export class EditprofileComponent implements OnInit {
           } else {
             let formData: any = new FormData();
             formData.append("file", this.file);
-            this.http.post('http://nodescoop.comsciproject.com/users/upload_image', formData).subscribe(response => {
+            this.http.post(this.host+'/users/upload_image', formData).subscribe(response => {
               if (response) {
                 console.log(response)
 
@@ -74,7 +77,7 @@ export class EditprofileComponent implements OnInit {
                 console.log("2"+uploaded_image_path);
 
                 let post_json = { text: ""};
-                this.http.post('http://nodescoop.comsciproject.com/users/post/'+this.id, post_json).subscribe(response => {
+                this.http.post(this.host+'/users/post/'+this.id, post_json).subscribe(response => {
                       if (response) {
 
                         items = [];
@@ -87,7 +90,7 @@ export class EditprofileComponent implements OnInit {
                         console.log("3"+posted_postID);
 
                         let insert_photos_json = { user_id: this.id, post_id: posted_postID, image: uploaded_image_path};
-                        this.http.post('http://nodescoop.comsciproject.com/users/insert_photos/', insert_photos_json).subscribe(response => {
+                        this.http.post(this.host+'/users/insert_photos/', insert_photos_json).subscribe(response => {
                           if (response) {
 
                             items = [];
@@ -100,8 +103,11 @@ export class EditprofileComponent implements OnInit {
                             console.log("4"+inserted_photo_id);
 
                             let profile_photo_json = { photo_id: inserted_photo_id };
-                            this.http.post('http://nodescoop.comsciproject.com/users/profile_photo/'+this.id, profile_photo_json).subscribe(response => {
+                            this.http.post(this.host+'/users/profile_photo/'+this.id, profile_photo_json).subscribe(response => {
                               if (response) {
+                                // this.http.get(this.host+'/profiler/get_user_image/'+sessionStorage.getItem("keyuser_id")).subscribe(response => {
+                                //   this.data.user_img = response[0].image;
+                                // });
                                 this.router.navigateByUrl('/profile/'+this.id);
                               } else {
                                 console.log('Status : insert_failed');

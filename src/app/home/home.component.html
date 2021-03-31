@@ -76,8 +76,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <ng-template pTemplate="footer">
                         <p-button icon="pi pi-check" (click)="displayMaximizable=false" label="Ok" (click)="post()"
                             styleClass="p-button-text"></p-button>
@@ -114,21 +112,28 @@
                     <p-card title="Simple Card" class="novel">
                         <div class="row">
                             <div class="col-sm-1">
-                                <div *ngIf="item.user_id == myID;">
+                                <!-- <div *ngIf="item.user_id == myID;">
                                     <div class="justify-content-around">
-                                        <img class="circular1" style="width: 50px; height: 50px;" src={{imgpath}}>
+                                        <img class="circular1" style="width: 50px; height: 50px;" src={{item.user_image}}>
                                     </div>
                                 </div>
                                 <div *ngIf="item.user_id != myID;">
                                     <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png">
+                                </div> -->
+                                <div *ngIf="item.user_image != null;">
+                                    <div class="justify-content-around">
+                                        <img class="circular1" style="width: 50px; height: 50px;" src={{item.user_image}}>
+                                    </div>
                                 </div>
-                                
+                                <div *ngIf="item.user_image == null;">
+                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png">
+                                </div>
                             </div>
                             &nbsp;&nbsp;
 
                             <div class="col-sm-10">
                                 <div class="d-flex flex-column justify-content-start ml-2">
-                                    <a href="otherprofile/{{item.user_id}}"> <span *ngIf="num == indexOfPosts;" class="font-weight-bold name" >{{account_name}}
+                                    <a [routerLink]=""  (click)="linkTo(item.user_id)"> <span *ngIf="num == indexOfPosts;" class="font-weight-bold name" >{{account_name}}
                                     </span></a>
 
                                     <span class="date text-black-50">Shared publicly - {{item.datetime | slice:0:10
@@ -141,7 +146,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <p class="multi_lines_text" [innerHTML]="item.text"></p><br>
-                                <div style="margin-left: 5%; margin-bottom: -3%;">0 liked</div>
+                                <img style="width:100%; max-width:600px;" src={{item.post_image}} alt=""><br><br>
+                                <div style="margin-left: 5%; margin-bottom: -3%;">Liked : {{item.liked}}</div>
                             </div>
 
                             <!-- <div>
@@ -190,7 +196,7 @@
                                     <div class="d-flex flex-row align-items-start">
                                         <div class="justify-content-around">
                                             <img class="circular"
-                                                src="http://nodescoop.comsciproject.com/images/jpfunnyface.png"
+                                                src={{imgpath}}
                                                 width="40">
                                         </div>
                                         <textarea class="form-control ml-4 shadow-none textarea" [rows]="1" [cols]="30"
@@ -205,8 +211,8 @@
                                     <div *ngFor="let select of comments">
                                         <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ml-4">
                                             <div class="row justify-content-around ">
-                                                <img class="circular"
-                                                    src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
+                                                <img class="circular1" src={{select.user_image}} *ngIf="select.user_image != null">
+                                                <img class="circular1" src="../../assets/images/userprofile.png" *ngIf="select.user_image == null">
                                             </div>
                                             <div class="p-d-flex p-p-3 card ml-4  " style="top: 10px;">
                                                 <div class="p-mr-2 p-as-center ml-2">

@@ -1,0 +1,169 @@
+<html>
+<style>
+    .novel {
+        height: 500px;
+        width: 800px;
+    }
+
+    .avatar {
+        vertical-align: middle;
+        width: 250px;
+        height: 250px;
+        border-radius: 100%;
+    }
+
+    :host>>>.mystyle {
+        background-color: rgb(111, 182, 182);
+    }
+
+    div.c {
+        position: absolute;
+        right: 0px;
+        width: 200px;
+        height: 120px;
+        /* border: 3px solid green; */
+    }
+</style>
+
+<body>
+    <div>
+        <br>
+        <div class="row">
+            &nbsp;&nbsp;&nbsp;&nbsp;<div class="col-sm-2">
+            </div>
+
+            &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="col-sm-7">
+                <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+                </p-confirmDialog>
+                <div *ngFor="let item of array;let num = index;">
+                    {{postBy(num)}}
+                    <p-card title="Simple Card" class="novel">
+                        <div class="row">
+                            <div class="col-sm-1">
+                                <!-- <div *ngIf="item.user_id == myID;">
+                                    <div class="justify-content-around">
+                                        <img class="circular1" style="width: 50px; height: 50px;" src={{item.user_image}}>
+                                    </div>
+                                </div>
+                                <div *ngIf="item.user_id != myID;">
+                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png">
+                                </div> -->
+                                <div *ngIf="item.user_image != null;">
+                                    <div class="justify-content-around">
+                                        <img class="circular1" style="width: 50px; height: 50px;" src={{item.user_image}}>
+                                    </div>
+                                </div>
+                                <div *ngIf="item.user_image == null;">
+                                    <img class="circular1" style="width: 50px; height: 50px;" src="../../assets/images/userprofile.png">
+                                </div>
+                            </div>
+                            &nbsp;&nbsp;
+
+                            <div class="col-sm-10">
+                                <div class="d-flex flex-column justify-content-start ml-2">
+                                    <a [routerLink]=""  (click)="linkTo(item.user_id)"> <span *ngIf="num == indexOfPosts;" class="font-weight-bold name" >{{account_name}}
+                                    </span></a>
+
+                                    <span class="date text-black-50">Shared publicly - {{item.datetime | slice:0:10
+                                        }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p class="multi_lines_text" [innerHTML]="item.text"></p><br>
+                                <img style="width:100%; max-width:600px;" src={{item.post_image}} alt=""><br><br>
+                                <div style="margin-left: 5%; margin-bottom: -3%;">Liked : {{item.liked}}</div>
+                            </div>
+
+                            <!-- <div>
+                                    <div class="d-flex justify-content-center row ">
+                                        <img class="img-circle" src="../../assets/images/wang.jpg" width="90%">
+    
+                                        <br>
+                                    </div>
+                                </div> -->
+                                
+                        </div>
+                        <div class="d-flex flex-column comment-section" id="myGroup">
+
+                            <div class="bg-white p-2">
+                                <div class="d-flex flex-row fs-12">
+                                    <div class="like p-2 cursor">
+                                        <span class="ml-1">
+
+                                        
+
+                                            <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Liked" *ngIf="likedIt(array[num].post_id)"
+                                            style="color: rgb(61, 75, 179);" class="p-button-text"  (click)="unlike(item.post_id)">
+                                        </button>
+
+
+
+                                        <button pButton pRipple icon="pi pi-thumbs-up" type="button" label=" Like" *ngIf="!likedIt(array[num].post_id)"
+                                            style="color: rgb(49, 50, 57);" class="p-button-text"  (click)="like(item.post_id)">
+                                        </button>
+                                            
+
+                                        </span>
+                                    </div>
+                                    <div class="like p-2 cursor action-collapse" data-toggle="collapse"
+                                        aria-expanded="true" aria-controls="collapse-1" href="#collapse-1">
+                                        <span class="ml-1">
+                                            <button (click)="isToggle(num)"  pButton pRipple icon="pi pi-comments"
+                                                type="button" label="  Comment" style="color: rgb(49, 50, 57); "
+                                                class="p-button-text"></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="num == indexofComment">
+                                <div id="collapse-1" class="p-2 collapse" data-parent="#myGroup">
+                                    <div class="d-flex flex-row align-items-start">
+                                        <div class="justify-content-around">
+                                            <img class="circular"
+                                                src={{user_img}}
+                                                width="40">
+                                        </div>
+                                        <textarea class="form-control ml-4 shadow-none textarea" [rows]="1" [cols]="30"
+                                            pInputTextarea autoResize="autoResize" [(ngModel)]="comment"
+                                            placeholder="เขียนความคิดเห็น"></textarea>
+                                        &nbsp;&nbsp;
+                                        <button icon=" pi pi-send" pButton pRipple type="button" label="Send"
+                                            (click)="onComment(comment)" class="ml-4 p-button-rounded p-button-outlined">
+                                        </button>
+                                        
+                                    </div>
+                                    <div *ngFor="let select of comments">
+                                        <div style="padding-top: 10px;" class="d-flex flex-row align-items-start ml-4">
+                                            <div class="row justify-content-around ">
+                                                <img class="circular1" src={{select.user_image}} *ngIf="select.user_image != null">
+                                                <img class="circular1" src="../../assets/images/userprofile.png" *ngIf="select.user_image == null">
+                                            </div>
+                                            <div class="p-d-flex p-p-3 card ml-4  " style="top: 10px;">
+                                                <div class="p-mr-2 p-as-center ml-2">
+                                                    <a href="#">
+                                                        <h4><strong>{{select.first_name}}
+                                                                &nbsp;{{select.last_name}}&nbsp;&nbsp;</strong></h4>
+                                                    </a>
+                                                    <strong>{{select.text}}</strong>
+                                                    &nbsp;&nbsp;
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-card><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

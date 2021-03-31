@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
+import { DatapassService } from '../datapass.service';
 
 @Component({
   selector: 'app-postframeother',
@@ -35,19 +36,24 @@ export class PostframeotherComponent implements OnInit {
   post_len;
   like_len;
   is_liked: any;
+  host
+
+  user_img;
 
   constructor(private acRouter: ActivatedRoute, private http: HttpClient, private router: Router,
-    private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig) {
+    private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, private data: DatapassService) {
     let id = acRouter.snapshot.params['p3'];
+    this.host = data.host
     this.ids = id;
     this.myID = sessionStorage.getItem("keyuser_id");
+    this.user_img = sessionStorage.getItem("user_img")
     console.log('id postframe page', id);
-    http.get('http://nodescoop.comsciproject.com/profiler/posts_profile/' + this.ids)
+    http.get(this.host+'/profiler/posts_profile/' + this.ids)
       .subscribe((Response: any) => {
         this.array = Response;
         console.log(Response)
-
       })
+    
   }
 
   async ngOnInit() {
@@ -62,7 +68,7 @@ export class PostframeotherComponent implements OnInit {
 
   }
   async getname() {
-    let response = this.http.get('http://nodescoop.comsciproject.com/users/select_some/' + this.ids)
+    let response = this.http.get(this.host+'/users/select_some/' + this.ids)
       .toPromise()
     return response;
   }
@@ -72,7 +78,7 @@ export class PostframeotherComponent implements OnInit {
     this.user_id = this.array[this.indexofComment].user_id;
     this.post_id = this.array[this.indexofComment].post_id;
 
-    this.http.get('http://nodescoop.comsciproject.com/users/show_comment/' + this.post_id)
+    this.http.get(this.host+'/users/show_comment/' + this.post_id)
       .subscribe(response => {
         if (response) {
           this.comments = response
@@ -98,7 +104,7 @@ export class PostframeotherComponent implements OnInit {
   async onComment(comment) {
     console.log("Comment"+comment);
     let comment_json = { post_id: this.post_id, text: this.comment, user_id: this.user_id };
-    await this.http.post('http://nodescoop.comsciproject.com/users/comment/' + this.myID, comment_json).subscribe(response => {
+    await this.http.post(this.host+'/users/comment/' + this.myID, comment_json).subscribe(response => {
       if (response) {
         let currentUrl = this.router.url;
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
@@ -112,16 +118,19 @@ export class PostframeotherComponent implements OnInit {
   }
 
   like(post_id) {
-    let json = { post_id: post_id, user_id: this.ids }
+    let json = { post_id: post_id, user_id: this.myID }
     console.log(json)
     console.log(post_id)
     // console.log(user_id)
     
-    this.http.post('http://nodescoop.comsciproject.com/users/like_post/' + this.ids, json)
+    this.http.post(this.host+'/users/like_post/' + this.myID, json)
       .subscribe(response => {
         if (response) {
           console.log(response)
           console.log(this.ids)
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate(['/profile/'+this.myID]);
+          });
 
         } else {
           console.log('error')
@@ -132,6 +141,32 @@ export class PostframeotherComponent implements OnInit {
 
       )
   }
+
+  unlike(post_id) {
+    let json = { post_id: post_id, user_id: this.myID }
+    console.log(json)
+    console.log(post_id)
+    // console.log(user_id)
+    
+    this.http.post(this.host+'/users/unlike_post/' + this.myID, json)
+      .subscribe(response => {
+        if (response) {
+          console.log(response)
+          console.log(this.ids)
+          this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+            this.router.navigate(['/profile/'+this.myID]);
+          });
+
+        } else {
+          console.log('error')
+        }
+      }, error => {
+        console.log('error', error)
+      }
+
+      )
+  }
+
   likedIt(pid) {
     for (let i=0 ; i < this.like_len ; i++) {
       if(this.is_liked[i].post_id == pid) {
@@ -141,5 +176,16 @@ export class PostframeotherComponent implements OnInit {
       }
     }
   }
+
+  linkTo(id) {
+    if( id != sessionStorage.getItem("keyuser_id")) {
+      this.router.navigateByUrl('/otherprofile/'+id);
+    } else {
+      this.router.navigateByUrl('/profile/'+id);
+    }
+    
+  }
+
+  
 
 }

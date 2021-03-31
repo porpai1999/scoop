@@ -27,7 +27,16 @@ routes.get('/profile/:user_id', (req, res) => {
 // show post in profile
 routes.get('/posts_profile/:user_id', (req, res) => {
     let id = req.params.user_id;
-    let sql = "select * from posts where user_id=? ORDER by datetime DESC"
+    let sql = `
+    SELECT post.*, COUNT(liked_post.user_id) as liked
+    from (select p1.post_id, i1.image as user_image, i2.image as post_image, u1.user_id, u1.first_name, u1.last_name, p1.datetime, p1.text
+    from users u1 LEFT JOIN photos i1 on u1.photo_id = i1.photo_id,
+    posts p1 LEFT JOIN photos i2 on p1.post_id = i2.post_id
+    where p1.user_id = u1.user_id and u1.user_id = ?) post LEFT JOIN liked_post
+    ON liked_post.post_id = post.post_id
+    GROUP BY 1
+    ORDER by post.datetime DESC
+    `
     connection.query(sql, [id], (error, results, fields) => {
         if (error) {
             throw error;
@@ -39,7 +48,16 @@ routes.get('/posts_profile/:user_id', (req, res) => {
 // show all posts signed in
 routes.get('/home_posts/', (req, res) => {
     // let id = req.query.id;
-    let sql = "select * from posts, users where posts.user_id = users.user_id ORDER by datetime DESC"
+    let sql = `
+    SELECT post.*, COUNT(liked_post.user_id) as liked
+    from (select p1.post_id, i1.image as user_image, i2.image as post_image, u1.user_id, u1.first_name, u1.last_name, p1.datetime, p1.text
+    from users u1 LEFT JOIN photos i1 on u1.photo_id = i1.photo_id,
+    posts p1 LEFT JOIN photos i2 on p1.post_id = i2.post_id
+    where p1.user_id = u1.user_id) post LEFT JOIN liked_post
+    ON liked_post.post_id = post.post_id
+    GROUP BY 1
+    ORDER by post.datetime DESC
+    `
     connection.query(sql, [], (error, results, fields) => {
         if (error) {
             throw error;
@@ -170,7 +188,14 @@ routes.get('/show_followers_c/:user_id', (req, res) => {
 // show following
 routes.get('/show_following/:user_id', (req, res) => {
     const user_id = req.params.user_id;
-    let sql = "SELECT userID_1, user_id, first_name, last_name FROM follows, users where userID_2 = ? and userID_1 = users.user_id";
+    let sql = `
+    SELECT myfollower.*, COUNT(follows.userID_1) as follower, COUNT(follows.userID_2) as following
+    from (SELECT userID_1, users.user_id, first_name, last_name, photos.image
+    FROM follows,
+    users LEFT JOIN photos on photos.photo_id = users.photo_id
+    where userID_1 = users.user_id and userID_2 = ?) myfollower left join follows on follows.userID_1 = myfollower.userID_1
+    GROUP by 1
+    `;
     sql = mysql.format(sql, [
         user_id
     ]);
@@ -185,7 +210,12 @@ routes.get('/show_following/:user_id', (req, res) => {
 // show followers
 routes.get('/show_followers/:user_id', (req, res) => {
     const user_id = req.params.user_id;
-    let sql = "SELECT userID_2, user_id, first_name, last_name FROM follows, users where userID_1 = ? and userID_2 = users.user_id";
+    let sql = `SELECT myfollower.*, COUNT(follows.userID_1) as follower, COUNT(follows.userID_2) as following
+    from (SELECT userID_2, users.user_id, first_name, last_name, photos.image
+    FROM follows,
+    users LEFT JOIN photos on photos.photo_id = users.photo_id
+    where userID_1 = ? and userID_2 = users.user_id) myfollower left join follows on follows.userID_1 = myfollower.userID_2
+    GROUP by 1`;
     sql = mysql.format(sql, [
         user_id
     ]);
@@ -199,7 +229,21 @@ routes.get('/show_followers/:user_id', (req, res) => {
 
 routes.get('/get_user_image/:user_id', (req, res) => {
     const user_id = req.params.user_id;
-    let sql = "SELECT users.user_id, users.photo_id, image FROM photos, users WHERE photos.photo_id = users.photo_id and photos.user_id = ?";
+    let sql = "SELECT users.user_id, users.photo_id, image FROM users LEFT JOIN photos on users.photo_id = photos.photo_id WHERE users.user_id = ?";
+    sql = mysql.format(sql, [
+        user_id
+    ]);
+    connection.query(sql, (error, results, fields) => {
+        if (error) throw error;
+        else {
+            return res.send(results);
+        }
+    });
+});
+
+routes.get('/show_user_image/:user_id', (req, res) => {
+    const user_id = req.params.user_id;
+    let sql = "SELECT image FROM photos WHERE user_id = ?";
     sql = mysql.format(sql, [
         user_id
     ]);

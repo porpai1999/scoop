@@ -16,16 +16,18 @@ export class ProfileComponent implements OnInit {
   myID
   followers;
   following;
-
+  user_img;
+  host
   constructor(private router : Router, private data : DatapassService, private acRouter : ActivatedRoute,
     private http: HttpClient) { 
       let ids = acRouter.snapshot.params['p1'];
       this.id = ids;
+      this.host = data.host
       this.myID = sessionStorage.getItem("keyuser_id");
-      this.http.get('http://nodescoop.comsciproject.com/profiler/get_user_image/'+this.myID).subscribe(response => {
-        this.imgpath = response[0].image;
+      // this.user_img = data.user_img;
+      this.http.get(this.host+'/profiler/get_user_image/'+this.myID).subscribe(response => {
+        this.user_img = response[0].image;
       });
-      //this.imgpath = "http://nodescoop.comsciproject.com/images/jpfunnyface.png"
       console.log(ids);
     }
 
@@ -37,11 +39,11 @@ export class ProfileComponent implements OnInit {
       'Authorization' : token
     });
     
-    this.http.get('http://nodescoop.comsciproject.com/profiler/profile/'+this.id, {headers: httpHeaders})
+    this.http.get(this.host+'/profiler/profile/'+this.id, {headers: httpHeaders})
        .subscribe(response => {
         this.fullname = response[0].first_name +' '+response[0].last_name;
         console.log('fullname :',this.fullname);
-        this.http.get('http://nodescoop.comsciproject.com/profiler/show_followers_c/'+this.myID).subscribe(response => {
+        this.http.get(this.host+'/profiler/show_followers_c/'+this.myID).subscribe(response => {
           let items = [];
           for (let key in response) {
             if (response.hasOwnProperty(key)) {
@@ -49,7 +51,7 @@ export class ProfileComponent implements OnInit {
             }
           }
           this.followers = items[0][0].followers
-          this.http.get('http://nodescoop.comsciproject.com/profiler/show_following_c/'+this.myID).subscribe(response => {
+          this.http.get(this.host+'/profiler/show_following_c/'+this.myID).subscribe(response => {
           let items = [];
             for (let key in response) {
               if (response.hasOwnProperty(key)) {

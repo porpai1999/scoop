@@ -33,5 +33,6 @@ app.use('/auth', require('./routes/auth'));
 app.use('/users', require('./routes/users'));
 app.use('/profiler', require('./routes/profiler'));
 
+app.options('*', cors())
 
 module.exports = app;

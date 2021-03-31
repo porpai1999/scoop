@@ -9,15 +9,15 @@
                         <div class="row">
                             <div class="col-sm-1">
                                 <div class="justify-content-around">
-                                    <img class="circular1"
-                                        src="http://nodescoop.comsciproject.com/images/jpfunnyface.png">
+                                    <img class="circular1" src={{item.user_image}} *ngIf="item.user_image != null">
+                                    <img class="circular1" src="../../assets/images/userprofile.png" *ngIf="item.user_image == null">
                                 </div>
 
                             </div>
                             <div class="col-sm ml-5">
 
                                 <br>
-                                <a href="otherprofile/{{item.user_id}}">
+                                <a [routerLink]=""  (click)="linkTo(item.user_id)">
                                     <h2><strong>{{item.first_name}}&nbsp;&nbsp;{{item.last_name}}</strong></h2>
                                 </a>
 
@@ -28,7 +28,7 @@
                                 <div class="d-flex justify-content-between">
                                     <br>
                                     <!-- <h2><strong>follows</strong></h2> -->
-                                    <button class="btn button border-light" type="button" [routerLink]="['/otherprofile',item.user_id]" >
+                                    <button class="btn button border-light" type="button" [routerLink]=""  (click)="linkTo(item.user_id)" >
                                         <span>
                                             <h4 style="color:#ffffff">View Profile</h4>
                                         </span>

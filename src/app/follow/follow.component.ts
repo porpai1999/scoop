@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DatapassService } from '../datapass.service';
 
 @Component({
   selector: 'app-follow',
@@ -16,42 +17,20 @@ export class FollowComponent implements OnInit {
   followers_c;
   following_c;
   list_userID;
-  constructor(private http: HttpClient, private router: Router,private acRouter:ActivatedRoute) {
+  host
+  constructor(private http: HttpClient, private router: Router,private acRouter:ActivatedRoute, private data: DatapassService) {
 
     let id = acRouter.snapshot.params['p3'];
     this.ids = id;
+    this.host=data.host;
 
     this.myID = sessionStorage.getItem("keyuser_id");
 
-    http.get('http://nodescoop.comsciproject.com/profiler/show_followers/' + id)
+    http.get(this.host+'/profiler/show_followers/' + id)
       .subscribe(res => {
         if (res) {
           console.log(res);
           this.show = res
-
-          this.http.get('http://nodescoop.comsciproject.com/profiler/show_followers_c/'+ this.list_userID).subscribe(response => {
-          let items = [];
-
-          for (let key in response) {
-            if (response.hasOwnProperty(key)) {
-              items.push(response[key]);
-            }
-          }
-          this.followers_c = items[0][0].followers
-          console.log(response);
-          this.http.get('http://nodescoop.comsciproject.com/profiler/show_following_c/'+ this.list_userID).subscribe(response => {
-          let items = [];
-            for (let key in response) {
-              if (response.hasOwnProperty(key)) {
-                items.push(response[key]);
-              }
-            }
-            this.following_c = items[0][0].following
-            console.log(this.following_c);
-            
-        });
-        });
-
         } else {
           console.log('error');
 
