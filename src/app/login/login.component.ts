@@ -37,6 +37,10 @@ export class LoginComponent implements OnInit {
     }
     else{
       this.displayPosition1 = false;
+      let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+        });
     } 
   }
 
