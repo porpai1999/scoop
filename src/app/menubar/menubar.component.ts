@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-menubar',
@@ -10,7 +10,7 @@ export class MenubarComponent implements OnInit {
 
 
   user_id;
-  constructor(private acRouter: ActivatedRoute) {
+  constructor(private acRouter: ActivatedRoute,private router:Router) {
       this.user_id = sessionStorage.getItem("keyuser_id");
       console.log(this.user_id)
    }
@@ -89,6 +89,14 @@ export class MenubarComponent implements OnInit {
   }
   ngOnInit(): void {
     
+  }
+  linkTo(id) {
+    if( id != sessionStorage.getItem("keyuser_id")) {
+      this.router.navigateByUrl('/otherprofile/'+id);
+    } else {
+      this.router.navigateByUrl('/profile/'+id);
+    }
+
   }
 
 }

@@ -2,7 +2,7 @@
     <ul class="nav nav-tabs justify-content-center">
         <!-- <li class="nav-item"><a routerLink='/home' class="nav-link" data-toggle="tab" >&nbsp;&nbsp;<i class="pi pi-home"></i></a></li> -->
         <!-- <li class="nav-item"><a [routerLink]="['/home/',user_id]"_id class="nav-link" data-toggle="tab" >HOME</a></li> -->
-        <li class="nav-item"><a [routerLink]="['/profile/',user_id]"_id class="nav-link" data-toggle="tab" >Posts</a></li>
+        <li class="nav-item"><a [routerLink]="['/profile/',user_id]"_id class="nav-link" data-toggle="tab" (click)="linkTo(user_id)">Posts</a></li>
         <li class="nav-item"><a [routerLink]="['/photo/',user_id]" class="nav-link" data-toggle="tab" (click)="photos()">Photos</a></li>
         <li class="nav-item"><a [routerLink]="['/follow/',user_id]" class="nav-link" data-toggle="tab" (click)="followers()">Followers</a></li>
         <li class="nav-item"><a [routerLink]="['/following/',user_id]" class="nav-link" data-toggle="tab" (click)="following()">Following</a></li>
