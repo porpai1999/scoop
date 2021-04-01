@@ -43,8 +43,7 @@ export class FollowComponent implements OnInit {
         console.log(error);
 
       });
-      this.http.get(this.host + "/profiler/show_user_image/"+ id).subscribe(response => {
-        this.array = response
+      this.http.get(this.host+'/profiler/get_user_image/'+ id).subscribe(response => {
         this.user_img = response[0].image;
       });
   }

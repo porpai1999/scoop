@@ -22,12 +22,19 @@ export class PhotoComponent implements OnInit {
   constructor(private router: Router, private data: DatapassService, private http: HttpClient, private acRouter : ActivatedRoute) {
     this.myID = sessionStorage.getItem("keyuser_id");
     let ids = acRouter.snapshot.params['p3'];
+    console.log("ids:");
+    
+    console.log(ids);
+    
     this.id = ids;
     this.host = data.host;
     this.http.get(this.host + "/profiler/show_user_image/"+ ids).subscribe(response => {
       this.array = response
-      this.user_img = response[0].image;
+      // this.user_img = response[0].image;
       console.log(this.array);
+    });
+    this.http.get(this.host+'/profiler/get_user_image/'+ids).subscribe(response => {
+      this.user_img = response[0].image;
     });
   }
 

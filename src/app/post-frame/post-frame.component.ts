@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService, } from 'primeng/api';
 import { Message } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
 import { DatapassService } from '../datapass.service';
@@ -44,7 +44,7 @@ export class PostFrameComponent implements OnInit {
 
 
   constructor(private acRouter: ActivatedRoute, private http: HttpClient, private router: Router,
-    private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, private data: DatapassService) {
+    private confirmationService: ConfirmationService, private primengConfig: PrimeNGConfig, private data: DatapassService, private messageService: MessageService) {
     // let id = acRouter.snapshot.params['p3'];
     // this.ids = id;
     this.host = data.host
@@ -116,7 +116,7 @@ export class PostFrameComponent implements OnInit {
 
       )
   }
-  confirm2(e) {
+  confirm2(e, postID) {
 
     this.indexofComment = e;
     this.user_id = this.array[this.indexofComment].user_id;
@@ -128,7 +128,7 @@ export class PostFrameComponent implements OnInit {
 
       accept: () => {
         this.msgs = [{ severity: 'info', summary: 'Confirmed', detail: 'Record deleted' }];
-        this.http.get(this.host+'/users/delete_post/' + this.post_id)
+        this.http.get(this.host+'/users/delete_post/' + postID)
           .subscribe(response => {
             if (response) {
               console.log(this.post_id);
@@ -242,5 +242,23 @@ export class PostFrameComponent implements OnInit {
       )
   }
 
+  deletePost(postID) {
+    this.http.get(this.host+'/users/delete_post/' + postID)
+          .subscribe(response => {
+            if (response) {
+              console.log(this.post_id);
+              console.log("deleted");
+              let currentUrl = this.router.url;
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([currentUrl]);
+              });
+            } else {
+              console.log('error')
+            }
+          }, error => {
+            console.log('error', error)
+          }
 
+          )
+    }
 }

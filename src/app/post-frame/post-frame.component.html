@@ -61,12 +61,17 @@
                 </p-confirmDialog>
                 <div *ngFor="let item of array ;let num = index;">
                 <p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text">
+                    
                 </p-confirmDialog> 
                 <div *ngFor="let item of array;let num = index;">
                     {{postBy(num)}}
                     <p-card title="Simple Card" class="novel">
+                        <div style="float: right;">
+                            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" (click)="deletePost(item.post_id)"></button>
+                        </div>
                         <div class="row">
                             <div class="col-sm-1">
+                                
                                 <!-- <div *ngIf="item.user_id == myID;">
                                     <div class="justify-content-around">
                                         <img class="circular1" style="width: 50px; height: 50px;" src={{item.user_image}}>
@@ -85,17 +90,20 @@
                                 </div>
                             </div>
                             &nbsp;&nbsp;
+                            
 
                             <div class="col-sm-10">
                                 <div class="d-flex flex-column justify-content-start ml-2">
                                     <a [routerLink]=""  (click)="linkTo(item.user_id)"> <span *ngIf="num == indexOfPosts;" class="font-weight-bold name" >{{account_name}}
+                                        
                                     </span></a>
 
                                     <span class="date text-black-50">Shared publicly - {{item.datetime | slice:0:10
                                         }}</span>
                                 </div>
                             </div>
-
+                            
+                            
                         </div>
                         <br>
                         <div class="row">

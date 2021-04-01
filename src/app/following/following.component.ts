@@ -29,8 +29,7 @@ export class FollowingComponent implements OnInit {
     this.myID = sessionStorage.getItem("keyuser_id");
     this.host = data.host
 
-    this.http.get(this.host + "/profiler/show_user_image/"+ this.id).subscribe(response => {
-      this.array = response
+    this.http.get(this.host+'/profiler/get_user_image/'+ids).subscribe(response => {
       this.user_img = response[0].image;
     });
     http.get(this.host+'/profiler/show_following/' + this.id)

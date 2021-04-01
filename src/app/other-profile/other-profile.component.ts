@@ -78,8 +78,13 @@ export class OtherProfileComponent implements OnInit {
         let json = { myID: sessionStorage.getItem("keyuser_id") }
         this.http.post(this.host+'/users/follow/'+this.id,json).subscribe(response => {
           console.log(response);
+          let currentUrl = this.router.url;
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+        });
           
       });
+      
       }
 
       unfollow() {
@@ -90,6 +95,10 @@ export class OtherProfileComponent implements OnInit {
         let json = { myID: sessionStorage.getItem("keyuser_id") }
         this.http.post(this.host+'/users/unfollow/'+this.id,json).subscribe(response => {
           console.log(response);
+          let currentUrl = this.router.url;
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+        });
           
       });
       }
