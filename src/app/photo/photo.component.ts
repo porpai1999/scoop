@@ -43,7 +43,7 @@ export class PhotoComponent implements OnInit {
        .subscribe(response => {
         this.fullname = response[0].first_name +' '+response[0].last_name;
         console.log('fullname :',this.fullname);
-        this.http.get(this.host+'/profiler/show_followers_c/'+this.myID).subscribe(response => {
+        this.http.get(this.host+'/profiler/show_followers_c/'+this.id).subscribe(response => {
           let items = [];
           for (let key in response) {
             if (response.hasOwnProperty(key)) {
@@ -51,7 +51,7 @@ export class PhotoComponent implements OnInit {
             }
           }
           this.followers = items[0][0].followers
-          this.http.get(this.host+'/profiler/show_following_c/'+this.myID).subscribe(response => {
+          this.http.get(this.host+'/profiler/show_following_c/'+this.id).subscribe(response => {
           let items = [];
             for (let key in response) {
               if (response.hasOwnProperty(key)) {
