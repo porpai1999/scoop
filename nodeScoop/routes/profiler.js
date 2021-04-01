@@ -186,7 +186,7 @@ routes.get('/show_followers_c/:user_id', (req, res) => {
 });
 
 // show following
-routes.get('/show_following/:user_id', (req, res) => {
+routes.get('/show_followers/:user_id', (req, res) => {
     const user_id = req.params.user_id;
     let sql = `
     SELECT myfollower.*, COUNT(follows.userID_1) as follower, COUNT(follows.userID_2) as following
@@ -208,7 +208,7 @@ routes.get('/show_following/:user_id', (req, res) => {
 });
 
 // show followers
-routes.get('/show_followers/:user_id', (req, res) => {
+routes.get('/show_following/:user_id', (req, res) => {
     const user_id = req.params.user_id;
     let sql = `SELECT myfollower.*, COUNT(follows.userID_1) as follower, COUNT(follows.userID_2) as following
     from (SELECT userID_2, users.user_id, first_name, last_name, photos.image

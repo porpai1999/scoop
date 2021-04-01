@@ -22,8 +22,10 @@
                                     <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
                                 <br><br>
                                 <div style="font-size: medium; color: darkgrey;">
-                                    {{followers_c}} &nbsp;Followers &nbsp;
-                                    {{following_c}} &nbsp;Following &nbsp;
+                                    <!-- {{followers_c}} &nbsp;Followers &nbsp;
+                                    {{following_c}} &nbsp;Following &nbsp; -->
+                                    {{following_c}} &nbsp;Followers &nbsp;
+                                    {{followers_c}} &nbsp;Following &nbsp;
                                 </div>
 
                             </strong>
@@ -60,7 +62,7 @@
                             <img class="circular1" src="../../assets/images/userprofile.png" *ngIf="item.image == null" width="80">
                             <div class="d-flex flex-column align-items-start ml-4">
                                 <!-- <a href="otherprofile/{{item.userID_2}}"> -->
-                                    <a [routerLink]=""  (click)="linkTo(item.userID_2)">
+                                    <a [routerLink]=""  (click)="linkTo(item.userID_1)">
                                     <strong><span
                                             class="font-weight-bold">{{item.first_name}}&nbsp;&nbsp;{{item.last_name}}</span></strong>
                                 </a>
