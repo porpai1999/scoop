@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center mt-2">
+        <div class="image_outer_container">
+            <div class="green_icon">
+            </div>
+            <div class="col-md-12">
+
+                <div class="row justify-content-around">
+                    <div class="circular ">
+                        <img class="circular1" src={{user_img}} *ngIf="user_img != null">
+                        <img class="circular1" src="../../assets/images/userprofile.png" *ngIf="user_img == null">&nbsp;
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="my-auto">
+                        <div class="row justify-content-center">
+                            <strong style="font-size: xx-large;">{{fullname}} &nbsp;
+    
+                                <!-- <button type="button" class="btn btn-outline-success "
+                                    style="border-color: rgb(22, 177, 156);" [routerLink]="['/editprofile',id]" >Edit Profile</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+                                <br><br>
+                                <div style="font-size: medium; color: darkgrey;">
+                                    {{followers}} &nbsp;Followers &nbsp;
+                                    {{following}} &nbsp;Following &nbsp;
+                                </div>
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+

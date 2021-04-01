@@ -1,6 +1,51 @@
 <app-header></app-header>
-<div class="container mt-5">
-    <app-menubar></app-menubar>
+<div class="container">
+    <app-feed></app-feed>
+    <!-- <div class="d-flex justify-content-center h-100 m-3">
+        <div class="image_outer_container">
+            <div class="green_icon">
+            </div>
+            <div class="col-md-12">
+
+                <div class="row justify-content-around">
+                    <div class="circular ">
+                        <img class="circular1" src={{user_img}} *ngIf="user_img != null">
+                        <img class="circular1" src="../../assets/images/userprofile.png" *ngIf="user_img == null">&nbsp;
+                    </div>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="my-auto">
+                        <div class="row justify-content-center">
+                            <strong style="font-size: xx-large;">{{fullname}} &nbsp;
+    
+                                <button type="button" class="btn btn-outline-success "
+                                    style="border-color: rgb(22, 177, 156);" [routerLink]="['/editprofile',id]" >Edit Profile</button>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <br><br>
+                                <div style="font-size: medium; color: darkgrey;">
+                                    {{followers}} &nbsp;Followers &nbsp;
+                                    {{following}} &nbsp;Following &nbsp;
+                                </div>
+
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+            </div>        
+        </div>
+        <br>
+    </div> -->
+    &nbsp;&nbsp;&nbsp;
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-dark justify-content-center">
+        <ul class="nav nav-tabs justify-content-center">
+            <!-- <li class="nav-item"><a routerLink='/home' class="nav-link" data-toggle="tab" >&nbsp;&nbsp;<i class="pi pi-home"></i></a></li> -->
+            <!-- <li class="nav-item"><a [routerLink]="['/home/',user_id]"_id class="nav-link" data-toggle="tab" >HOME</a></li> -->
+            <li class="nav-item"><a [routerLink]=" " class="nav-link" data-toggle="tab" (click)="linkTo(id)" >Posts</a></li>
+            <li class="nav-item"><a [routerLink]="['/photo/',id]" class="nav-link" data-toggle="tab" (click)="photos()">Photos</a></li>
+            <li class="nav-item"><a [routerLink]="['/follow/',id]" class="nav-link" data-toggle="tab" (click)="followers()">Followers</a></li>
+            <li class="nav-item"><a [routerLink]="['/following/',id]" class="nav-link" data-toggle="tab" (click)="following()">Following</a></li>
+        </ul>
+    </nav>
     <div class="grid-container">
         <div *ngFor="let item of array; let num = index">
             <br>

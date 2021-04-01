@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'profile/:p1', component: ProfileComponent},
   { path: 'profile/:p1/', component: ProfileComponent},
-  { path: 'feed', component: FeedComponent},
+  { path: 'feed/:p3', component: FeedComponent},
   { path: 'editprofile/:p1', component: EditprofileComponent},
   { path: 'posts/:p2', component: PostsComponent},
   { path: 'posts', component: PostsComponent},

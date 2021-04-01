@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DatapassService } from '../datapass.service';
@@ -14,10 +14,14 @@ export class FollowComponent implements OnInit {
   myID;
   show;
   ids;
+  fullname;
+  user_img;
   followers_c;
   following_c;
   list_userID;
-  host
+  host;
+  array;
+
   constructor(private http: HttpClient, private router: Router,private acRouter:ActivatedRoute, private data: DatapassService) {
 
     let id = acRouter.snapshot.params['p3'];
@@ -38,11 +42,64 @@ export class FollowComponent implements OnInit {
       }, error => {
         console.log(error);
 
-      })
+      });
+      this.http.get(this.host + "/profiler/show_user_image/"+ id).subscribe(response => {
+        this.array = response
+        this.user_img = response[0].image;
+      });
   }
 
   ngOnInit(): void {
     console.log("this.show.user_id");
+    const token= "Bearer "+ sessionStorage.getItem("token");
+    console.log('token: '+sessionStorage.getItem("token"))
+    const httpHeaders = new HttpHeaders({
+      'content-type' : 'application/json',
+      'Authorization' : token
+    });
+    
+    this.http.get(this.host+'/profiler/profile/'+this.ids, {headers: httpHeaders})
+       .subscribe(response => {
+        this.fullname = response[0].first_name +' '+response[0].last_name;
+        console.log('fullname :',this.fullname);
+        this.http.get(this.host+'/profiler/show_followers_c/'+this.ids).subscribe(response => {
+          let items = [];
+          for (let key in response) {
+            if (response.hasOwnProperty(key)) {
+              items.push(response[key]);
+            }
+          }
+          this.followers_c = items[0][0].followers
+          this.http.get(this.host+'/profiler/show_following_c/'+this.ids).subscribe(response => {
+          let items = [];
+            for (let key in response) {
+              if (response.hasOwnProperty(key)) {
+                items.push(response[key]);
+              }
+            }
+            this. following_c = items[0][0].following
+        });
+        });
+      },error =>{
+        console.log(error);
+      });
+    
+        //สร้าง session 
+        sessionStorage.profile = "Profile";
+        if(typeof(Storage) !== "undefined"){
+          if(sessionStorage.clickcountProfile){
+            sessionStorage.clickcountProfile = Number(sessionStorage.clickcountProfile)+1;
+            console.log("Creating a success session...");
+          }
+          else{
+            sessionStorage.clickcountProfile = 1;
+            console.log("Start creating sessions...");
+          }
+          sessionStorage.getItem("result")+ sessionStorage.clickcountProfile ;
+        }
+        else{
+          sessionStorage.getItem("result");
+        }
   }
   photos(){
     //สร้าง session 
