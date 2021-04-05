@@ -29,7 +29,7 @@ routes.get('/posts_profile/:user_id', (req, res) => {
     let id = req.params.user_id;
     let sql = `
     SELECT post.*, COUNT(liked_post.user_id) as liked
-    from (select p1.post_id, i1.image as user_image, i2.image as post_image, u1.user_id, u1.first_name, u1.last_name, p1.datetime, p1.text
+    from (select p1.post_id, i1.image as user_image, i2.image as post_image, i2.photo_id as post_image_id, u1.user_id, u1.first_name, u1.last_name, p1.datetime, p1.text
     from users u1 LEFT JOIN photos i1 on u1.photo_id = i1.photo_id,
     posts p1 LEFT JOIN photos i2 on p1.post_id = i2.post_id
     where p1.user_id = u1.user_id and u1.user_id = ?) post LEFT JOIN liked_post

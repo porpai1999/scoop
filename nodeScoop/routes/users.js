@@ -336,6 +336,21 @@ routes.get('/delete_post/:post_id', (req, res) => {
     });
 });
 
+// delete photo
+routes.get('/delete_photo/:photo_id', (req, res) => {
+    console.log("deleting...");
+    let photo_id = req.params.photo_id;
+    let sql = "DELETE FROM photos WHERE photo_id="+photo_id
+    connection.query(sql, (error, results, fields) => {
+        if (error) {
+            throw error;
+        }
+        else {
+            return res.send(results);
+        }
+    });
+});
+
 /*
 verifyToken
 jwt.verify(req.token, config.JWT_SECRET, (error) => {

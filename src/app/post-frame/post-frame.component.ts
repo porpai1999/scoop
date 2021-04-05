@@ -242,16 +242,42 @@ export class PostFrameComponent implements OnInit {
       )
   }
 
-  deletePost(postID) {
+  deletePost(postID, img) {
+    console.log("img here vv");
+    
+    console.log(img);
+    
     this.http.get(this.host+'/users/delete_post/' + postID)
           .subscribe(response => {
             if (response) {
               console.log(this.post_id);
               console.log("deleted");
-              let currentUrl = this.router.url;
+              if (img != null ){
+                this.http.get(this.host+'/users/delete_photo/' + img).subscribe(response => {
+                  if(response) {
+                    let currentUrl = this.router.url;
+                    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                      this.router.navigate([currentUrl]);
+                    });
+                    
+                  }
+
+                  else {
+                    let currentUrl = this.router.url;
+                    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                      this.router.navigate([currentUrl]);
+                    });
+                  }
+                  
+                });
+              }
+              else {
+                let currentUrl = this.router.url;
               this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
                 this.router.navigate([currentUrl]);
               });
+              }
+              
             } else {
               console.log('error')
             }

@@ -31,17 +31,24 @@ export class LoginComponent implements OnInit {
     // this.user_img = data.user_img;
   }
   click(){
+    console.log("here");
+    
+    console.log(this.loginstatus);
+    
     if (this.loginstatus == 1) {
       this.displayPosition = false;
       this.router.navigateByUrl('/home');
     }
     else{
       this.displayPosition1 = false;
-      let currentUrl = this.router.url;
+    } 
+  }
+
+  refesh() {
+    let currentUrl = this.router.url;
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
           this.router.navigate([currentUrl]);
         });
-    } 
   }
 
   login(position: string) {
