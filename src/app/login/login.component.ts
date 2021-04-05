@@ -41,14 +41,23 @@ export class LoginComponent implements OnInit {
     }
     else{
       this.displayPosition1 = false;
-    } 
+      let currentUrl = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate([currentUrl]);
+          // this.displayPosition1 = false;
+        });
+    }
+    
   }
 
   refesh() {
-    let currentUrl = this.router.url;
-        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-          this.router.navigate([currentUrl]);
-        });
+    
+    // let currentUrl = this.router.url;
+    //     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    //       this.router.navigate([currentUrl]);
+          
+    //     });
+        this.displayPosition1 = false;
   }
 
   login(position: string) {
@@ -85,6 +94,7 @@ export class LoginComponent implements OnInit {
           this.displayPosition = true;
           console.log("Success");
           this.loginstatus = 1;
+          // this.router.navigateByUrl('/home');
           // this.router.navigateByUrl('/home/'+this.items[2]);
         }
          else {
